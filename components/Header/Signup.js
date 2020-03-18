@@ -4,23 +4,28 @@ import * as Yup from "yup";
 import { useAuth } from "~/hooks/auth";
 import { useForm } from "~/hooks/form";
 
-const LoginSchema = Yup.object().shape({
+const SignupSchema = Yup.object().shape({
+  firstName: Yup.string().required("Required"),
+  lastName: Yup.string().required("Required"),
   email: Yup.string()
     .email("Invalid email")
     .required("Required"),
   password: Yup.string()
     .min(2, "Too Short!")
     .max(30, "Too Long!")
+    .required("Required"),
+  passwordConfirmation: Yup.string()
+    .oneOf([Yup.ref("password"), null])
     .required("Required")
 });
 
 export default function() {
-  const { form, validate, isValid } = useForm(LoginSchema);
+  const { form, validate, isValid } = useForm(SignupSchema);
   const { logIn } = useAuth();
 
-  const onFinish = ({ email, password }) => {
+  const onFinish = values => {
     if (isValid()) {
-      logIn(email, password);
+      console.log(values);
     } else {
       message.warning("Certains champs sont invalides");
     }
@@ -35,6 +40,20 @@ export default function() {
       onChange={validate}
       onFinish={onFinish}
     >
+      <Form.Item name="firstName" required={true}>
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Prenom"
+        />
+      </Form.Item>
+
+      <Form.Item name="lastName" required={true}>
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Nom"
+        />
+      </Form.Item>
+
       <Form.Item name="email" required={true}>
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -46,18 +65,16 @@ export default function() {
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
         />
       </Form.Item>
 
-      <Form.Item>
-        <Form.Item name="remember" valuePropName="checked" noStyle>
-          <Checkbox>Remember me</Checkbox>
-        </Form.Item>
-
-        <a className="login-form-forgot" href="">
-          Forgot password
-        </a>
+      <Form.Item name="passwordConfirmation" required={true}>
+        <Input
+          prefix={<LockOutlined className="site-form-item-icon" />}
+          type="password"
+          placeholder="Confirmation du mot de passe"
+        />
       </Form.Item>
 
       <Form.Item>

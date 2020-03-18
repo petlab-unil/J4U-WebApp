@@ -22,8 +22,7 @@ export function useProvideAuth() {
   const logIn = (email, password) => {
     auth({ variables: { email, password } })
       .then(({ data }) => {
-        console.log(data);
-        console.log(data.auth);
+        if (!data) return;
         setAccessToken(data.auth.accessToken);
         setRefreshToken(data.auth.refreshToken);
         setLoggedIn(true);

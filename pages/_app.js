@@ -9,6 +9,7 @@ import { onError } from "apollo-link-error";
 import { ThemeProvider } from "styled-components";
 import { ProvideAuth } from "~/hooks/auth";
 import { message } from "antd";
+import MainLayout from "~/layouts/MainLayout";
 
 const theme = {
   colors: {
@@ -16,24 +17,13 @@ const theme = {
   }
 };
 
-//export default class MyApp extends App {
-//  render() {
-//    const { Component, pageProps } = this.props;
-//    return (
-//      <ThemeProvider theme={theme}>
-//        <ProvideAuth>
-//          <Component {...pageProps} />
-//        </ProvideAuth>
-//      </ThemeProvider>
-//    );
-//  }
-//}
-
 const App = ({ Component, pageProps, apollo }) => (
   <ApolloProvider client={apollo}>
     <ThemeProvider theme={theme}>
       <ProvideAuth>
-        <Component {...pageProps} />
+        <MainLayout>
+          <Component {...pageProps} />
+        </MainLayout>
       </ProvideAuth>
     </ThemeProvider>
   </ApolloProvider>
