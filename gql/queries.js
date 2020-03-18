@@ -1,14 +1,12 @@
 import gql from "graphql-tag";
 
-export const APP_MSGS = gql`
-  {
-    appMessages @client {
-      messages {
-        id
-        message
-        code
-        type
-      }
+export const ME = gql`
+  query me {
+    me {
+      id
+      email
+      firstName
+      lastName
     }
   }
 `;

@@ -1,4 +1,5 @@
 import AnonHeader from "./AnonHeader";
+import AuthHeader from "./AuthHeader";
 import { useAuth } from "~/hooks/auth";
 
 export default function() {
@@ -6,7 +7,7 @@ export default function() {
   console.log(loggedIn, "aaaaa");
 
   if (loggedIn) {
-    return null;
+    return <AuthHeader />;
   } else {
     return <AnonHeader />;
   }
