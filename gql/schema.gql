@@ -1,9 +1,0 @@
-type AppMessage {
-  id: Int
-  message: String!
-  code: Int
-}
-
-type AppMessages {
-  messages: [AppMessage]
-}

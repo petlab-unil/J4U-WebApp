@@ -1,9 +1,7 @@
-import { useEffect } from "react";
-import { useMutation } from "@apollo/react-hooks";
-import { Form, Input, Button, Checkbox, Select } from "antd";
+import { Form, Input, Button, Checkbox, Select, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
-import { AUTH } from "~/gql/mutations";
+import { useAuth } from "~/hooks/auth";
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string()
@@ -26,7 +24,7 @@ async function val(form, schema) {
     errorsSchema[k] = { name: k, value: form.getFieldValue(k), errors: [] };
   });
 
-  const errors = await schema
+  await schema
     .validate(values, { abortEarly: false })
     .then(_ => [])
     .catch(function(err) {
@@ -40,13 +38,11 @@ async function val(form, schema) {
 
 export default function() {
   const [form] = Form.useForm();
-  const [auth, { data }] = useMutation(AUTH);
+  const { logIn } = useAuth();
 
-  //console.log(data);
-
-  const onFinish = values => {
+  const onFinish = ({ email, password }) => {
     //console.log(values);
-    auth({ variables: { email: values.email, password: values.password } });
+    logIn(email, password);
   };
 
   return (
