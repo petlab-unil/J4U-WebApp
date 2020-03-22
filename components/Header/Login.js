@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Form, Input, Button, Checkbox, Select, message } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
@@ -61,15 +62,13 @@ export default function() {
       </Form.Item>
 
       <Form.Item>
-        <Button
-          disabled={!isValid()}
-          type="primary"
-          htmlType="submit"
-          className="login-form-button"
-        >
-          Log in
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          Login
         </Button>
-        Or <a href="">register now!</a>
+        Ou
+        <Link href="/?signup" shallow>
+          <a> S'inscrire</a>
+        </Link>
       </Form.Item>
     </Form>
   );

@@ -15,11 +15,12 @@ const Logo = styled.div`
 export default function() {
   const me = useMe();
   if (!me) return null;
+  console.log(me);
 
   return (
     <>
       <Logo>J4U</Logo>
-      <Menu theme="dark" mode="horizontal" style={{ lineHeight: "64px" }}>
+      <Menu mode="horizontal" theme="dark" style={{ lineHeight: "64px" }}>
         <Menu.Item key="1">
           Bienvenue {me.firstName} {me.lastName}
         </Menu.Item>

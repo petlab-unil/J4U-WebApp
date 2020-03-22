@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import { Menu, Typography, Modal } from "antd";
+import { Menu, Typography, Modal, Button } from "antd";
 import styled from "styled-components";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -56,12 +56,7 @@ export default function() {
       <LoginModal visible={loginVisible} reset={reset} />
       <SignupModal visible={signupVisible} reset={reset} />
       <Logo>J4U</Logo>
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        /*                defaultSelectedKeys={["2"]} */
-        style={{ lineHeight: "64px" }}
-      >
+      <Menu mode="horizontal" theme="dark" style={{ lineHeight: "64px" }}>
         <Menu.Item onClick={setLoginVisible} key="1">
           <Link href="/?login" shallow>
             <a> Se Connecter</a>

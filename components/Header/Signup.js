@@ -1,22 +1,40 @@
-import { Form, Input, Button, Checkbox, Select, message } from "antd";
+import Link from "next/link";
+import moment from "moment";
+import { Form, Input, Button, Radio, message, DatePicker } from "antd";
 import { UserOutlined, LockOutlined } from "@ant-design/icons";
 import * as Yup from "yup";
 import { useAuth } from "~/hooks/auth";
 import { useForm } from "~/hooks/form";
 
 const SignupSchema = Yup.object().shape({
-  firstName: Yup.string().required("Required"),
-  lastName: Yup.string().required("Required"),
+  civilite: Yup.string()
+    .oneOf(["MLLE", "MME", "M"], "Erreur")
+    .required("Champ obligatoire"),
+  firstName: Yup.string().required("Champ obligatoire"),
+  lastName: Yup.string().required("Champ obligatoire"),
+  birthDate: Yup.date()
+    .test("DOB", "18 ans minimum", value => {
+      return moment().diff(moment(value), "years") >= 18;
+    })
+    .required("Champ obligatoire"),
+  phone: Yup.string().required("Champ obligatoire"),
   email: Yup.string()
     .email("Invalid email")
-    .required("Required"),
+    .required("Champ obligatoire"),
+  emailConfirmation: Yup.string()
+    .oneOf([Yup.ref("email"), null], "Email et confirmation differents")
+    .email("Invalid email")
+    .required("Champ obligatoire"),
   password: Yup.string()
-    .min(2, "Too Short!")
-    .max(30, "Too Long!")
-    .required("Required"),
+    .min(5, "Minimum 5 characteres!")
+    .max(20, "Maximum 20 characteres!")
+    .required("Champ obligatoire"),
   passwordConfirmation: Yup.string()
-    .oneOf([Yup.ref("password"), null])
-    .required("Required")
+    .oneOf(
+      [Yup.ref("password"), null],
+      "Mot de passe et confirmation differents"
+    )
+    .required("Champ obligatoire")
 });
 
 export default function() {
@@ -24,6 +42,7 @@ export default function() {
   const { logIn } = useAuth();
 
   const onFinish = values => {
+    console.log(values);
     if (isValid()) {
       console.log(values);
     } else {
@@ -40,6 +59,14 @@ export default function() {
       onChange={validate}
       onFinish={onFinish}
     >
+      <Form.Item name="civilite">
+        <Radio.Group>
+          <Radio.Button value="MLLE">Mlle</Radio.Button>
+          <Radio.Button value="MME">Mme</Radio.Button>
+          <Radio.Button value="M">M</Radio.Button>
+        </Radio.Group>
+      </Form.Item>
+
       <Form.Item name="firstName" required={true}>
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
@@ -54,10 +81,28 @@ export default function() {
         />
       </Form.Item>
 
+      <Form.Item name="birthDate" required={true}>
+        <DatePicker format="YYYY-MM-DD" onChange={validate} />
+      </Form.Item>
+
+      <Form.Item name="phone" required={true}>
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Numero de telephone"
+        />
+      </Form.Item>
+
       <Form.Item name="email" required={true}>
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
           placeholder="Email"
+        />
+      </Form.Item>
+
+      <Form.Item name="emailConfirmation" required={true}>
+        <Input
+          prefix={<UserOutlined className="site-form-item-icon" />}
+          placeholder="Confirmation de l'email"
         />
       </Form.Item>
 
@@ -78,15 +123,13 @@ export default function() {
       </Form.Item>
 
       <Form.Item>
-        <Button
-          disabled={!isValid()}
-          type="primary"
-          htmlType="submit"
-          className="login-form-button"
-        >
-          Log in
+        <Button type="primary" htmlType="submit" className="login-form-button">
+          Signup
         </Button>
-        Or <a href="">register now!</a>
+        Ou
+        <Link href="/?login" shallow>
+          <a> Se connecter</a>
+        </Link>
       </Form.Item>
     </Form>
   );

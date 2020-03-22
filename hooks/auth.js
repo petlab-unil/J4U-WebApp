@@ -1,5 +1,6 @@
-import { useApolloClient, useMutation } from "@apollo/react-hooks";
+import {useMutation } from "@apollo/react-hooks";
 import { useState, useContext, createContext } from "react";
+import { useRouter } from "next/router";
 import { message } from "antd";
 import { AUTH } from "~/gql/mutations";
 
@@ -18,6 +19,7 @@ export function useProvideAuth() {
   const [refreshToken, setRefreshToken] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
   const [auth] = useMutation(AUTH);
+  const router = useRouter();
 
   const logIn = (email, password) => {
     auth({ variables: { email, password } })
@@ -27,6 +29,7 @@ export function useProvideAuth() {
         setRefreshToken(data.auth.refreshToken);
         setLoggedIn(true);
         message.success("Connection reussie!");
+        router.push("/", "/", { shallow: true });
       })
       .catch(err => console.log(err.message));
   };
