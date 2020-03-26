@@ -1,31 +1,15 @@
-import { useState } from "react";
-import { Menu, Typography, Modal } from "antd";
-import styled from "styled-components";
 import { useMe } from "~hooks/me";
-
-const Logo = styled.div`
-  height: 31px;
-  float: left;
-  line-height: 64px;
-  color: white !important;
-  font-size: 32px;
-  margin-right: 200px;
-`;
+import UserHeader from "./UserHeader";
+import AdminHeader from "./AdminHeader";
 
 export default function() {
   const me = useMe();
   if (!me) return null;
-  console.log(me);
 
-  return (
-    <>
-      <Logo>J4U</Logo>
-      <Menu mode="horizontal" theme="dark" style={{ lineHeight: "64px" }}>
-        <Menu.Item key="1">
-          Bienvenue {me.firstName} {me.lastName}
-        </Menu.Item>
-        <Menu.Item key="2">{me.email}</Menu.Item>
-      </Menu>
-    </>
-  );
+  if (me.role === "USER") {
+    return <UserHeader/>
+  } else {
+    return <AdminHeader/>
+  }
+
 }

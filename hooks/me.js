@@ -13,5 +13,6 @@ export function useMe() {
       }
     }
   });
+
   return data ? data.me : null;
 }

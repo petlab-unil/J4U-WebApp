@@ -1,4 +1,5 @@
 import React from "react";
+import App from "next/app";
 import withApollo from "next-with-apollo";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { ApolloClient } from "apollo-client";
@@ -9,6 +10,7 @@ import { onError } from "apollo-link-error";
 import { ThemeProvider } from "styled-components";
 import { ProvideAuth } from "~/hooks/auth";
 import { message } from "antd";
+import { NookiesProvider, parseNookies } from "next-nookies-persist";
 import MainLayout from "~/layouts/MainLayout";
 
 const theme = {
@@ -17,17 +19,36 @@ const theme = {
   }
 };
 
-const App = ({ Component, pageProps, apollo }) => (
-  <ApolloProvider client={apollo}>
-    <ThemeProvider theme={theme}>
-      <ProvideAuth>
-        <MainLayout>
-          <Component {...pageProps} />
-        </MainLayout>
-      </ProvideAuth>
-    </ThemeProvider>
-  </ApolloProvider>
-);
+class MyApp extends App {
+  static async getInitialProps({ Component, ctx }) {
+    return {
+      pageProps: {
+        nookies: parseNookies(ctx), // 👈
+        ...(Component.getInitialProps
+          ? await Component.getInitialProps(ctx)
+          : {})
+      }
+    };
+  }
+
+  render() {
+    const { Component, pageProps, apollo } = this.props;
+
+    return (
+      <NookiesProvider initialValue={pageProps.nookies}>
+        <ApolloProvider client={apollo}>
+          <ThemeProvider theme={theme}>
+            <ProvideAuth>
+              <MainLayout>
+                <Component {...pageProps} />
+              </MainLayout>
+            </ProvideAuth>
+          </ThemeProvider>
+        </ApolloProvider>
+      </NookiesProvider>
+    );
+  }
+}
 
 export default withApollo(({ initialState }) => {
   return new ApolloClient({
@@ -57,4 +78,4 @@ export default withApollo(({ initialState }) => {
     ]),
     cache: new InMemoryCache().restore(initialState || {})
   });
-})(App);
+})(MyApp);

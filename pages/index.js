@@ -1,5 +1,3 @@
-const IndexPage = props => {
+export default props => {
   return <div>akjdsfnjks</div>;
 };
-
-export default IndexPage;

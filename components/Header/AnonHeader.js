@@ -1,19 +1,9 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
 import Link from "next/link";
-import { Menu, Typography, Modal, Button } from "antd";
-import styled from "styled-components";
+import { useRouter } from "next/router";
+import { Menu, Modal } from "antd";
 import Login from "./Login";
 import Signup from "./Signup";
-
-const Logo = styled.div`
-  height: 31px;
-  float: left;
-  line-height: 64px;
-  color: white !important;
-  font-size: 32px;
-  margin-right: 200px;
-`;
+import Logo from "./Logo";
 
 const LoginModal = ({ visible, reset }) => (
   <Modal
@@ -57,12 +47,12 @@ export default function() {
       <SignupModal visible={signupVisible} reset={reset} />
       <Logo>J4U</Logo>
       <Menu mode="horizontal" theme="dark" style={{ lineHeight: "64px" }}>
-        <Menu.Item onClick={setLoginVisible} key="1">
+        <Menu.Item key="1">
           <Link href="/?login" shallow>
             <a> Se Connecter</a>
           </Link>
         </Menu.Item>
-        <Menu.Item onClick={setSignupVisible} key="2">
+        <Menu.Item key="2">
           <Link href="/?signup" shallow>
             <a> S'inscrire</a>
           </Link>

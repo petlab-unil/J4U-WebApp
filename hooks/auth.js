@@ -1,5 +1,6 @@
-import {useMutation } from "@apollo/react-hooks";
-import { useState, useContext, createContext } from "react";
+import { useMutation } from "@apollo/react-hooks";
+import { useContext, createContext } from "react";
+import useStorage from "next-nookies-persist";
 import { useRouter } from "next/router";
 import { message } from "antd";
 import { AUTH } from "~/gql/mutations";
@@ -15,21 +16,32 @@ export const useAuth = () => {
 };
 
 export function useProvideAuth() {
-  const [accessToken, setAccessToken] = useState(null);
-  const [refreshToken, setRefreshToken] = useState(null);
-  const [loggedIn, setLoggedIn] = useState(false);
+  const { nookies, setNookie, removeNookie } = useStorage();
   const [auth] = useMutation(AUTH);
   const router = useRouter();
+
+  console.log(nookies, "ajkfjkfajsdk");
+
+  const accessToken = nookies.accessToken;
+  const refreshToken = nookies.refreshToken;
+  const loggedIn = accessToken && refreshToken;
 
   const logIn = (email, password) => {
     auth({ variables: { email, password } })
       .then(({ data }) => {
         if (!data) return;
-        setAccessToken(data.auth.accessToken);
-        setRefreshToken(data.auth.refreshToken);
-        setLoggedIn(true);
+        console.log(data);
+        setNookie("accessToken", data.auth.accessToken);
+        setNookie("refreshToken", data.auth.refreshToken);
         message.success("Connection reussie!");
-        router.push("/", "/", { shallow: true });
+
+        console.log(router.query);
+
+        if (router.query.redirect) {
+          router.push(router.query.redirect, router.query.redirect);
+        } else {
+          router.push("/", "/", { shallow: true });
+        }
       })
       .catch(err => console.log(err.message));
   };
@@ -38,8 +50,9 @@ export function useProvideAuth() {
     console.log("signup");
   };
 
-  const signout = () => {
-    console.log("signout");
+  const logOut = () => {
+    removeNookie("accessToken");
+    removeNookie("refreshToken");
   };
 
   // Subscribe to user on mount
@@ -58,6 +71,7 @@ export function useProvideAuth() {
     accessToken,
     refreshToken,
     loggedIn,
-    logIn
+    logIn,
+    logOut
   };
 }
