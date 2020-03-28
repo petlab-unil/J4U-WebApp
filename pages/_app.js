@@ -12,6 +12,7 @@ import { ProvideAuth } from "~/hooks/auth";
 import { message } from "antd";
 import { NookiesProvider, parseNookies } from "next-nookies-persist";
 import MainLayout from "~/layouts/MainLayout";
+import { parseServerError } from "~/helpers";
 
 const theme = {
   colors: {
@@ -62,10 +63,9 @@ export default withApollo(({ initialState }) => {
             //);
             //console.log(client.cache);
             //console.log(client);
-            const re = /CODE\(([0-9]*)\)\sMSG\((.*)\)/g;
-            const match = re.exec(msg);
-            const errMsg = match ? match[2] : msg;
-            message.error(errMsg);
+            const { errorMsg: parsedMsg } = parseServerError(msg);
+            const errorMsg = parsedMsg ? parsedMsg : msg;
+            message.error(errorMsg);
           });
 
         if (networkError) console.log(`[Network error]: ${networkError}`);

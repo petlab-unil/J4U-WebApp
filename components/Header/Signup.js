@@ -39,7 +39,6 @@ const SignupSchema = Yup.object().shape({
 
 export default function() {
   const { form, validate, isValid } = useForm(SignupSchema);
-  const { logIn } = useAuth();
 
   const onFinish = values => {
     console.log(values);

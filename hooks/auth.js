@@ -1,4 +1,4 @@
-import { useMutation } from "@apollo/react-hooks";
+import { useMutation, useApolloClient } from "@apollo/react-hooks";
 import { useContext, createContext } from "react";
 import useStorage from "next-nookies-persist";
 import { useRouter } from "next/router";
@@ -17,10 +17,9 @@ export const useAuth = () => {
 
 export function useProvideAuth() {
   const { nookies, setNookie, removeNookie } = useStorage();
+  const client = useApolloClient();
   const [auth] = useMutation(AUTH);
   const router = useRouter();
-
-  console.log(nookies, "ajkfjkfajsdk");
 
   const accessToken = nookies.accessToken;
   const refreshToken = nookies.refreshToken;
@@ -30,12 +29,9 @@ export function useProvideAuth() {
     auth({ variables: { email, password } })
       .then(({ data }) => {
         if (!data) return;
-        console.log(data);
         setNookie("accessToken", data.auth.accessToken);
         setNookie("refreshToken", data.auth.refreshToken);
         message.success("Connection reussie!");
-
-        console.log(router.query);
 
         if (router.query.redirect) {
           router.push(router.query.redirect, router.query.redirect);
@@ -51,22 +47,12 @@ export function useProvideAuth() {
   };
 
   const logOut = () => {
+    router.push("/?login", "/?login");
+    client.cache.reset();
     removeNookie("accessToken");
     removeNookie("refreshToken");
   };
 
-  // Subscribe to user on mount
-  // Because this sets state in the callback it will cause any ...
-  // ... component that utilizes this hook to re-render with the ...
-  // ... latest auth object.
-  //useEffect(() => {
-  //});
-
-  //  // Cleanup subscription on unmount
-  //  return () => unsubscribe();
-  //}, []);
-
-  // Return the user object and auth methods
   return {
     accessToken,
     refreshToken,
