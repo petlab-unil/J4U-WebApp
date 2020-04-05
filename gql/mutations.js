@@ -1,4 +1,4 @@
-import gql from "graphql-tag";
+import gql from 'graphql-tag';
 
 export const AUTH = gql`
   mutation Auth($email: String!, $password: String!) {
@@ -9,14 +9,22 @@ export const AUTH = gql`
   }
 `;
 
-export const PUSH_MSG = gql`
-  mutation PushMessage($appMessage: AppMessage!) {
-    pushMessage(appMessage: $appMessage) @client
+export const VERIFY_USER = gql`
+  mutation VerifyUser($token: String!) {
+    verifyUser(token: $token) {
+      verified
+    }
   }
 `;
 
-export const DEL_MSG = gql`
-  mutation DelMessage($id: Int!) {
-    delMessage(id: $id) @client
+export const CREATE_USER = gql`
+  mutation CreateUser($user: UserInput!, $token: String!) {
+    createUser(user: $user, token: $token) {
+      user {
+        id
+        email
+        verified
+      }
+    }
   }
 `;

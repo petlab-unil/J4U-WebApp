@@ -1,3 +1,9 @@
-export default props => {
-  return <div>akjdsfnjks</div>;
+import Home from '~/components/Home';
+
+export default () => {
+  return (
+    <div>
+      <Home />
+    </div>
+  );
 };

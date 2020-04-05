@@ -1,7 +1,6 @@
+import styled from 'styled-components';
 
-import styled from "styled-components";
-
-export default  styled.div`
+export default styled.div`
   height: 31px;
   float: left;
   line-height: 64px;

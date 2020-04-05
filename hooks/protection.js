@@ -1,21 +1,18 @@
-import { useEffect } from "react";
-import { useRouter } from "next/router";
-import { useAuth } from "./auth";
-import { useMe } from "./me";
+import { useEffect } from 'react';
+import { useRouter } from 'next/router';
+import { useAuth } from './auth';
+import useMe from './me';
 
 export function useAuthRequired() {
   const router = useRouter();
   const { loggedIn } = useAuth();
 
-  const pathname = router.pathname;
+  const { pathname } = router;
   const ok = loggedIn;
 
   useEffect(() => {
     if (!ok) {
-      router.push(
-        `/?login&redirect=${pathname}`,
-        `/?login&redirect=${pathname}`
-      );
+      router.push(`/?login&redirect=${pathname}`, `/?login&redirect=${pathname}`);
     }
   }, [ok]);
 
@@ -26,7 +23,7 @@ export function useRolesRequired(roles) {
   const router = useRouter();
   const me = useMe();
 
-  const pathname = router.pathname;
+  const { pathname } = router;
   const ok = me && roles.includes(me.role);
 
   useEffect(() => {

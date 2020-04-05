@@ -1,13 +1,12 @@
-import AnonHeader from "./AnonHeader";
-import AuthHeader from "./AuthHeader";
-import { useAuth } from "~/hooks/auth";
+import AnonHeader from './AnonHeader';
+import AuthHeader from './AuthHeader';
+import { useAuth } from '~/hooks/auth';
 
-export default function() {
+export default function () {
   const { loggedIn } = useAuth();
 
   if (loggedIn) {
     return <AuthHeader />;
-  } else {
-    return <AnonHeader />;
   }
+  return <AnonHeader />;
 }

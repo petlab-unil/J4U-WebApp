@@ -1,9 +1,10 @@
-import Link from "next/link";
-import { useRouter } from "next/router";
-import { Menu, Modal } from "antd";
-import Login from "./Login";
-import Signup from "./Signup";
-import Logo from "./Logo";
+import PropTypes from 'prop-types';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { Menu, Modal } from 'antd';
+import Login from './Login';
+import Signup from './Signup';
+import Logo from './Logo';
 
 const LoginModal = ({ visible, reset }) => (
   <Modal
@@ -12,10 +13,16 @@ const LoginModal = ({ visible, reset }) => (
     onOk={reset}
     onCancel={reset}
     width="500px"
+    footer={null}
   >
     <Login />
   </Modal>
 );
+
+LoginModal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  reset: PropTypes.func.isRequired,
+};
 
 const SignupModal = ({ visible, reset }) => (
   <Modal
@@ -24,37 +31,39 @@ const SignupModal = ({ visible, reset }) => (
     onOk={reset}
     onCancel={reset}
     width="500px"
+    footer={null}
   >
     <Signup />
   </Modal>
 );
 
-export default function() {
+SignupModal.propTypes = {
+  visible: PropTypes.bool.isRequired,
+  reset: PropTypes.func.isRequired,
+};
+
+export default function () {
   const router = useRouter();
 
-  const loginVisible = "login" in router.query;
-  const signupVisible = "signup" in router.query;
+  const loginVisible = 'login' in router.query;
+  const signupVisible = 'signup' in router.query;
 
-  const setLoginVisible = () =>
-    router.push("/?login", "/?login", { shallow: true });
-  const setSignupVisible = () =>
-    router.push("/?signup", "/?signup", { shallow: true });
-  const reset = () => router.push("/", "/", { shallow: true });
+  const reset = () => router.push('/', '/', { shallow: true });
 
   return (
     <>
       <LoginModal visible={loginVisible} reset={reset} />
       <SignupModal visible={signupVisible} reset={reset} />
       <Logo>J4U</Logo>
-      <Menu mode="horizontal" theme="dark" style={{ lineHeight: "64px" }}>
+      <Menu mode="horizontal" theme="dark" style={{ lineHeight: '64px' }}>
         <Menu.Item key="1">
           <Link href="/?login" shallow>
-            <a> Se Connecter</a>
+            <a href="?login"> Se Connecter</a>
           </Link>
         </Menu.Item>
         <Menu.Item key="2">
           <Link href="/?signup" shallow>
-            <a> S'inscrire</a>
+            <a href="?signup"> S&apos;inscrire</a>
           </Link>
         </Menu.Item>
       </Menu>

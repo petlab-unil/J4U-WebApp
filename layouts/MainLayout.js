@@ -1,6 +1,8 @@
-import { Layout, Breadcrumb } from "antd";
-import AppHeader from "~/components/Header";
-import styled from "styled-components";
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
+import { Layout, Breadcrumb } from 'antd';
+import AppHeader from '~/components/Header';
+
 const { Header, Content, Footer } = Layout;
 
 const MainHeader = styled(Header)`
@@ -24,23 +26,29 @@ const PageWrapper = styled.div`
   min-height: 280px;
 `;
 
-export default ({ children }) => {
+function MainLayout({ children }) {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout style={{ minHeight: '100vh' }}>
       <MainHeader className="header" theme="light">
         <AppHeader />
       </MainHeader>
       <ContentWrapper>
-        <NavBreadcrumb style={{ margin: "16px 0" }}>
+        <NavBreadcrumb style={{ margin: '16px 0' }}>
           <Breadcrumb.Item>Home</Breadcrumb.Item>
           <Breadcrumb.Item>List</Breadcrumb.Item>
           <Breadcrumb.Item>App</Breadcrumb.Item>
         </NavBreadcrumb>
         <PageWrapper>{children}</PageWrapper>
       </ContentWrapper>
-      <Footer style={{ textAlign: "center" }}>
+      <Footer style={{ textAlign: 'center' }}>
         Made with &hearts; by <a href="https://google.com">J4U</a>
       </Footer>
     </Layout>
   );
+}
+
+MainLayout.propTypes = {
+  children: PropTypes.node.isRequired,
 };
+
+export default MainLayout;
