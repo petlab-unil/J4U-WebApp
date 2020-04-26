@@ -2,7 +2,12 @@
   "presets": ["next/babel"],
   "plugins": [
     ["babel-plugin-import-graphql"],
-    ["babel-plugin-root-import"],
+    [
+      "module-resolver",
+      {
+        "root": ["./src"]
+      }
+    ],
     [
       "import",
       {
