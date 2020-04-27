@@ -53,7 +53,7 @@ class MyApp extends App {
 export default withApollo(({ initialState }) => {
   const isServer = () => typeof window === `undefined`;
 
-  const adjustedUrl = isServer() ? process.env.API_URI : process.env.API_URI_DOCKER;
+  const adjustedUrl = isServer() ? process.env.API_URI_DOCKER : process.env.API_URI;
   console.log('Adjuted URI: ', adjustedUrl);
 
   return new ApolloClient({
