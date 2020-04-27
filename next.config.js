@@ -1,5 +1,6 @@
 /* eslint-disable */
-require('dotenv').config();
+const result = require('dotenv').config();
+console.log(result);
 const withPlugins = require('next-compose-plugins');
 const less = require('@zeit/next-less');
 const bundleAnalyzer = require('@next/bundle-analyzer');
