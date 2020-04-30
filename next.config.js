@@ -10,8 +10,8 @@ const path = require('path');
 
 const nextConfig = {
   env: {
-    API_URI: process.env.API_URI,
-    API_URI_DOCKER: process.env.API_URI_DOCKER,
+    GRAPHQL_URI: process.env.GRAPHQL_URI,
+    NEXT_GRAPHQL_PROXY_URI: process.env.NEXT_GRAPHQL_PROXY_URI,
   },
 };
 

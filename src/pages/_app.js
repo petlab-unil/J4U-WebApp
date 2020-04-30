@@ -51,11 +51,6 @@ class MyApp extends App {
 }
 
 export default withApollo(({ initialState }) => {
-  const isServer = () => typeof window === `undefined`;
-
-  const adjustedUrl = isServer() ? process.env.API_URI_DOCKER : process.env.API_URI;
-  console.log('Adjuted URI: ', adjustedUrl);
-
   return new ApolloClient({
     // ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
     ssrMode: false,
@@ -80,7 +75,7 @@ export default withApollo(({ initialState }) => {
         if (networkError) console.log(`[Network error]: ${networkError}`);
       }),
       new HttpLink({
-        uri: adjustedUrl, // Server URL (must be absolute)
+        uri: process.env.NEXT_GRAPHQL_PROXY_URI, // Server URL (must be absolute)
         credentials: 'omit', // Additional fetch() options like `credentials` or `headers`
         fetch,
       }),
