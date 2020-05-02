@@ -51,6 +51,7 @@ class MyApp extends App {
 }
 
 export default withApollo(({ initialState }) => {
+  console.log(process.env.NEXT_GRAPHQL_PROXY_URI, '_app');
   return new ApolloClient({
     // ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
     ssrMode: false,

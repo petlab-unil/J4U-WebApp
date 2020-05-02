@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 export default async (req, res) => {
+  console.log(process.env.GRAPHQL_URI, 'server');
   try {
     const { body: data, headers } = req;
     const { method } = req;
