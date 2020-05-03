@@ -1,15 +1,19 @@
+import { useState } from 'react';
 import { PageHeader } from 'antd';
-import { RecommendationSearch, RecommendationcResults } from 'components/Recommendation';
+import { RecommendationSearch, RecommendationResults, JobDetails } from 'components/Recommendation';
 import { useRouter } from 'next/router';
+import get from 'lodash/get';
 import useRecommendation from 'hooks/recommendation';
-import RecommendationResults from 'components/Recommendation/RecommendationResults';
+import useMe from 'hooks/me';
 
 const Recommendation = () => {
+  const [jobDetails, setJobDetails] = useState(undefined);
   const router = useRouter();
-
+  const me = useMe();
+  const searchEnabled = get(me, 'group.uiConfig.search');
   const { recoms, setRecomVariables } = useRecommendation();
 
-  console.log(recoms, 'ahahah');
+  const cancel = () => setJobDetails(undefined);
 
   return (
     <div gutter={[10, 10]}>
@@ -19,10 +23,11 @@ const Recommendation = () => {
         title="Recommandation"
         subTitle="Recommande des jobs"
       >
-        <RecommendationSearch setRecomVariables={setRecomVariables} />
+        {searchEnabled ? <RecommendationSearch setRecomVariables={setRecomVariables} /> : null}
       </PageHeader>
       <br />
-      <RecommendationResults recoms={recoms} />
+      <RecommendationResults recoms={recoms} setJobDetails={setJobDetails} />
+      <JobDetails position={jobDetails} cancel={cancel} />
     </div>
   );
 };

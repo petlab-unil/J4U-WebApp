@@ -1,35 +1,38 @@
 import gql from 'graphql-tag';
+import { FRAGMENT_GROUP_ALL_FIELDS } from './fragments';
 
 export const ME = gql`
   query me {
     me {
       id
       email
+      civilite
       firstName
       lastName
+      birthDate
       verified
       role
       baselineLink
       formDone
+      alpha
+      beta
+      oldJobIsco08
+      oldJobTitle
       group {
-        id
-        name
-        baselineId
-        cruiserId
+        ...GroupAllFields
       }
     }
   }
+  ${FRAGMENT_GROUP_ALL_FIELDS}
 `;
 
 export const ALL_GROUPS = gql`
   query allGroups {
     allGroups {
-      id
-      name
-      baselineId
-      cruiserId
+      ...GroupAllFields
     }
   }
+  ${FRAGMENT_GROUP_ALL_FIELDS}
 `;
 
 export const GET_SIGNUP_LINK = gql`
@@ -64,8 +67,13 @@ export const JOB_SEARCH_HINTS = gql`
 `;
 
 export const RECOMMENDATIONS = gql`
-  query recommendations($oldJobIsco08: Int!, $alpha: Float!, $beta: Float!) {
-    recommendations(oldJobIsco08: $oldJobIsco08, alpha: $alpha, beta: $beta) {
+  query recommendations($oldJobIsco08: Int!, $oldJobTitle: String!, $alpha: Float!, $beta: Float!) {
+    recommendations(
+      oldJobIsco08: $oldJobIsco08
+      oldJobTitle: $oldJobTitle
+      alpha: $alpha
+      beta: $beta
+    ) {
       varList
       results {
         jobTitle
@@ -84,6 +92,7 @@ export const POSITIONS = gql`
       positions {
         id
         jobQuantity
+        externalUrl
         company {
           name
           city
