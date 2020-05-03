@@ -3,6 +3,7 @@ import { PageHeader } from 'antd';
 import { RecommendationSearch, RecommendationResults, JobDetails } from 'components/Recommendation';
 import { useRouter } from 'next/router';
 import get from 'lodash/get';
+import AuthRequired from 'components/HOC/AuthRequiredPage';
 import useRecommendation from 'hooks/recommendation';
 import useMe from 'hooks/me';
 
@@ -32,4 +33,4 @@ const Recommendation = () => {
   );
 };
 
-export default Recommendation;
+export default AuthRequired(Recommendation);

@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import moment from 'moment';
 import { Button, Card, Col, DatePicker, Popconfirm, Row, Spin, Typography } from 'antd';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import { useState } from 'react';
 import { GET_SIGNUP_LINK } from 'gql/queries';
 import { useAuth } from 'hooks/auth';

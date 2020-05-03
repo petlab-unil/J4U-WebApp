@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import moment from 'moment';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
 import { Form, Input, Button, Radio, message, DatePicker } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';

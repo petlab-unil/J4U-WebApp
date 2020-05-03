@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { Select } from 'antd';
 import { useAuth } from 'hooks/auth';
 import { ALL_SURVEYS } from 'gql/queries';
@@ -17,13 +17,14 @@ const SurveySelect = (props) => {
     },
   });
 
-  const options = data.allSurveys
-    ? data.allSurveys.map((survey) => (
-        <Option key={survey.id} value={survey.id}>
-          {survey.name}
-        </Option>
-      ))
-    : [];
+  const options =
+    data && data.allSurveys
+      ? data.allSurveys.map((survey) => (
+          <Option key={survey.id} value={survey.id}>
+            {survey.name}
+          </Option>
+        ))
+      : [];
 
   return (
     <Select

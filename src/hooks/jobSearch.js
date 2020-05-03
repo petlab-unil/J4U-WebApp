@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import throttle from 'lodash/throttle';
 import { JOB_SEARCH_HINTS } from 'gql/queries';
 

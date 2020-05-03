@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { Select } from 'antd';
 import { useAuth } from 'hooks/auth';
 import { ALL_GROUPS } from 'gql/queries';
@@ -17,13 +17,16 @@ const GroupSelect = (props) => {
     },
   });
 
-  const options = data.allGroups
-    ? data.allGroups.map((group) => (
-        <Option key={group.id} value={group.id}>
-          {group.name}
-        </Option>
-      ))
-    : [];
+  console.log(loading, error, 'jjjjjjjj');
+
+  const options =
+    data && data.allGroups
+      ? data.allGroups.map((group) => (
+          <Option key={group.id} value={group.id}>
+            {group.name}
+          </Option>
+        ))
+      : [];
 
   return (
     <Select

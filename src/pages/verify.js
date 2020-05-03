@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import { Spin, Alert } from 'antd';
 import { VERIFY_USER } from 'gql/mutations';
 import { parseServerError } from 'helpers';

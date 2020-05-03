@@ -2,13 +2,9 @@ import React from 'react';
 import App from 'next/app';
 import withApollo from 'next-with-apollo';
 import { message } from 'antd';
-import { ApolloProvider } from '@apollo/react-hooks';
-import { ApolloClient } from 'apollo-client';
-import { InMemoryCache } from 'apollo-cache-inmemory';
-import { ApolloLink } from 'apollo-link';
+import { ApolloProvider, InMemoryCache, ApolloClient, ApolloLink, HttpLink } from '@apollo/client';
 import Router from 'next/router';
-import { HttpLink } from 'apollo-link-http';
-import { onError } from 'apollo-link-error';
+import { onError } from '@apollo/link-error';
 import { ThemeProvider } from 'styled-components';
 import { NookiesProvider, parseNookies } from 'next-nookies-persist';
 import { ProvideAuth } from 'hooks/auth';
@@ -68,7 +64,9 @@ export default withApollo(({ initialState }) => {
 
             if (typeof window !== 'undefined') {
               message.error(errorMsg);
-              if (code === 201) Router.push(`/logout?redirect=${Router.pathname}`);
+
+              if (code === 201 && Router.pathname !== '/logout')
+                Router.push(`/logout?redirect=${Router.pathname}`);
             }
           });
 

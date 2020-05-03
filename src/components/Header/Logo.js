@@ -7,7 +7,7 @@ const LogoWrapper = styled.div`
   line-height: 64px;
   color: white !important;
   font-size: 32px;
-  margin-right: 200px;
+  margin-right: 20px;
 `;
 
 export default () => (

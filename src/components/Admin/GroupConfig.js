@@ -1,5 +1,5 @@
 import { Card, Row, Col, Form, Input, Button, Switch } from 'antd';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { SurveySelect } from 'components/Select';
 import { useAuth } from 'hooks/auth';
 import capitalize from 'lodash/capitalize';
@@ -91,11 +91,7 @@ const GroupDetail = ({ group }) => {
 
 export default () => {
   const { accessToken } = useAuth();
-  const {
-    loading,
-    error,
-    data: { allGroups = [] },
-  } = useQuery(ALL_GROUPS, {
+  const { loading, error, data } = useQuery(ALL_GROUPS, {
     context: {
       headers: {
         accessToken,
@@ -103,6 +99,8 @@ export default () => {
       skip: !accessToken,
     },
   });
+
+  const allGroups = data && data.allGroups ? data.allGroups : [];
 
   return (
     <Card title="Group configuration">

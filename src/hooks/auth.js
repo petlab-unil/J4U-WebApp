@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useMutation, useApolloClient } from '@apollo/react-hooks';
+import { useMutation, useApolloClient } from '@apollo/client';
 import { useContext, createContext } from 'react';
 import useStorage from 'next-nookies-persist';
 import { useRouter } from 'next/router';

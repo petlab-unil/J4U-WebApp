@@ -1,11 +1,10 @@
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { useAuth } from 'hooks/auth';
 import { ME } from 'gql/queries';
 
 export default function () {
   const { accessToken } = useAuth();
-
-  const { data } = useQuery(ME, {
+  const { data, error, loading } = useQuery(ME, {
     skip: !accessToken,
     context: {
       headers: {
@@ -13,6 +12,8 @@ export default function () {
       },
     },
   });
+
+  console.log(error, loading);
 
   return data ? data.me : null;
 }

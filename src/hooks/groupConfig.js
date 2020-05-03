@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Form } from 'antd';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 import isEqual from 'lodash/isEqual';
 import omit from 'lodash/omit';
 import { useAuth } from 'hooks/auth';
