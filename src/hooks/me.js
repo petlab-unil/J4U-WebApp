@@ -13,7 +13,5 @@ export default function () {
     },
   });
 
-  console.log(error, loading);
-
   return data ? data.me : null;
 }

@@ -36,9 +36,6 @@ const EmploymentDates = ({ position }) => {
 };
 
 const Position = ({ position, setJobDetails }) => {
-  console.log(position.employment.startDate);
-  console.log(position.employment.endDate);
-  console.log('-----------------------------');
   return (
     <Tooltip title="Cliquer pour les détatils">
       <ClickCard
@@ -70,10 +67,6 @@ const IndividualResult = ({ recom, setJobDetails }) => {
   const { positions, totalCount, loading, page, setPage } = usePositions(recom.avam);
 
   const count = totalCount === undefined ? '' : `positions: ${totalCount}`;
-
-  console.log(totalCount, positions.length);
-
-  console.log(loading, 'asandfjjnnknkys');
 
   return (
     <Row gutter={[24, 24]}>

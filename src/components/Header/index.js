@@ -9,8 +9,6 @@ import { useAuth } from 'hooks/auth';
 import Logo from './Logo';
 import Login from './Login';
 import Signup from './Signup';
-import AnonHeader from './AnonHeader';
-import AuthHeader from './AuthHeader';
 
 const LoginModal = ({ visible, reset }) => (
   <Modal
@@ -86,9 +84,10 @@ const Recommendation = ({ me }) => {
 };
 
 export default () => {
+  const router = useRouter();
+  if (router.pathname === '/logout') return null;
   const me = useMe();
   const { logOut } = useAuth();
-  const router = useRouter();
 
   const loginVisible = 'login' in router.query;
   const signupVisible = 'signup' in router.query;
@@ -97,7 +96,6 @@ export default () => {
 
   const selectedKey = () => {
     const { pathname, query } = router;
-    console.log(query);
     if (pathname === '/recommandation') {
       return 'recommandation';
     }

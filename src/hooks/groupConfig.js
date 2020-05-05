@@ -42,14 +42,9 @@ export default (group) => {
     }
   };
   const updateCanSave = async () => {
-    console.log('-------------');
     const noErrors = (await errorsCount()) === 0;
     const changed = !isEqual(refGroup, getFormValues());
-    console.log(refGroup);
-    console.log(getFormValues());
-    console.log(changed);
     setCanSave(noErrors && changed);
-    console.log('-------------');
   };
 
   // Exosed functions

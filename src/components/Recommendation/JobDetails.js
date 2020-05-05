@@ -31,8 +31,6 @@ const JobDetails = ({ position, cancel }) => {
 
   const emptyContact = every([firstName, lastName, phone, email], isEmpty);
 
-  console.log(position.externalUrl);
-  console.log(JSON.stringify(description));
   return (
     <Modal
       width="80%"

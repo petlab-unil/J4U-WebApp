@@ -10,7 +10,6 @@ const VerifyCard = ({ me }) => {
 };
 
 const SurveyCard = ({ me }) => {
-  console.log(me);
   if (!me.formDone) {
     return (
       <Card title="Questionnaires">

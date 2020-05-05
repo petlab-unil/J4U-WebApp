@@ -8,7 +8,6 @@ export default () => {
   const [recomVariables, setRecomVariables] = useState(undefined);
   const { accessToken } = useAuth();
 
-  console.log(recomVariables);
   const { oldJobData } = pick(recomVariables, ['oldJobData.isco08', 'oldJobData.title']);
   const variables = pick(recomVariables, ['alpha', 'beta']);
   variables.oldJobIsco08 = !oldJobData || oldJobData.isco08;

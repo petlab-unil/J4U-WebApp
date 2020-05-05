@@ -64,9 +64,9 @@ export default withApollo(({ initialState }) => {
 
             if (typeof window !== 'undefined') {
               message.error(errorMsg);
-
-              if (code === 201 && Router.pathname !== '/logout')
+              if (code === 201) {
                 Router.push(`/logout?redirect=${Router.pathname}`);
+              }
             }
           });
 

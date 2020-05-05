@@ -10,10 +10,7 @@ const Recommendation = ({ setRecomVariables }) => {
   const alphaFixed = get(me, 'group.uiConfig.alphaFixed');
   const betaFixed = get(me, 'group.uiConfig.betaFixed');
 
-  console.log(me);
-
   const onFinish = (v) => {
-    console.log(v);
     setRecomVariables(v);
   };
 

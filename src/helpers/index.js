@@ -10,7 +10,6 @@ export function parseServerError(msg) {
 }
 
 export function getCertificate(me, jobTitle) {
-  console.log(me);
   const { civilite, firstName, lastName, birthDate } = me;
   axios({
     url: `${process.env.API_URI}/certificate`,

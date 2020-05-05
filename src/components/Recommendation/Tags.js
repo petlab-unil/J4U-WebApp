@@ -50,24 +50,3 @@ export const LoadTag = ({ position }) => {
     </Tooltip>
   );
 };
-
-const EmploymentDate = ({ value, name }) => {
-  if (value)
-    return (
-      <Row>
-        <Col span={6}>{name}:</Col>
-        <Col span={18}>{value}</Col>
-      </Row>
-    );
-  return null;
-};
-
-export const EmploymentDates = ({ position }) => {
-  return (
-    <>
-      <EmploymentDate position={position} value={position.employment.startDate} name="Début" />
-      <EmploymentDate position={position} value={position.employment.endDate} name="Fin" />
-    </>
-  );
-  return null;
-};

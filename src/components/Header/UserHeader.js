@@ -1,5 +1,6 @@
 import { Menu } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
+import { useRouter } from 'next/router';
 import styled from 'styled-components';
 import Link from 'next/link';
 import useMe from 'hooks/me';
@@ -29,7 +30,7 @@ export default () => {
       <Logo />
       <Profile me={me} />
       {me.formDone ? (
-        <Menu.Item key="3">
+        <Menu.Item key="recommandation">
           <Link href="/recommandation">
             <a href="/recommandation">Recommandations</a>
           </Link>

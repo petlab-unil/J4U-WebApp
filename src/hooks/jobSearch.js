@@ -16,7 +16,6 @@ export default (onChange) => {
     });
   };
   const handleSearch = (keywords) => {
-    console.log('ahahha');
     setQuery(keywords);
   };
   const throttledSearch = useRef(throttle(handleSearch, 1000)).current;

@@ -17,8 +17,6 @@ const GroupSelect = (props) => {
     },
   });
 
-  console.log(loading, error, 'jjjjjjjj');
-
   const options =
     data && data.allGroups
       ? data.allGroups.map((group) => (
