@@ -6,6 +6,7 @@ import every from 'lodash/every';
 import isEmpty from 'lodash/isEmpty';
 import { getCertificate } from 'helpers';
 import { PermanentTag, ImmediatelyTag, LoadTag } from './Tags';
+import { useTracker } from 'hooks/tracker';
 
 const { Text } = Typography;
 
@@ -18,10 +19,12 @@ const ScrollDiv = styled.div`
 const JobDetails = ({ position, cancel }) => {
   const [view, setView] = useState('INFO');
   const me = useMe();
+  const tracker = useTracker();
 
   if (!position) return null;
 
   const {
+    id,
     externalUrl,
     descriptions: [{ title, description }],
     location: { city, countryCode, cantonCode },
@@ -30,10 +33,19 @@ const JobDetails = ({ position, cancel }) => {
     employment: { startDate, endDate },
   } = position;
 
+  console.log(id);
+
   const emptyContact = every([firstName, lastName, phone, email], isEmpty);
 
   const infoFooter = [
-    <Button key="apply" type="primary" onClick={() => setView('APPLY')}>
+    <Button
+      key="apply"
+      type="primary"
+      onClick={() => {
+        setView('APPLY');
+        tracker.track('APPLY_CLICK', { job_id: id, job_title: title });
+      }}
+    >
       Postuler
     </Button>,
   ];
@@ -90,14 +102,34 @@ const JobDetails = ({ position, cancel }) => {
       {view === 'APPLY' ? (
         <Row gutter={[24, 24]}>
           <Col>
-            <Button key="apply" type="primary">
-              <a href={externalUrl} target="_blank" rel="noopener noreferrer">
-                Postuler sur site externe
-              </a>
-            </Button>
+            {externalUrl && (
+              <Button
+                key="apply"
+                type="primary"
+                onClick={() => {
+                  setView('APPLY');
+                  tracker.track('EXTERNAL_CLICK', {
+                    job_id: id,
+                    job_title: title,
+                    external_url: externalUrl,
+                  });
+                }}
+              >
+                <a href={externalUrl} target="_blank" rel="noopener noreferrer">
+                  Postuler sur site externe
+                </a>
+              </Button>
+            )}
           </Col>
           <Col>
-            <Button key="certificate" type="primary" onClick={() => getCertificate(me, title)}>
+            <Button
+              key="certificate"
+              type="primary"
+              onClick={() => {
+                getCertificate(me, title);
+                tracker.track('CERTIFICATE_CLICK', { job_id: id, job_title: title });
+              }}
+            >
               Certificat
             </Button>
           </Col>

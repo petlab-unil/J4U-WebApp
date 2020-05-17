@@ -68,6 +68,12 @@ const IndividualResult = ({ recom, setJobDetails }) => {
 
   const count = totalCount === undefined ? '' : `positions: ${totalCount}`;
 
+  const header = (
+    <>
+      {`${count}`} <Spin spinning={!!loading} />
+    </>
+  );
+
   return (
     <Row gutter={[24, 24]}>
       <Col span={24}>
@@ -76,7 +82,7 @@ const IndividualResult = ({ recom, setJobDetails }) => {
             <Col span={24}>Résultats</Col>
             <Col span={24}>
               <Collapse bordered={false}>
-                <Panel header={`${count}`} style={{ width: '100%' }}>
+                <Panel header={header} style={{ width: '100%' }}>
                   <Pagination
                     simple
                     current={page}

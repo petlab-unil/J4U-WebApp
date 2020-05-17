@@ -146,6 +146,21 @@ export default () => {
             Logout
           </Menu.Item>
         ) : null}
+        <Menu.Item key="contact">
+          <Link href="/contact" shallow>
+            <a href="contact">Contact</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="legal">
+          <Link href="/legal" shallow>
+            <a href="legal">Legal</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="tirage">
+          <Link href="/tirage" shallow>
+            <a href="tirage">Tirage</a>
+          </Link>
+        </Menu.Item>
       </Menu>
     </>
   );
