@@ -32,7 +32,7 @@ const SignupSchema = Yup.object().shape({
     .required('Champ obligatoire'),
 });
 
-export default function () {
+export default () => {
   const router = useRouter();
   const { form, validate, isValid } = useForm(SignupSchema);
   const [createUser] = useMutation(CREATE_USER);
@@ -126,4 +126,4 @@ export default function () {
       </Form.Item>
     </Form>
   );
-}
+};

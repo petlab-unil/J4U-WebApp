@@ -1,6 +1,7 @@
 import { Row, Col } from 'antd';
 import { SignupLink, GroupConfig } from 'components/Admin';
 import RolesRequired from 'components/HOC/RolesRequiredPage';
+import TrackVisit from 'components/HOC/TrackVisit';
 
 const Admin = () => {
   return (
@@ -18,4 +19,4 @@ const Admin = () => {
   );
 };
 
-export default RolesRequired(Admin, ['ADMIN']);
+export default RolesRequired(TrackVisit(Admin), ['ADMIN']);

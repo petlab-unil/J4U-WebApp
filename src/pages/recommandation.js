@@ -4,6 +4,7 @@ import { RecommendationSearch, RecommendationResults, JobDetails } from 'compone
 import { useRouter } from 'next/router';
 import get from 'lodash/get';
 import AuthRequired from 'components/HOC/AuthRequiredPage';
+import TrackVisit from 'components/HOC/TrackVisit';
 import useRecommendation from 'hooks/recommendation';
 import useMe from 'hooks/me';
 
@@ -33,4 +34,4 @@ const Recommendation = () => {
   );
 };
 
-export default AuthRequired(Recommendation);
+export default AuthRequired(TrackVisit(Recommendation));

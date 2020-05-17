@@ -72,29 +72,29 @@ const IndividualResult = ({ recom, setJobDetails }) => {
     <Row gutter={[24, 24]}>
       <Col span={24}>
         <Card title={recom.jobTitle}>
-          <Spin spinning={!!loading}>
-            <Row>
-              <Col span={24}>Résultats</Col>
-              <Col span={24}>
-                <Collapse bordered={false}>
-                  <Panel header={`${count}`} style={{ width: '100%' }}>
-                    <Pagination
-                      simple
-                      current={page}
-                      defaultPageSize={10}
-                      total={totalCount}
-                      onChange={(p) => {
-                        setPage(p);
-                      }}
-                    />
+          <Row>
+            <Col span={24}>Résultats</Col>
+            <Col span={24}>
+              <Collapse bordered={false}>
+                <Panel header={`${count}`} style={{ width: '100%' }}>
+                  <Pagination
+                    simple
+                    current={page}
+                    defaultPageSize={10}
+                    total={totalCount}
+                    onChange={(p) => {
+                      setPage(p);
+                    }}
+                  />
+                  <Spin spinning={!!loading}>
                     {positions.map((position, i) => (
                       <Position key={i} position={position} setJobDetails={setJobDetails} />
                     ))}
-                  </Panel>
-                </Collapse>
-              </Col>
-            </Row>
-          </Spin>
+                  </Spin>
+                </Panel>
+              </Collapse>
+            </Col>
+          </Row>
         </Card>
       </Col>
     </Row>

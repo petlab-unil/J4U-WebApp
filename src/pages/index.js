@@ -1,9 +1,10 @@
+import TrackVisit from 'components/HOC/TrackVisit';
 import Home from 'components/Home';
 
-export default () => {
-  return (
-    <div>
-      <Home />
-    </div>
-  );
-};
+const Index = () => (
+  <div>
+    <Home />
+  </div>
+);
+
+export default TrackVisit(Index);

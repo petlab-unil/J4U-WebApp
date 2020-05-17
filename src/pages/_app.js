@@ -1,5 +1,4 @@
 import React from 'react';
-import App from 'next/app';
 import withApollo from 'next-with-apollo';
 import { message } from 'antd';
 import { ApolloProvider, InMemoryCache, ApolloClient, ApolloLink, HttpLink } from '@apollo/client';
@@ -17,34 +16,30 @@ const theme = {
   },
 };
 
-class MyApp extends App {
-  static async getInitialProps({ Component, ctx }) {
-    return {
-      pageProps: {
-        nookies: parseNookies(ctx),
-        ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
-      },
-    };
-  }
+const MyApp = ({ Component, pageProps, apollo }) => {
+  return (
+    <NookiesProvider initialValue={pageProps.nookies}>
+      <ApolloProvider client={apollo}>
+        <ThemeProvider theme={theme}>
+          <ProvideAuth>
+            <MainLayout>
+              <Component {...pageProps} />
+            </MainLayout>
+          </ProvideAuth>
+        </ThemeProvider>
+      </ApolloProvider>
+    </NookiesProvider>
+  );
+};
 
-  render() {
-    const { Component, pageProps, apollo } = this.props;
-
-    return (
-      <NookiesProvider initialValue={pageProps.nookies}>
-        <ApolloProvider client={apollo}>
-          <ThemeProvider theme={theme}>
-            <ProvideAuth>
-              <MainLayout>
-                <Component {...pageProps} />
-              </MainLayout>
-            </ProvideAuth>
-          </ThemeProvider>
-        </ApolloProvider>
-      </NookiesProvider>
-    );
-  }
-}
+MyApp.getInitialProps = async ({ Component, ctx }) => {
+  return {
+    pageProps: {
+      nookies: parseNookies(ctx),
+      ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
+    },
+  };
+};
 
 export default withApollo(({ initialState }) => {
   return new ApolloClient({

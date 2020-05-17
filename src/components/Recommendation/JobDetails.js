@@ -1,5 +1,5 @@
-import { Fragment } from 'react';
-import { Modal, Descriptions, Button, Typography } from 'antd';
+import { useState } from 'react';
+import { Modal, Descriptions, Button, Typography, Row, Col } from 'antd';
 import styled from 'styled-components';
 import useMe from 'hooks/me';
 import every from 'lodash/every';
@@ -16,6 +16,7 @@ const ScrollDiv = styled.div`
 `;
 
 const JobDetails = ({ position, cancel }) => {
+  const [view, setView] = useState('INFO');
   const me = useMe();
 
   if (!position) return null;
@@ -31,24 +32,24 @@ const JobDetails = ({ position, cancel }) => {
 
   const emptyContact = every([firstName, lastName, phone, email], isEmpty);
 
+  const infoFooter = [
+    <Button key="apply" type="primary" onClick={() => setView('APPLY')}>
+      Postuler
+    </Button>,
+  ];
+  const applyFooter = [
+    <Button key="back" type="primary" onClick={() => setView('INFO')}>
+      Retour
+    </Button>,
+  ];
+
   return (
     <Modal
       width="80%"
       visible={!!position}
       onCancel={cancel}
       title="Details"
-      footer={[
-        externalUrl ? (
-          <Button key="apply" type="primary">
-            <a href={externalUrl} target="_blank" rel="noopener noreferrer">
-              Postuler sur site externe
-            </a>
-          </Button>
-        ) : null,
-        <Button key="certificate" type="primary" onClick={() => getCertificate(me, title)}>
-          Certificat
-        </Button>,
-      ]}
+      footer={view === 'APPLY' ? applyFooter : infoFooter}
     >
       <Descriptions title="General" layout="vertical" column={3}>
         <Descriptions.Item label="Titre">{title}</Descriptions.Item>
@@ -62,15 +63,7 @@ const JobDetails = ({ position, cancel }) => {
           {endDate ? `Fin: ${endDate}` : null}
         </Descriptions.Item>
         <Descriptions.Item span={3} label="Description">
-          <ScrollDiv>
-            {description}
-            {/*             {description.split('\n').map((x, i) => (
-              <Fragment key={i}>
-                {x}
-                <br />
-              </Fragment>
-            ))} */}
-          </ScrollDiv>
+          <ScrollDiv>{description}</ScrollDiv>
         </Descriptions.Item>
       </Descriptions>
 
@@ -86,7 +79,7 @@ const JobDetails = ({ position, cancel }) => {
         <Descriptions.Item label="Canton">{cantonCode}</Descriptions.Item>
       </Descriptions>
 
-      {emptyContact ? null : (
+      {emptyContact || view === 'INFO' ? null : (
         <Descriptions title="Contact" layout="horitontal">
           <Descriptions.Item label="Prenom">{firstName}</Descriptions.Item>
           <Descriptions.Item label="Nom">{lastName}</Descriptions.Item>
@@ -94,6 +87,22 @@ const JobDetails = ({ position, cancel }) => {
           <Descriptions.Item label="Email">{email}</Descriptions.Item>
         </Descriptions>
       )}
+      {view === 'APPLY' ? (
+        <Row gutter={[24, 24]}>
+          <Col>
+            <Button key="apply" type="primary">
+              <a href={externalUrl} target="_blank" rel="noopener noreferrer">
+                Postuler sur site externe
+              </a>
+            </Button>
+          </Col>
+          <Col>
+            <Button key="certificate" type="primary" onClick={() => getCertificate(me, title)}>
+              Certificat
+            </Button>
+          </Col>
+        </Row>
+      ) : null}
     </Modal>
   );
 };

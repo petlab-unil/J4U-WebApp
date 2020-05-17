@@ -1,4 +1,5 @@
 import PropTypes from 'prop-types';
+import { useMemo } from 'react';
 import { useMutation, useApolloClient } from '@apollo/client';
 import { useContext, createContext } from 'react';
 import useStorage from 'next-nookies-persist';
@@ -45,8 +46,8 @@ export function useProvideAuth() {
       router.push('/?login&', '/?login');
     }
     client.cache.reset();
-    removeNookie('accessToken');
     removeNookie('refreshToken');
+    removeNookie('accessToken');
   };
 
   return {
@@ -58,11 +59,21 @@ export function useProvideAuth() {
   };
 }
 
-export function ProvideAuth({ children }) {
+export const ProvideAuth = ({ children }) => {
   const auth = useProvideAuth();
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
-}
+};
 
 ProvideAuth.propTypes = {
   children: PropTypes.node.isRequired,
+};
+
+export const withAuth = (Component) => {
+  const auth = useAuth();
+  const Wrapped = (props) => <Component {...props} auth={auth} />;
+
+  return React.memo(
+    Wrapped,
+    (prevProps, nextProps) => prevProps.auth.accessToken !== nextProps.auth.accessToken
+  );
 };

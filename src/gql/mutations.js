@@ -40,3 +40,22 @@ export const UPDATE_GROUP_CONFIG = gql`
   }
   ${FRAGMENT_GROUP_ALL_FIELDS}
 `;
+
+export const CREATE_EVENT = gql`
+  mutation CreateEvent($event: EventInput!) {
+    createEvent(event: $event) {
+      event {
+        id
+        type
+        timestamp
+        ip
+        user {
+          id
+          email
+        }
+        userAgent
+        payload
+      }
+    }
+  }
+`;

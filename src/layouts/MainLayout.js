@@ -1,7 +1,9 @@
 import PropTypes from 'prop-types';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 import { Layout, Breadcrumb } from 'antd';
 import AppHeader from 'components/Header';
+import { withTracker } from 'hooks/tracker';
 
 const { Header, Content, Footer } = Layout;
 
@@ -26,7 +28,22 @@ const PageWrapper = styled.div`
   min-height: 280px;
 `;
 
-const MainLayout = ({ children }) => {
+const MainLayout = withTracker(({ children, tracker }) => {
+  useEffect(() => {
+    if (window.trackInterval) {
+      clearInterval(window.trackInterval);
+    }
+    const interval = setInterval(() => {
+      tracker.track('HEARTBEAT');
+    }, 10000);
+    window.trackInterval = interval;
+
+    return () => {
+      if (window.trackInterval) {
+        clearInterval(window.trackInterval);
+      }
+    };
+  }, [tracker]);
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <MainHeader className="header" theme="light">
@@ -47,7 +64,7 @@ const MainLayout = ({ children }) => {
       </Footer>
     </Layout>
   );
-};
+});
 
 MainLayout.propTypes = {
   children: PropTypes.node.isRequired,

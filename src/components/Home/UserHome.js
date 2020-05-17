@@ -1,26 +1,48 @@
-import { Row, Col, Card, Typography } from 'antd';
+import { Row, Col, Card, Typography, Alert } from 'antd';
 
 const { Paragraph } = Typography;
 
 const VerifyCard = ({ me }) => {
   if (!me.verified) {
-    return <Card title="Verification du compte">Vous devez verifier votre compte</Card>;
+    return (
+      <Alert
+        message="Verification du compte"
+        description="Vous devez verifier votre compte en suivant les intructions recues par email"
+        type="error"
+        showIcon
+      />
+    );
   }
-  return null;
+  return (
+    <Alert
+      message="Verification du compte"
+      description="Votre compte a bien ete verifie"
+      type="success"
+      showIcon
+    />
+  );
 };
 
 const SurveyCard = ({ me }) => {
-  if (!me.formDone) {
-    return (
-      <Card title="Questionnaires">
-        <Paragraph>Vous devez compléter le questionnaires Qualtrics</Paragraph>
-        <Paragraph>
-          <a href={me.baselineLink}>Questionnaire</a>
-        </Paragraph>
-      </Card>
-    );
-  }
-  return null;
+  const desc = (
+    <>
+      <Paragraph>Vous devez compléter le questionnaire Qualtrics</Paragraph>
+      <Paragraph>
+        <a href={me.baselineLink}>Questionnaire</a>
+      </Paragraph>
+    </>
+  );
+
+  if (!me.formDone)
+    return <Alert message="Questionnaires" description={desc} type="error" showIcon />;
+  return (
+    <Alert
+      message="Questionnaires"
+      description={`Questionnaire complete le ${me.formDoneAt}`}
+      type="success"
+      showIcon
+    />
+  );
 };
 
 export default ({ me }) => {

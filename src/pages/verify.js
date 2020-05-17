@@ -6,7 +6,7 @@ import { Spin, Alert } from 'antd';
 import { VERIFY_USER } from 'gql/mutations';
 import { parseServerError } from 'helpers';
 
-export default (p) => {
+export default () => {
   const router = useRouter();
 
   const [verifyUser, { loading, error, data }] = useMutation(VERIFY_USER, {
