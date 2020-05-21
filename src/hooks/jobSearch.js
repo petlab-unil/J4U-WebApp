@@ -12,6 +12,7 @@ export default (onChange) => {
   const onSelect = (value, option) => {
     onChange({
       isco08: option.isco08,
+      avam: option.avam,
       title: option.value,
     });
   };
@@ -25,9 +26,7 @@ export default (onChange) => {
   if (loading || error) return { optionsObj, onSelect, handleSearch: throttledSearch, loading };
 
   optionsObj = data.jobSearchHints.map((x) => ({
-    id: x.id,
-    label: x.title,
-    value: x.isco08,
+    ...x,
   }));
 
   return { optionsObj, query, onSelect, handleSearch: throttledSearch, loading };

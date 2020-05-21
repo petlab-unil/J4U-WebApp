@@ -3,22 +3,6 @@ import { useState, useEffect, memo } from 'react';
 import { CREATE_EVENT } from 'gql/mutations';
 import { useAuth } from 'hooks/auth';
 
-export const applyClickPayload = (jobId, jobTitle) => ({
-  job_id: jobId,
-  job_title: jobTitle,
-});
-
-export const certificateClickPayload = (jobId, jobTitle) => ({
-  job_id: jobId,
-  job_title: jobTitle,
-});
-
-export const externalWebsiteClickPayload = (jobId, jobTitle, externalUrl) => ({
-  job_id: jobId,
-  job_title: jobTitle,
-  external_url,
-});
-
 class Tracker {
   constructor(accessToken, client) {
     this.accessToken = accessToken;

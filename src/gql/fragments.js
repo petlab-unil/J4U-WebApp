@@ -8,6 +8,7 @@ export const FRAGMENT_GROUP_ALL_FIELDS = gql`
     cruiserId
     uiConfig {
       search
+      recommendations
       alphaFixed
       betaFixed
     }

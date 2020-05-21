@@ -5,16 +5,18 @@ import useJobSearch from 'hooks/jobSearch';
 const JobSearch = ({ onChange, me }) => {
   const { optionsObj, onSelect, handleSearch, loading } = useJobSearch(onChange);
 
-  let options = optionsObj.map(({ id, label, value }) => ({
+  let options = optionsObj.map(({ id, isco08, avam, title }) => ({
     key: id,
-    isco08: value,
-    value: label,
-    label: <div>{label}</div>,
+    isco08,
+    avam,
+    value: title,
+    label: <div>{title}</div>,
   }));
 
   options.push({
     key: -1,
     isco08: me.oldJobIsco08,
+    avam: null,
     value: me.oldJobTitle,
     label: <div>{me.oldJobTitle}</div>,
   });
