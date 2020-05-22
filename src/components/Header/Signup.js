@@ -41,7 +41,7 @@ export default () => {
 
   const onFinish = (values) => {
     if (isValid) {
-      values.birthDate.format('YYYY-MM-DD');
+      values.borthDate = values.birthDate.format('YYYY-MM-DD');
       createUser({
         variables: {
           user: values,
