@@ -43,6 +43,9 @@ export default () => {
     if (isValid) {
       values.birthDate = values.birthDate.format('YYYY-MM-DD');
 
+      delete values.emailConfirmation;
+      delete values.passwordConfirmation;
+
       createUser({
         variables: {
           user: values,
