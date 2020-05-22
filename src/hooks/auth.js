@@ -1,5 +1,4 @@
 import PropTypes from 'prop-types';
-import { useMemo } from 'react';
 import { useMutation, useApolloClient } from '@apollo/client';
 import { useContext, createContext } from 'react';
 import useStorage from 'next-nookies-persist';

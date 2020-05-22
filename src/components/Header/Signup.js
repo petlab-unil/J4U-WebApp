@@ -39,19 +39,23 @@ export default () => {
 
   const { token } = router.query;
 
-  const onFinish = (values) => {
+  const onFinish = async (values) => {
     if (isValid) {
       values.birthDate = values.birthDate.format('YYYY-MM-DD');
 
       delete values.emailConfirmation;
       delete values.passwordConfirmation;
 
-      createUser({
+      await createUser({
         variables: {
           user: values,
           token,
         },
       });
+      message.success(
+        'Compte cree avec succes! Veuillez verifier votre adresse email en cliquant sur le lien qui vous a ete envoye'
+      );
+      router.push('/?login', '/?login');
     } else {
       message.warning('Certains champs sont invalides');
     }
