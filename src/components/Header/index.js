@@ -46,40 +46,22 @@ SignupModal.propTypes = {
   reset: PropTypes.func.isRequired,
 };
 
+const Wrapper = styled.span`
+  width: 30px;
+  margin-right: 50px;
+`;
+
+const InfoWrapper = styled.span`
+  font-size: 10px;
+`;
+
 const Profile = ({ me }) => {
-  const Wrapper = styled.span`
-    width: 30px;
-    margin-right: 50px;
-  `;
   if (!me) return null;
   return (
     <Wrapper>
       <UserOutlined />
       {me.email}
     </Wrapper>
-  );
-};
-
-const Logout = ({ me, logOut }) => {
-  if (!me) return null;
-
-  return (
-    <Menu.Item key="logout" onClick={() => logOut()}>
-      Log Out
-    </Menu.Item>
-  );
-};
-
-const Recommendation = ({ me }) => {
-  if (!me) return null;
-  if (!me.formDone || me.role !== 'USER') return null;
-
-  return (
-    <Menu.Item key="recommandation">
-      <Link href="/recommandation">
-        <a href="/recommandation">Recommandations</a>
-      </Link>
-    </Menu.Item>
   );
 };
 
@@ -104,6 +86,15 @@ export default () => {
     }
     if (pathname === '/admin') {
       return 'admin';
+    }
+    if (pathname === '/legal') {
+      return 'legal';
+    }
+    if (pathname === '/contact') {
+      return 'contact';
+    }
+    if (pathname === '/tirage') {
+      return 'tirage';
     }
     return '';
   };
@@ -141,26 +132,34 @@ export default () => {
             </Link>
           </Menu.Item>
         ) : null}
+
+        <Menu.Item key="contact">
+          <InfoWrapper>
+            <Link href="/contact" shallow>
+              <a href="contact">Contact</a>
+            </Link>
+          </InfoWrapper>
+        </Menu.Item>
+        <Menu.Item key="legal">
+          <InfoWrapper>
+            <Link href="/legal" shallow>
+              <a href="legal">Legal</a>
+            </Link>
+          </InfoWrapper>
+        </Menu.Item>
+        <Menu.Item key="tirage">
+          <InfoWrapper>
+            <Link href="/tirage" shallow>
+              <a href="tirage">Tirage</a>
+            </Link>
+          </InfoWrapper>
+        </Menu.Item>
+
         {me ? (
           <Menu.Item key="logout" onClick={() => logOut()}>
             Logout
           </Menu.Item>
         ) : null}
-        <Menu.Item key="contact">
-          <Link href="/contact" shallow>
-            <a href="contact">Contact</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="legal">
-          <Link href="/legal" shallow>
-            <a href="legal">Legal</a>
-          </Link>
-        </Menu.Item>
-        <Menu.Item key="tirage">
-          <Link href="/tirage" shallow>
-            <a href="tirage">Tirage</a>
-          </Link>
-        </Menu.Item>
       </Menu>
     </>
   );
