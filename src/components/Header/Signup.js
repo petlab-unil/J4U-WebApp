@@ -87,7 +87,7 @@ export default () => {
       </Form.Item>
 
       <Form.Item name="birthDate" required>
-        <DatePicker format="YYYY-MM-DD" onChange={validate} />
+        <Input />
       </Form.Item>
 
       <Form.Item name="phone" required>

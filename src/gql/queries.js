@@ -131,3 +131,18 @@ export const POSITIONS = gql`
     }
   }
 `;
+
+export const ALL_DATETIME_JOBS = gql`
+  query allDatetimeJobs {
+    allDatetimeJobs {
+      id
+      name
+      action
+      params
+      state
+      creationDate
+      executionDate
+      executedDate
+    }
+  }
+`;

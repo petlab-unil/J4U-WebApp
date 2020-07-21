@@ -59,3 +59,28 @@ export const CREATE_EVENT = gql`
     }
   }
 `;
+
+export const CREATE_DATETIME_JOB = gql`
+  mutation CreateDatetimeJob($datetimeJob: DatetimeJobInput!) {
+    createDatetimeJob(datetimeJob: $datetimeJob) {
+      datetimeJob {
+        id
+        name
+        action
+        params
+        state
+        creationDate
+        executionDate
+        executedDate
+      }
+    }
+  }
+`;
+
+export const DELETE_DATETIME_JOB = gql`
+  mutation DeleteDatetimeJob($id: ID!) {
+    deleteDatetimeJob(id: $id) {
+      ok
+    }
+  }
+`;
