@@ -191,6 +191,9 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
                   <Descriptions.Item label="Cohort End">
                     {moment(params.cohortEnd).format('YYYY-MM-DD')}
                   </Descriptions.Item>
+                  <Descriptions.Item label="Emails Matched" span={2}>
+                    {(params.emailsMatched || []).join(' -- ')}
+                  </Descriptions.Item>
                 </Descriptions>
                 <Button onClick={() => deleteCampaign({ variables: { id: campaign.id } })}>
                   DEL
