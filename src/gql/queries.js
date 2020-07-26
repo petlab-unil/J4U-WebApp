@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { FRAGMENT_GROUP_ALL_FIELDS } from './fragments';
+import { FRAGMENT_GROUP_ALL_FIELDS, FRAGMENT_USER_ALL_FIELD } from './fragments';
 
 export const ME = gql`
   query me {
@@ -25,6 +25,15 @@ export const ME = gql`
     }
   }
   ${FRAGMENT_GROUP_ALL_FIELDS}
+`;
+
+export const ALL_USERS = gql`
+  query allUsers {
+    allUsers {
+      ...UserAllFields
+    }
+  }
+  ${FRAGMENT_USER_ALL_FIELD}
 `;
 
 export const ALL_GROUPS = gql`

@@ -1,12 +1,26 @@
-import { Card, Row, Col, Form, Input, Button, DatePicker, Descriptions, Badge, Spin } from 'antd';
+import { useState } from 'react';
+import {
+  Card,
+  Row,
+  Col,
+  Form,
+  Input,
+  Button,
+  DatePicker,
+  Descriptions,
+  Badge,
+  Select,
+  Spin,
+} from 'antd';
 import moment from 'moment';
-import { useQuery } from '@apollo/client';
-import { useMutation } from '@apollo/client';
+import { useQuery, useMutation } from '@apollo/client';
 import { SurveySelect, GroupSelect } from 'components/Select';
 import { useAuth } from 'hooks/auth';
 import useMailCampaign from 'hooks/mailCampaign';
 import { ALL_DATETIME_JOBS } from 'gql/queries';
 import { DELETE_DATETIME_JOB } from 'gql/mutations';
+
+const { Search } = Input;
 
 const layout = {
   labelCol: { span: 6 },
@@ -125,6 +139,7 @@ const AddMailCampaign = () => {
 };
 
 const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
+  const [filters, setFilters] = useState({});
   const [deleteCampaign] = useMutation(DELETE_DATETIME_JOB, {
     context: {
       headers: {
@@ -134,11 +149,46 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
     refetchQueries: ['allDatetimeJobs'],
   });
 
+  const onChange = (v) => {
+    setFilters(v);
+  };
+
+  const filterCampaigns = () => {
+    let res = campaigns;
+    console.log(filters);
+    console.log(campaigns);
+    if (filters.name) res = campaigns.filter((c) => c.name.toLowerCase().includes(filters.name));
+    if (filters.state && filters.state.length > 0)
+      res = res.filter((c) => filters.state.includes(c.state));
+    return res;
+  };
+
+  const stateOptions = [
+    <Select.Option key="PENDING">PENDING</Select.Option>,
+    <Select.Option key="SUCCESS">SUCCESS</Select.Option>,
+  ];
+
   return (
     <Col md={24} sm={24}>
       <Card title="All mail campaigns" type="inner">
         <Row gutter={[24, 24]}>
-          {campaigns.map((campaign, i) => {
+          <Col md={24} sm={24}>
+            <Form onValuesChange={onChange} layout="inline">
+              <Form.Item name="name" label="Name">
+                <Search
+                  placeholder="filter by name"
+                  onSearch={(value) => console.log(value)}
+                  style={{ width: 200 }}
+                />
+              </Form.Item>
+              <Form.Item name="state" label="State">
+                <Select mode="multiple" style={{ width: 250 }} placeholder="Tags Mode" allowClear>
+                  {stateOptions}
+                </Select>
+              </Form.Item>
+            </Form>
+          </Col>
+          {filterCampaigns(campaigns).map((campaign, i) => {
             const params = JSON.parse(campaign.params);
 
             let badgeType;
@@ -165,7 +215,6 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
                 break;
             }
 
-            console.log(params, '................................');
             return (
               <Col sm={24} lg={12} key={i}>
                 <Descriptions title="Campaign Info" size="small" ordered column={4}>
@@ -192,7 +241,7 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
                     {moment(params.cohortEnd).format('YYYY-MM-DD')}
                   </Descriptions.Item>
                   <Descriptions.Item label="Emails Matched" span={2}>
-                    {(params.emailsMatched || []).join(' -- ')}
+                    {(params.emailsMatched || []).join(' --restra ')}
                   </Descriptions.Item>
                 </Descriptions>
                 <Button onClick={() => deleteCampaign({ variables: { id: campaign.id } })}>
@@ -218,10 +267,7 @@ export default () => {
     },
   });
 
-  console.log('RRRRRRRRRRRRRRRRRRRRRRRRRRRRR');
-  console.log(data);
   const allDatetimeJobs = data && data.allDatetimeJobs ? data.allDatetimeJobs : [];
-  console.log(allDatetimeJobs);
 
   return (
     <Card title="Mail Campaigns">
