@@ -13,11 +13,12 @@ import {
   Spin,
 } from 'antd';
 import moment from 'moment';
+import get from 'lodash/get';
 import { useQuery, useMutation } from '@apollo/client';
 import { SurveySelect, GroupSelect } from 'components/Select';
 import { useAuth } from 'hooks/auth';
 import useMailCampaign from 'hooks/mailCampaign';
-import { ALL_DATETIME_JOBS } from 'gql/queries';
+import { ALL_DATETIME_JOBS, ALL_GROUPS } from 'gql/queries';
 import { DELETE_DATETIME_JOB } from 'gql/mutations';
 
 const { Search } = Input;
@@ -33,7 +34,8 @@ const tailLayout = {
   },
 };
 
-const ItemSelect = (SelectComponent, props) => ({ value, onChange }) => {
+const ItemSelect = (SelectComponent) => ({ value, onChange, ...props }) => {
+  console.log(props, '--------------');
   return <SelectComponent value={value} setValue={onChange} {...props} />;
 };
 const SurveyItem = ItemSelect(SurveySelect);
@@ -80,7 +82,7 @@ const AddMailCampaign = () => {
               label="Group"
               rules={[{ required: true, message: 'Required' }]}
             >
-              <GroupItem placeholder="Group" showSearch />
+              <GroupItem placeholder="Group" showSearch mode="multiple" />
             </Form.Item>
 
             <Form.Item
@@ -148,6 +150,20 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
     },
     refetchQueries: ['allDatetimeJobs'],
   });
+  const { data } = useQuery(ALL_GROUPS, {
+    context: {
+      headers: {
+        accessToken,
+      },
+    },
+  });
+  const allGroups = get(data, 'allGroups', []);
+  console.log(allGroups, data);
+  const groupsMap = {};
+  allGroups.forEach((x) => {
+    groupsMap[x.id] = x.name;
+  });
+  console.log(groupsMap);
 
   const onChange = (v) => {
     setFilters(v);
@@ -191,6 +207,8 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
           {filterCampaigns(campaigns).map((campaign, i) => {
             const params = JSON.parse(campaign.params);
 
+            const groupNames = params.groupId.map((x) => groupsMap[x]).join(', ');
+
             let badgeType;
             let badgeText;
             switch (campaign.state) {
@@ -227,21 +245,26 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
                   <Descriptions.Item label="Status" span={2}>
                     <Badge status={badgeType} text={badgeText} />
                   </Descriptions.Item>
-                  <Descriptions.Item label="Expiration" span={4}>
-                    {moment(params.surveyEnd).format('YYYY-MM-DD HH[h]')}
+                  <Descriptions.Item label="Expiration" span={2}>
+                    {moment(params.surveyEnd).format('DD-MM-YYYY HH[h]')}
                   </Descriptions.Item>
-                  <Descriptions.Item label="Distribution" span={4}>
+                  <Descriptions.Item label="Execution" span={2}>
+                    {moment(params.executionDate).format('DD-MM-YYYY HH:mm')}
+                  </Descriptions.Item>
+                  <Descriptions.Item label="Distribution" span={2}>
                     {params.distribId}
                   </Descriptions.Item>
-                  <Descriptions.Item label="Group">{params.groupId}</Descriptions.Item>
+                  <Descriptions.Item label="Group" span={2}>
+                    {groupNames}
+                  </Descriptions.Item>
                   <Descriptions.Item label="Cohort Start" span={2}>
-                    {moment(params.cohortStart).format('YYYY-MM-DD')}
+                    {moment(params.cohortStart).format('DD-MM-YYYY')}
                   </Descriptions.Item>
-                  <Descriptions.Item label="Cohort End">
-                    {moment(params.cohortEnd).format('YYYY-MM-DD')}
+                  <Descriptions.Item label="Cohort End" span={2}>
+                    {moment(params.cohortEnd).format('DD-MM-YYYY')}
                   </Descriptions.Item>
-                  <Descriptions.Item label="Emails Matched" span={2}>
-                    {(params.emailsMatched || []).join(' --restra ')}
+                  <Descriptions.Item label="Emails Matched" span={4}>
+                    {(params.emailsMatched || []).join(', ')}
                   </Descriptions.Item>
                 </Descriptions>
                 <Button onClick={() => deleteCampaign({ variables: { id: campaign.id } })}>
