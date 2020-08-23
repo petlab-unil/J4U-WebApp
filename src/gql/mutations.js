@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { FRAGMENT_GROUP_ALL_FIELDS } from './fragments';
+import * as fragments from './fragments';
 
 export const AUTH = gql`
   mutation Auth($email: String!, $password: String!) {
@@ -38,7 +38,7 @@ export const UPDATE_GROUP_CONFIG = gql`
       }
     }
   }
-  ${FRAGMENT_GROUP_ALL_FIELDS}
+  ${fragments.FRAGMENT_GROUP_ALL_FIELDS}
 `;
 
 export const CREATE_EVENT = gql`
@@ -83,4 +83,26 @@ export const DELETE_DATETIME_JOB = gql`
       ok
     }
   }
+`;
+
+export const CREATE_COHORT = gql`
+  mutation CreateCohort($cohortData: CohortInput!) {
+    createCohort(cohortData: $cohortData) {
+      cohort {
+        ...CohortAllFields
+      }
+    }
+  }
+  ${fragments.FRAGMENT_COHORT_ALL_FIELDS}
+`;
+
+export const UPDATE_COHORT = gql`
+  mutation UpdateCohort($cohortId: ID!, $cohortData: CohortInput!) {
+    updateCohort(cohortId: $cohortId, cohortData: $cohortData) {
+      cohort {
+        ...CohortAllFields
+      }
+    }
+  }
+  ${fragments.FRAGMENT_COHORT_ALL_FIELDS}
 `;

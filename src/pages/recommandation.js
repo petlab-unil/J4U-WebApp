@@ -18,7 +18,7 @@ const WithRecommendation = () => {
   const [jobDetails, setJobDetails] = useState(undefined);
   const router = useRouter();
   const me = useMe();
-  const searchEnabled = get(me, 'group.uiConfig.search');
+  const searchEnabled = get(me, 'cohort.search');
   const { recoms, setRecomVariables } = useRecommendation();
 
   const cancel = () => setJobDetails(undefined);
@@ -45,7 +45,7 @@ const WithoutRecommendation = () => {
   const [selectedJob, setSelectedJob] = useState(undefined);
   const router = useRouter();
   const me = useMe();
-  const searchEnabled = get(me, 'group.uiConfig.search');
+  const searchEnabled = get(me, 'group.cohort.search');
 
   const cancel = () => setJobDetails(undefined);
 
@@ -69,7 +69,7 @@ const WithoutRecommendation = () => {
 const Recommendation = () => {
   const me = useMe();
 
-  const withRecom = get(me, 'group.uiConfig.recommendations');
+  const withRecom = get(me, 'cohort.recommendations');
   console.log(me);
   console.log(withRecom);
 

@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { FRAGMENT_GROUP_ALL_FIELDS, FRAGMENT_USER_ALL_FIELD } from './fragments';
+import * as fragments from './fragments';
 
 export const ME = gql`
   query me {
@@ -24,7 +24,7 @@ export const ME = gql`
       }
     }
   }
-  ${FRAGMENT_GROUP_ALL_FIELDS}
+  ${fragments.FRAGMENT_GROUP_ALL_FIELDS}
 `;
 
 export const ALL_USERS = gql`
@@ -33,7 +33,7 @@ export const ALL_USERS = gql`
       ...UserAllFields
     }
   }
-  ${FRAGMENT_USER_ALL_FIELD}
+  ${fragments.FRAGMENT_USER_ALL_FIELD}
 `;
 
 export const ALL_GROUPS = gql`
@@ -42,7 +42,16 @@ export const ALL_GROUPS = gql`
       ...GroupAllFields
     }
   }
-  ${FRAGMENT_GROUP_ALL_FIELDS}
+  ${fragments.FRAGMENT_GROUP_ALL_FIELDS}
+`;
+
+export const ALL_COHORTS = gql`
+  query allCohorts {
+    allCohorts {
+      ...CohortAllFields
+    }
+  }
+  ${fragments.FRAGMENT_COHORT_ALL_FIELDS}
 `;
 
 export const GET_SIGNUP_LINK = gql`

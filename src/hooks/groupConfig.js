@@ -74,7 +74,6 @@ export default (group) => {
       name: group.name,
       baselineId: group.baselineId,
       cruiserId: group.cruiserId,
-      uiConfig: omit(group.uiConfig, '__typename'),
     });
   }, [group]);
   return { form, onChange, reset, save, canSave };

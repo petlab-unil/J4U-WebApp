@@ -1,5 +1,5 @@
 import { Row, Col, Tabs } from 'antd';
-import { SignupLink, GroupConfig, MailCampaign, Users } from 'components/Admin';
+import { SignupLink, GroupConfig, MailCampaign, Users, Cohorts } from 'components/Admin';
 import RolesRequired from 'components/HOC/RolesRequiredPage';
 import TrackVisit from 'components/HOC/TrackVisit';
 import { useRouter } from 'next/router';
@@ -24,6 +24,10 @@ const Admin = () => {
       activeKey = '3';
       break;
 
+    case 'cohorts':
+      activeKey = '4';
+      break;
+
     default:
       activeKey = '1';
       break;
@@ -41,6 +45,10 @@ const Admin = () => {
 
       case '3':
         router.push('/admin?pane=users', '/admin?pane=users', { shallow: true });
+        break;
+
+      case '4':
+        router.push('/admin?pane=cohorts', '/admin?pane=cohorts', { shallow: true });
         break;
 
       default:
@@ -70,6 +78,10 @@ const Admin = () => {
 
       <TabPane tab="Users" key="3">
         <Users />
+      </TabPane>
+
+      <TabPane tab="Cohorts" key="4">
+        <Cohorts />
       </TabPane>
     </Tabs>
   );

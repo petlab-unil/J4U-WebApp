@@ -6,12 +6,20 @@ export const FRAGMENT_GROUP_ALL_FIELDS = gql`
     name
     baselineId
     cruiserId
-    uiConfig {
-      search
-      recommendations
-      alphaFixed
-      betaFixed
-    }
+  }
+`;
+
+export const FRAGMENT_COHORT_ALL_FIELDS = gql`
+  fragment CohortAllFields on Cohort {
+    id
+    groupId
+    name
+    cohortStart
+    cohortEnd
+    search
+    recommendations
+    alphaFixed
+    betaFixed
   }
 `;
 
@@ -33,6 +41,9 @@ export const FRAGMENT_USER_ALL_FIELD = gql`
     oldJobTitle
     formDone
     formDoneAt
+    cohort {
+      ...CohortAllFields
+    }
     features {
       id
       value
@@ -47,4 +58,5 @@ export const FRAGMENT_USER_ALL_FIELD = gql`
       name
     }
   }
+  ${FRAGMENT_COHORT_ALL_FIELDS}
 `;

@@ -7,8 +7,8 @@ const Recommendation = ({ setRecomVariables }) => {
   const onValuesChange = (v) => console.log(v, 'vvv');
 
   const me = useMe();
-  const alphaFixed = get(me, 'group.uiConfig.alphaFixed');
-  const betaFixed = get(me, 'group.uiConfig.betaFixed');
+  const alphaFixed = get(me, 'cohort.alphaFixed');
+  const betaFixed = get(me, 'cohort.betaFixed');
 
   const onFinish = (v) => {
     setRecomVariables(v);
