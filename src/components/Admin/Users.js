@@ -15,6 +15,11 @@ const columns = [
     key: 'lastName',
   },
   {
+    title: 'Email',
+    dataIndex: 'email',
+    key: 'email',
+  },
+  {
     title: 'Birth Date',
     dataIndex: 'birthDate',
     key: 'birthDate',

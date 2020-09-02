@@ -15,9 +15,10 @@ import {
 import moment from 'moment';
 import get from 'lodash/get';
 import { useQuery, useMutation } from '@apollo/client';
-import { SurveySelect, GroupSelect } from 'components/Select';
+import { SurveySelect, CohortSelect } from 'components/Select';
 import { useAuth } from 'hooks/auth';
 import useMailCampaign from 'hooks/mailCampaign';
+import { useAllCohorts } from 'hooks/cohorts';
 import { ALL_DATETIME_JOBS, ALL_GROUPS } from 'gql/queries';
 import { DELETE_DATETIME_JOB } from 'gql/mutations';
 
@@ -39,19 +40,10 @@ const ItemSelect = (SelectComponent) => ({ value, onChange, ...props }) => {
   return <SelectComponent value={value} setValue={onChange} {...props} />;
 };
 const SurveyItem = ItemSelect(SurveySelect);
-const GroupItem = ItemSelect(GroupSelect);
+const CohortItem = ItemSelect(CohortSelect);
 
 const AddMailCampaign = () => {
   const { form, onChange, reset, save, canSave, createLoading } = useMailCampaign();
-
-  const checkDiff = ({ getFieldValue }) => ({
-    validator(rule, value) {
-      if (!value || getFieldValue('baselineId') !== value) {
-        return Promise.resolve();
-      }
-      return Promise.reject(Error('Les survey sont les memes'));
-    },
-  });
 
   return (
     <Col md={24} sm={24}>
@@ -78,27 +70,11 @@ const AddMailCampaign = () => {
             </Form.Item>
 
             <Form.Item
-              name={['params', 'groupId']}
-              label="Group"
+              name={['params', 'cohortId']}
+              label="Cohort"
               rules={[{ required: true, message: 'Required' }]}
             >
-              <GroupItem placeholder="Group" showSearch mode="multiple" />
-            </Form.Item>
-
-            <Form.Item
-              name={['params', 'cohortStart']}
-              label="Cohort Start"
-              rules={[{ required: true, message: 'Required' }]}
-            >
-              <DatePicker />
-            </Form.Item>
-
-            <Form.Item
-              name={['params', 'cohortEnd']}
-              label="Cohort End"
-              rules={[{ required: true, message: 'Required' }]}
-            >
-              <DatePicker />
+              <CohortItem placeholder="Cohort" showSearch mode="multiple" />
             </Form.Item>
 
             <Form.Item
@@ -150,20 +126,11 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
     },
     refetchQueries: ['allDatetimeJobs'],
   });
-  const { data } = useQuery(ALL_GROUPS, {
-    context: {
-      headers: {
-        accessToken,
-      },
-    },
+  const { allCohorts } = useAllCohorts();
+  const cohortsMap = {};
+  allCohorts.forEach((x) => {
+    cohortsMap[x.id] = x.name;
   });
-  const allGroups = get(data, 'allGroups', []);
-  console.log(allGroups, data);
-  const groupsMap = {};
-  allGroups.forEach((x) => {
-    groupsMap[x.id] = x.name;
-  });
-  console.log(groupsMap);
 
   const onChange = (v) => {
     setFilters(v);
@@ -207,7 +174,7 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
           {filterCampaigns(campaigns).map((campaign, i) => {
             const params = JSON.parse(campaign.params);
 
-            const groupNames = params.groupId.map((x) => groupsMap[x]).join(', ');
+            const cohortNames = params.cohortId.map((x) => cohortsMap[x]).join(', ');
 
             let badgeType;
             let badgeText;
@@ -254,14 +221,8 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
                   <Descriptions.Item label="Distribution" span={2}>
                     {params.distribId}
                   </Descriptions.Item>
-                  <Descriptions.Item label="Group" span={2}>
-                    {groupNames}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Cohort Start" span={2}>
-                    {moment(params.cohortStart).format('DD-MM-YYYY')}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Cohort End" span={2}>
-                    {moment(params.cohortEnd).format('DD-MM-YYYY')}
+                  <Descriptions.Item label="Cohort" span={2}>
+                    {cohortNames}
                   </Descriptions.Item>
                   <Descriptions.Item label="Emails Matched" span={4}>
                     {(params.emailsMatched || []).join(', ')}
@@ -295,12 +256,12 @@ export default () => {
   return (
     <Card title="Mail Campaigns">
       <Row gutter={[24, 24]}>
+        <AddMailCampaign />
         <DisplayMailCampaigns
           campaigns={allDatetimeJobs}
           accessToken={accessToken}
           loading={loading}
         />
-        <AddMailCampaign />
       </Row>
     </Card>
   );

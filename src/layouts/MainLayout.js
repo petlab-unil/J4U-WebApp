@@ -29,7 +29,7 @@ const PageWrapper = styled.div`
 `;
 
 const MainLayout = withTracker(({ children, tracker }) => {
-  useEffect(() => {
+  /*   useEffect(() => {
     if (window.trackInterval) {
       clearInterval(window.trackInterval);
     }
@@ -43,7 +43,7 @@ const MainLayout = withTracker(({ children, tracker }) => {
         clearInterval(window.trackInterval);
       }
     };
-  }, [tracker]);
+  }, [tracker]); */
   return (
     <Layout style={{ minHeight: '100vh' }}>
       <MainHeader className="header" theme="light">

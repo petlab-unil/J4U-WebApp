@@ -15,6 +15,9 @@ export const ME = gql`
       baselineLink
       formDone
       formDoneAt
+      cohort {
+        ...CohortAllFields
+      }
       alpha
       beta
       oldJobIsco08
@@ -25,6 +28,7 @@ export const ME = gql`
     }
   }
   ${fragments.FRAGMENT_GROUP_ALL_FIELDS}
+  ${fragments.FRAGMENT_COHORT_ALL_FIELDS}
 `;
 
 export const ALL_USERS = gql`

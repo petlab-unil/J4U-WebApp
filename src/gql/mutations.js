@@ -41,10 +41,10 @@ export const UPDATE_GROUP_CONFIG = gql`
   ${fragments.FRAGMENT_GROUP_ALL_FIELDS}
 `;
 
-export const CREATE_EVENT = gql`
-  mutation CreateEvent($event: EventInput!) {
-    createEvent(event: $event) {
-      event {
+export const CREATE_ACTIVITY = gql`
+  mutation CreateActivity($activity: ActivityInput!) {
+    createActivity(activity: $activity) {
+      activity {
         id
         type
         timestamp

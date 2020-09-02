@@ -1,6 +1,6 @@
 import { useApolloClient } from '@apollo/client';
 import { useState, useEffect, memo } from 'react';
-import { CREATE_EVENT } from 'gql/mutations';
+import { CREATE_ACTIVITY } from 'gql/mutations';
 import { useAuth } from 'hooks/auth';
 
 class Tracker {
@@ -15,8 +15,8 @@ class Tracker {
     if (!token) return;
     this.client
       .mutate({
-        mutation: CREATE_EVENT,
-        variables: { event: { type, payload: JSON.stringify(payload) } },
+        mutation: CREATE_ACTIVITY,
+        variables: { activity: { type, payload: JSON.stringify(payload) } },
         context: {
           headers: {
             accessToken: token,
