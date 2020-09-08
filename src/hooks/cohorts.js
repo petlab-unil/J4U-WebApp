@@ -28,6 +28,11 @@ function mutationCommons() {
   const [refObj, setRefObj] = useState({});
   const [canSave, setCanSave] = useState(false);
 
+  const newRefObj = () => {
+    const ref = form.getFieldsValue(true);
+    setRefObj(ref);
+  };
+
   const hasChanged = () => {
     const newObj = form.getFieldsValue(true);
     console.log(refObj, newObj);
@@ -45,11 +50,10 @@ function mutationCommons() {
   };
 
   useEffect(() => {
-    const ref = form.getFieldsValue(true);
-    setRefObj(ref);
+    newRefObj();
   }, []);
 
-  return { accessToken, form, onChange, reset, refObj, canSave };
+  return { accessToken, form, onChange, reset, refObj, newRefObj, setCanSave, canSave };
 }
 
 export function useCreateCohort() {
@@ -79,7 +83,16 @@ export function useCreateCohort() {
 }
 
 export function useUpdateCohort() {
-  const { accessToken, form, onChange, refObj, canSave, reset } = mutationCommons();
+  const {
+    accessToken,
+    form,
+    onChange,
+    refObj,
+    newRefObj,
+    setCanSave,
+    canSave,
+    reset,
+  } = mutationCommons();
   const [updateCohort] = useMutation(UPDATE_COHORT, {
     context: {
       headers: {
@@ -89,17 +102,19 @@ export function useUpdateCohort() {
     refetchQueries: ['allCohorts'],
   });
 
-  const save = (values) => {
+  const save = async (values) => {
     console.log(values);
     values.cohortStart = values.cohortStart.format('YYYY-MM-DD');
     values.cohortEnd = values.cohortEnd.format('YYYY-MM-DD');
-    createCohort({
+    const obj = await updateCohort({
       variables: {
         cohortId: refObj.id,
         cohortData: values,
       },
     });
-    reset();
+    newRefObj();
+    onChange();
+    setCanSave(false);
   };
   return { form, onChange, save, canSave, reset };
 }
