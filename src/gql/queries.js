@@ -53,6 +53,15 @@ export const ALL_COHORTS = gql`
   query allCohorts {
     allCohorts {
       ...CohortAllFields
+      users {
+        id
+        email
+        group {
+          id
+          name
+        }
+        formDoneAt
+      }
     }
   }
   ${fragments.FRAGMENT_COHORT_ALL_FIELDS}

@@ -5,7 +5,6 @@ import JobSearch from './JobSearch';
 
 const Recommendation = ({ setRecomVariables }) => {
   const onValuesChange = (v) => console.log(v, 'vvv');
-
   const me = useMe();
   const alphaFixed = get(me, 'cohort.alphaFixed');
   const betaFixed = get(me, 'cohort.betaFixed');

@@ -1,8 +1,10 @@
-import { Card, Row, Col, Form, Input, Button, Switch, DatePicker } from 'antd';
+import { Card, Row, Col, Form, Input, Button, Switch, DatePicker, List, Collapse } from 'antd';
 import moment from 'moment';
 import omit from 'lodash/omit';
 import { useAllCohorts, useCreateCohort, useUpdateCohort } from 'hooks/cohorts';
 import { GroupSelect } from 'components/Select';
+
+const { Panel } = Collapse;
 
 const layout = {
   labelCol: { span: 7 },
@@ -131,6 +133,27 @@ const CohortForm = ({ form, onChange, save, canSave, reset, initialValues }) => 
   );
 };
 
+const UsersMatched = ({ users }) => {
+  return (
+    <Collapse>
+      <Panel header={`${users.length} users matched`}>
+        <List
+          itemLayout="horizontal"
+          dataSource={users}
+          renderItem={(item) => (
+            <List.Item>
+              <List.Item.Meta
+                title={item.email}
+                description={`Group: ${item.group.name} form done: ${item.formDoneAt}`}
+              />
+            </List.Item>
+          )}
+        />
+      </Panel>
+    </Collapse>
+  );
+};
+
 const CreateCohort = () => {
   const { form, save, onChange, canSave, reset } = useCreateCohort();
 
@@ -140,7 +163,12 @@ const CreateCohort = () => {
       onChange={onChange}
       canSave={canSave}
       save={save}
-      initialValues={{ search: false, recommendations: false, alphaFixed: false, betaFixed: false }}
+      initialValues={{
+        search: false,
+        recommendations: false,
+        alphaFixed: false,
+        betaFixed: false,
+      }}
       reset={reset}
     />
   );
@@ -155,14 +183,17 @@ const UpdateCohort = ({ cohort }) => {
   const { form, save, onChange, reset, canSave } = useUpdateCohort();
 
   return (
-    <CohortForm
-      form={form}
-      onChange={onChange}
-      canSave={canSave}
-      save={save}
-      initialValues={initialValues}
-      reset={reset}
-    />
+    <>
+      <CohortForm
+        form={form}
+        onChange={onChange}
+        canSave={canSave}
+        save={save}
+        initialValues={initialValues}
+        reset={reset}
+      />
+      <UsersMatched users={cohort.users} />
+    </>
   );
 };
 

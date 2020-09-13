@@ -11,6 +11,7 @@ import {
   Badge,
   Select,
   Spin,
+  Alert,
 } from 'antd';
 import moment from 'moment';
 import get from 'lodash/get';
@@ -47,6 +48,10 @@ const AddMailCampaign = () => {
 
   return (
     <Col md={24} sm={24}>
+      <Alert
+        type="warning"
+        message="Execution date should be 2 hours before the time you expect (server's time is 2 hours behind)"
+      />
       <Card title="Add Mail Campaign" type="inner">
         <Spin spinning={createLoading}>
           <Form

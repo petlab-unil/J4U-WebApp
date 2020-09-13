@@ -21,6 +21,8 @@ const WithRecommendation = () => {
   const searchEnabled = get(me, 'cohort.search');
   const { recoms, setRecomVariables } = useRecommendation();
 
+  console.log(me);
+
   const cancel = () => setJobDetails(undefined);
 
   return (
@@ -45,7 +47,7 @@ const WithoutRecommendation = () => {
   const [selectedJob, setSelectedJob] = useState(undefined);
   const router = useRouter();
   const me = useMe();
-  const searchEnabled = get(me, 'group.cohort.search');
+  const searchEnabled = get(me, 'cohort.search');
 
   const cancel = () => setJobDetails(undefined);
 

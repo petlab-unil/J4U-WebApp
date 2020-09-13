@@ -77,7 +77,7 @@ const IndividualResult = ({ recom, setJobDetails }) => {
   return (
     <Row gutter={[24, 24]}>
       <Col span={24}>
-        <Card title={recom.jobTitle}>
+        <Card title={`${recom.jobTitle}, rank: ${recom.rank + 1}`}>
           <Row>
             <Col span={24}>Résultats</Col>
             <Col span={24}>
@@ -109,12 +109,18 @@ const IndividualResult = ({ recom, setJobDetails }) => {
 
 const RecommendationResults = ({ recoms, setJobDetails }) => {
   const middlePoint = Math.floor(recoms.length / 2);
-  const colsData = chunk(recoms, middlePoint);
+  const colsData = chunk(
+    recoms.map((x, i) => ({
+      ...x,
+      rank: i,
+    })),
+    middlePoint
+  );
   return (
     <>
       <Row gutter={[24, 24]} justify="space-around">
         {colsData.map((x, i) => (
-          <Col xs={24} lg={12}>
+          <Col xs={24} lg={12} key={i}>
             {x.map((recom, i) => (
               <IndividualResult key={i} recom={recom} setJobDetails={setJobDetails} />
             ))}
