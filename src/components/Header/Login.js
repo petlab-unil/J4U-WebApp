@@ -9,7 +9,7 @@ const LoginSchema = Yup.object().shape({
   password: Yup.string().min(2, 'Too Short!').max(30, 'Too Long!').required('Required'),
 });
 
-export default function () {
+export default () => {
   const { form, validate, isValid } = useForm(LoginSchema);
   const { logIn } = useAuth();
 
@@ -29,12 +29,13 @@ export default function () {
       initialValues={{ remember: true }}
       onChange={validate}
       onFinish={onFinish}
+      layout="vertical"
     >
-      <Form.Item name="email" required>
+      <Form.Item label="Email" name="email" required>
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
       </Form.Item>
 
-      <Form.Item name="password" required>
+      <Form.Item label="Password" name="password" required>
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
@@ -44,15 +45,15 @@ export default function () {
 
       <Form.Item>
         <a className="login-form-forgot" href="/aa">
-          Mot de passe oublie
+          Mot de passe oublié
         </a>
       </Form.Item>
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button" disabled={!isValid}>
-          Login
+          Se Connecter
         </Button>
       </Form.Item>
     </Form>
   );
-}
+};

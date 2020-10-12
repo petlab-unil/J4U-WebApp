@@ -7,7 +7,7 @@ export default () => {
   return (
     <Row justify="center">
       <Col lg={10} xs={22}>
-        <Title>Information du Tirage</Title>
+        <Title>Informations sur le tirage au sort</Title>
         <Paragraph>
           Vous êtes invité à participer à une étude pilote qui vise à vous aider dans votre
           recherche d’emploi. Nous vous remercions de votre participation. Cette étude est réalisée
@@ -75,7 +75,7 @@ export default () => {
       <Col lg={10} xs={22}>
         <Paragraph>
           <Link href="/">
-            <Button type="link">Page d'acceuil</Button>
+            <Button type="link">Page d'accueil</Button>
           </Link>
         </Paragraph>
       </Col>

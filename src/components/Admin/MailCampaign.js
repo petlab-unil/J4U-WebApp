@@ -15,6 +15,7 @@ import {
 } from 'antd';
 import moment from 'moment';
 import get from 'lodash/get';
+import sortBy from 'lodash/sortBy';
 import { useQuery, useMutation } from '@apollo/client';
 import { SurveySelect, CohortSelect } from 'components/Select';
 import { useAuth } from 'hooks/auth';
@@ -148,6 +149,7 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
     if (filters.name) res = campaigns.filter((c) => c.name.toLowerCase().includes(filters.name));
     if (filters.state && filters.state.length > 0)
       res = res.filter((c) => filters.state.includes(c.state));
+    res = sortBy(res, (x) => x.executionDate);
     return res;
   };
 
@@ -204,7 +206,6 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
               default:
                 break;
             }
-
             return (
               <Col sm={24} lg={12} key={i}>
                 <Descriptions title="Campaign Info" size="small" ordered column={4}>
@@ -221,7 +222,7 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
                     {moment(params.surveyEnd).format('DD-MM-YYYY HH[h]')}
                   </Descriptions.Item>
                   <Descriptions.Item label="Execution" span={2}>
-                    {moment(params.executionDate).format('DD-MM-YYYY HH:mm')}
+                    {moment(campaign.executionDate).format('DD-MM-YYYY HH:mm')}
                   </Descriptions.Item>
                   <Descriptions.Item label="Distribution" span={2}>
                     {params.distribId}

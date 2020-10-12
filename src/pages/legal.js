@@ -7,7 +7,7 @@ export default () => {
   return (
     <Row justify="center">
       <Col lg={10} xs={22}>
-        <Title>Information Legale</Title>
+        <Title>Informations légales</Title>
         <Paragraph>
           <strong>1. Objectifs de l’étude</strong>
           <br />
@@ -167,7 +167,7 @@ export default () => {
       <Col lg={10} xs={22}>
         <Paragraph>
           <Link href="/">
-            <Button type="link">Page d'acceuil</Button>
+            <Button type="link">Page d'accueil</Button>
           </Link>
         </Paragraph>
       </Col>

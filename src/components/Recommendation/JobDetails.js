@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import useMe from 'hooks/me';
 import every from 'lodash/every';
 import isEmpty from 'lodash/isEmpty';
+import get from 'lodash/get';
 import { getCertificate } from 'helpers';
 import { PermanentTag, ImmediatelyTag, LoadTag } from './Tags';
 import { useTracker } from 'hooks/tracker';
@@ -20,6 +21,8 @@ const JobDetails = ({ position, cancel }) => {
   const [view, setView] = useState('INFO');
   const me = useMe();
   const tracker = useTracker();
+
+  const recomEnabled = get(me, 'cohort.recommendations');
 
   if (!position) return null;
 
@@ -122,16 +125,18 @@ const JobDetails = ({ position, cancel }) => {
             )}
           </Col>
           <Col>
-            <Button
-              key="certificate"
-              type="primary"
-              onClick={() => {
-                getCertificate(me, title);
-                tracker.track('CERTIFICATE_CLICK', { job_id: id, job_title: title });
-              }}
-            >
-              Certificat
-            </Button>
+            {recomEnabled && (
+              <Button
+                key="certificate"
+                type="primary"
+                onClick={() => {
+                  getCertificate(me, title);
+                  tracker.track('CERTIFICATE_CLICK', { job_id: id, job_title: title });
+                }}
+              >
+                Certificat
+              </Button>
+            )}
           </Col>
         </Row>
       ) : null}

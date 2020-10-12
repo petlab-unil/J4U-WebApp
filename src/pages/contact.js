@@ -18,7 +18,7 @@ export default () => {
       <Col lg={10} xs={22}>
         <Paragraph>
           <Link href="/">
-            <Button type="link">Page d'acceuil</Button>
+            <Button type="link">Page d'accueil</Button>
           </Link>
         </Paragraph>
       </Col>

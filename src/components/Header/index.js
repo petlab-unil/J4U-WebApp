@@ -30,7 +30,7 @@ LoginModal.propTypes = {
 
 const SignupModal = ({ visible, reset }) => (
   <Modal
-    title="Connection"
+    title="Connexion"
     visible={visible}
     onOk={reset}
     onCancel={reset}
@@ -78,6 +78,12 @@ export default () => {
 
   const selectedKey = () => {
     const { pathname, query } = router;
+    if (pathname === '/') {
+      return 'home';
+    }
+    if (pathname === '/videos') {
+      return 'videos';
+    }
     if (pathname === '/recommandation') {
       return 'recommandation';
     }
@@ -110,14 +116,21 @@ export default () => {
         selectedKeys={[selectedKey()]}
       >
         <Logo />
+
         <Profile me={me} />
-        {!me ? (
-          <Menu.Item key="login">
-            <Link href="/?login" shallow>
-              <a href="?login"> Se Connecter</a>
-            </Link>
-          </Menu.Item>
-        ) : null}
+
+        <Menu.Item key="home">
+          <Link href="/" shallow>
+            <a href="/"> Accueil</a>
+          </Link>
+        </Menu.Item>
+
+        <Menu.Item key="videos">
+          <Link href="/videos" shallow>
+            <a href="/videos"> Videos Explicatives</a>
+          </Link>
+        </Menu.Item>
+
         {me && me.formDone && me.role === 'USER' ? (
           <Menu.Item key="recommandation">
             <Link href="/recommandation">
@@ -125,6 +138,7 @@ export default () => {
             </Link>
           </Menu.Item>
         ) : null}
+
         {me && me.role === 'ADMIN' ? (
           <Menu.Item key="admin">
             <Link href="/admin">
@@ -133,13 +147,6 @@ export default () => {
           </Menu.Item>
         ) : null}
 
-        <Menu.Item key="contact">
-          <InfoWrapper>
-            <Link href="/contact" shallow>
-              <a href="contact">Contact</a>
-            </Link>
-          </InfoWrapper>
-        </Menu.Item>
         <Menu.Item key="legal">
           <InfoWrapper>
             <Link href="/legal" shallow>
@@ -147,6 +154,7 @@ export default () => {
             </Link>
           </InfoWrapper>
         </Menu.Item>
+
         <Menu.Item key="tirage">
           <InfoWrapper>
             <Link href="/tirage" shallow>
@@ -154,6 +162,22 @@ export default () => {
             </Link>
           </InfoWrapper>
         </Menu.Item>
+
+        <Menu.Item key="contact">
+          <InfoWrapper>
+            <Link href="/contact" shallow>
+              <a href="contact">Contact</a>
+            </Link>
+          </InfoWrapper>
+        </Menu.Item>
+
+        {!me ? (
+          <Menu.Item key="login">
+            <Link href="/?login" shallow>
+              <a href="?login"> Se Connecter</a>
+            </Link>
+          </Menu.Item>
+        ) : null}
 
         {me ? (
           <Menu.Item key="logout" onClick={() => logOut()}>
