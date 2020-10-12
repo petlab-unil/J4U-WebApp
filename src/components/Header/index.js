@@ -126,9 +126,7 @@ export default () => {
         </Menu.Item>
 
         <Menu.Item key="videos">
-          <Link href="/videos" shallow>
-            <a href="/videos"> Videos Explicatives</a>
-          </Link>
+          <a href="https://youtube.com"> Videos Explicatives</a>
         </Menu.Item>
 
         {me && me.formDone && me.role === 'USER' ? (
