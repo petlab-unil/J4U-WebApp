@@ -68,6 +68,10 @@ const IndividualResult = ({ recom, setJobDetails }) => {
 
   const count = totalCount === undefined ? '' : `positions: ${totalCount}`;
 
+  if (recom.avam === 101128) {
+    console.log(recom.jobTitle, recom.avam, positions);
+  }
+
   const header = (
     <>
       {`${count}`} <Spin spinning={!!loading} />
