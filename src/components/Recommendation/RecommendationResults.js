@@ -66,10 +66,21 @@ const Position = ({ position, setJobDetails }) => {
 const IndividualResult = ({ recom, setJobDetails }) => {
   const { positions, totalCount, loading, page, setPage } = usePositions(recom.avam);
 
-  const count = totalCount === undefined ? '' : `positions: ${totalCount}`;
+  const count = totalCount === undefined ? '' : `offres disponibles: ${totalCount}`;
 
-  if (recom.avam === 101128) {
-    console.log(recom.jobTitle, recom.avam, positions);
+  if (totalCount === 0) {
+    return (
+      <Row gutter={[24, 24]}>
+        <Col span={24}>
+          <Card title={`${recom.jobTitle}, niveau de proximité: ${recom.rank + 1}`}>
+            <Row>
+              Nous n’avons actuellement aucune offre correspondant à ce poste spécifique. Retentez
+              plus tard, une offre pourrait apparaître.
+            </Row>
+          </Card>
+        </Col>
+      </Row>
+    );
   }
 
   const header = (
@@ -81,7 +92,7 @@ const IndividualResult = ({ recom, setJobDetails }) => {
   return (
     <Row gutter={[24, 24]}>
       <Col span={24}>
-        <Card title={`${recom.jobTitle}, rank: ${recom.rank + 1}`}>
+        <Card title={`${recom.jobTitle}, niveau de proximité: ${recom.rank + 1}`}>
           <Row>
             <Col span={24}>Résultats</Col>
             <Col span={24}>
@@ -123,11 +134,13 @@ const RecommendationResults = ({ recoms, setJobDetails }) => {
   return (
     <>
       <Row gutter={[24, 24]} justify="space-around">
-        {colsData.map((x, i) => (
+        {[0].map((x, i) => (
           <Col xs={24} lg={12} key={i}>
-            {x.map((recom, i) => (
-              <IndividualResult key={i} recom={recom} setJobDetails={setJobDetails} />
-            ))}
+            {recoms.map((recom, i) => {
+              const y = { ...recom };
+              y.rank = i;
+              return <IndividualResult key={i} recom={y} setJobDetails={setJobDetails} />;
+            })}
           </Col>
         ))}
       </Row>

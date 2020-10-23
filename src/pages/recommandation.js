@@ -30,8 +30,8 @@ const WithRecommendation = () => {
       <PageHeader
         ghost={false}
         onBack={() => router.push('/')}
-        title="Recommandation"
-        subTitle="Recommande des jobs"
+        title="Recommandations"
+        subTitle="Cet outil recommande des emplois"
       >
         {searchEnabled ? <RecommendationSearch setRecomVariables={setRecomVariables} /> : null}
       </PageHeader>
@@ -56,8 +56,8 @@ const WithoutRecommendation = () => {
       <PageHeader
         ghost={false}
         onBack={() => router.push('/')}
-        title="Recommandation"
-        subTitle="Recommande des jobs"
+        title="Recommandations"
+        subTitle="Cet outil recommande des emplois"
       >
         {searchEnabled ? <NoRecommendationSearch setRecomVariables={setSelectedJob} /> : null}
       </PageHeader>

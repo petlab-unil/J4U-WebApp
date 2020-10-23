@@ -12,7 +12,7 @@ import Signup from './Signup';
 
 const LoginModal = ({ visible, reset }) => (
   <Modal
-    title="Connection"
+    title="Connexion"
     visible={visible}
     onOk={reset}
     onCancel={reset}
@@ -126,7 +126,9 @@ export default () => {
         </Menu.Item>
 
         <Menu.Item key="videos">
-          <a href="https://youtube.com"> Videos Explicatives</a>
+          <Link href="/videos" shallow>
+            <a href="/videos"> Vidéos explicatives</a>
+          </Link>
         </Menu.Item>
 
         {me && me.formDone && me.role === 'USER' ? (
@@ -148,7 +150,7 @@ export default () => {
         <Menu.Item key="legal">
           <InfoWrapper>
             <Link href="/legal" shallow>
-              <a href="legal">Legal</a>
+              <a href="legal">Conditions légales</a>
             </Link>
           </InfoWrapper>
         </Menu.Item>
@@ -156,7 +158,7 @@ export default () => {
         <Menu.Item key="tirage">
           <InfoWrapper>
             <Link href="/tirage" shallow>
-              <a href="tirage">Tirage</a>
+              <a href="tirage">Conditions du tirage</a>
             </Link>
           </InfoWrapper>
         </Menu.Item>
@@ -179,7 +181,7 @@ export default () => {
 
         {me ? (
           <Menu.Item key="logout" onClick={() => logOut()}>
-            Logout
+            Déconnexion
           </Menu.Item>
         ) : null}
       </Menu>

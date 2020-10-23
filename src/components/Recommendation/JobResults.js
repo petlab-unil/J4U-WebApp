@@ -79,7 +79,7 @@ const JobResults = ({ selectedJob, setJobDetails }) => {
 
   const { positions, totalCount, loading, page, setPage } = usePositions(avam);
 
-  const count = totalCount === undefined ? '' : `Positions: ${totalCount}`;
+  const count = totalCount === undefined ? '' : `Offres disponibles: ${totalCount}`;
 
   const header = (
     <>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Router from 'next/router';
 import { Row, Col, Card, Typography, Alert } from 'antd';
 import { YoutubeFilled } from '@ant-design/icons';
 
@@ -18,7 +19,7 @@ const VerifyCard = ({ me }) => {
 
   return (
     <Alert
-      message="Adresse email vérifiée"
+      message="Etape 1 : Adresse email vérifiée"
       description="Vous avez vérifié votre adresse email avec succès."
       type="success"
       showIcon
@@ -33,9 +34,9 @@ const SurveyCard = ({ me }) => {
         <b>
           Si vous venez de faire le questionnaire, patientez quelques minutes afin que l’application
           charge vos données puis{' '}
-          <Link href="/">
-            <a href="/">actualisez la page</a>
-          </Link>
+          <a href="/" onClick={() => Router.reload(window.location.pathname)}>
+            actualisez la page
+          </a>
           .
         </b>
       </Paragraph>
@@ -50,8 +51,7 @@ const SurveyCard = ({ me }) => {
         <ul>
           <li>
             Répondez honnêtement. Il n’y a pas de réponse juste ou de réponse fausse, le but étant
-            d’obtenir un outil personnalisé. • Faites l’enquête dans un endroit calme sans être
-            interrompu.
+            d’obtenir un outil personnalisé.
           </li>
           <li>Faites l’enquête dans un endroit calme sans être interrompu.</li>
           <li>
@@ -68,33 +68,49 @@ const SurveyCard = ({ me }) => {
     </>
   );
 
+  const good = (
+    <>
+      <p>{`Questionnaire complété le ${me.formDoneAt}`}</p>
+      Accédez à vos recommandations personnalisées en cliquant sur l’onglet «
+      <Link href="/recommandation" shallow>
+        <a href="/recommandation"> Recommandations</a>
+      </Link>{' '}
+      ».
+    </>
+  );
+
   if (!me.formDone)
     return <Alert message="Etape 3: Questionnaire" description={desc} type="error" showIcon />;
-  return (
-    <Alert
-      message="Questionnaires"
-      description={`Questionnaire complete le ${me.formDoneAt}`}
-      type="success"
-      showIcon
-    />
-  );
+  return <Alert message="Etape 3 : Questionnaire" description={good} type="success" showIcon />;
 };
 
 const VideoCard = ({ me }) => {
-  if (me.formDone) return null;
   const desc = (
     <>
       <Paragraph>
-        <a href="https://youtube.com">Vidéo explicative</a>
+        <Link href="/videos" shallow>
+          <a href="/videos"> Vidéos explicatives</a>
+        </Link>
       </Paragraph>
     </>
   );
+
+  if (me.verified) {
+    return (
+      <Alert
+        message="Etape 2 : Visionner la vidéo explicative "
+        description={desc}
+        type="success"
+        showIcon
+      />
+    );
+  }
 
   return (
     <Alert
       message="Etape 2 : Visionner la vidéo explicative "
       description={desc}
-      type="warning"
+      type="error"
       showIcon
     />
   );

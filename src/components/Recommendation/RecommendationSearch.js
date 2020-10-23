@@ -2,6 +2,7 @@ import { Form, Row, Col, Button, Slider } from 'antd';
 import get from 'lodash/get';
 import useMe from 'hooks/me';
 import JobSearch from './JobSearch';
+import Help from './Help';
 
 const Recommendation = ({ setRecomVariables }) => {
   const onValuesChange = (v) => console.log(v, 'vvv');
@@ -34,28 +35,48 @@ const Recommendation = ({ setRecomVariables }) => {
       <br />
       <Row gutter={[24, 2]}>
         <Col lg={8} xs={12}>
-          <Form.Item
-            label="Job précédent"
-            name="oldJobData"
-            rules={[{ required: true, message: 'Please input your username!' }]}
-          >
-            <JobSearch me={me} />
-          </Form.Item>
+          <Row>
+            <Col span={24}>
+              <Form.Item
+                label="Emploi précédent"
+                name="oldJobData"
+                rules={[{ required: true, message: 'Please input your username!' }]}
+              >
+                <JobSearch me={me} />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Help url="https://www.youtube.com/watch?v=iYiq3ot9qNI" />
+            </Col>
+          </Row>
+        </Col>
+
+        <Col lg={5} xs={6}>
+          <Row>
+            <Col span={24}>
+              <Form.Item
+                label="Importance de mon profil personnel"
+                name="alpha"
+                rules={[{ required: true, message: 'Please input your password!' }]}
+              >
+                <Slider
+                  min={0}
+                  max={1}
+                  step={0.01}
+                  style={{ width: '100%' }}
+                  disabled={alphaFixed}
+                />
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Help url="https://www.youtube.com/watch?v=tpcz6F4Y2Mw" />
+            </Col>
+          </Row>
         </Col>
 
         <Col lg={5} xs={6}>
           <Form.Item
-            label="Alpha"
-            name="alpha"
-            rules={[{ required: true, message: 'Please input your password!' }]}
-          >
-            <Slider min={0} max={1} step={0.01} style={{ width: '100%' }} disabled={alphaFixed} />
-          </Form.Item>
-        </Col>
-
-        <Col lg={5} xs={6}>
-          <Form.Item
-            label="Beta"
+            label="Importance de mon emploi précédent"
             name="beta"
             rules={[{ required: true, message: 'Please input your password!' }]}
           >
@@ -64,11 +85,18 @@ const Recommendation = ({ setRecomVariables }) => {
         </Col>
 
         <Col lg={4} xs={6}>
-          <Form.Item label="Recommander">
-            <Button type="primary" htmlType="submit">
-              Recommander
-            </Button>
-          </Form.Item>
+          <Row>
+            <Col span={24}>
+              <Form.Item label="Recommander">
+                <Button type="primary" htmlType="submit">
+                  Recommander
+                </Button>
+              </Form.Item>
+            </Col>
+            <Col span={24}>
+              <Help url="https://www.youtube.com/watch?v=FjtWuRmA0nQ" />
+            </Col>
+          </Row>
         </Col>
       </Row>
     </Form>

@@ -27,7 +27,7 @@ const Recommendation = ({ setRecomVariables }) => {
       <Row gutter={[24, 2]}>
         <Col lg={8} xs={12}>
           <Form.Item
-            label="Job"
+            label="Emploi précédent"
             name="job"
             rules={[{ required: true, message: 'Please input your username!' }]}
           >

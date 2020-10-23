@@ -37,7 +37,7 @@ const JobSearch = ({ onChange, me }) => {
           onSearch={handleSearch}
           optionFilterProp="label"
         >
-          <Input.Search size="medium" placeholder="Job précédent" enterButton />
+          <Input.Search size="medium" placeholder="Emploi précédent" enterButton />
         </AutoComplete>
       </Col>
       <Col span={4}>

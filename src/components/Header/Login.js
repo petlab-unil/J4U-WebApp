@@ -35,11 +35,11 @@ export default () => {
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
       </Form.Item>
 
-      <Form.Item label="Password" name="password" required>
+      <Form.Item label="Mot de passe" name="password" required>
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
           type="password"
-          placeholder="Password"
+          placeholder="Mot de passe"
         />
       </Form.Item>
 
