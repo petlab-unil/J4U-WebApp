@@ -118,8 +118,8 @@ export const RECOMMENDATIONS = gql`
 `;
 
 export const POSITIONS = gql`
-  query positions($professionCodes: [Int]!, $page: Int!) {
-    positions(professionCodes: $professionCodes, page: $page) {
+  query positions($professionCodes: [Int]!, $cantonCode: CantonEnum!, $page: Int!) {
+    positions(professionCodes: $professionCodes, cantonCode: $cantonCode, page: $page) {
       totalCount
       positions {
         id

@@ -2,6 +2,12 @@ import { Form, Row, Col, Button, Slider } from 'antd';
 import get from 'lodash/get';
 import useMe from 'hooks/me';
 import JobSearch from './JobSearch';
+import { CantonSelect } from 'components/Select';
+
+const ItemSelect = (SelectComponent, props) => ({ value, onChange }) => {
+  return <SelectComponent value={value} setValue={onChange} {...props} />;
+};
+const CantonItem = ItemSelect(CantonSelect);
 
 const Recommendation = ({ setRecomVariables }) => {
   const onValuesChange = (v) => console.log(v, 'vvv');
@@ -32,6 +38,16 @@ const Recommendation = ({ setRecomVariables }) => {
             rules={[{ required: true, message: 'Please input your username!' }]}
           >
             <JobSearch me={me} />
+          </Form.Item>
+        </Col>
+
+        <Col span={2}>
+          <Form.Item
+            name="cantonCode"
+            label="Canton"
+            rules={[{ required: true, message: 'Required' }]}
+          >
+            <CantonItem placeholder="Canton" showSearch />
           </Form.Item>
         </Col>
 

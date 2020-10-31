@@ -87,7 +87,7 @@ export default () => {
       </Form.Item>
 
       <Form.Item name="birthDate" required>
-        <Input />
+        <DatePicker />
       </Form.Item>
 
       <Form.Item name="phone" required>

@@ -19,9 +19,7 @@ const WithRecommendation = () => {
   const router = useRouter();
   const me = useMe();
   const searchEnabled = get(me, 'cohort.search');
-  const { recoms, setRecomVariables } = useRecommendation();
-
-  console.log(me);
+  const { recoms, setRecomVariables, cantonCode } = useRecommendation();
 
   const cancel = () => setJobDetails(undefined);
 
@@ -36,7 +34,11 @@ const WithRecommendation = () => {
         {searchEnabled ? <RecommendationSearch setRecomVariables={setRecomVariables} /> : null}
       </PageHeader>
       <br />
-      <RecommendationResults recoms={recoms} setJobDetails={setJobDetails} />
+      <RecommendationResults
+        recoms={recoms}
+        setJobDetails={setJobDetails}
+        cantonCode={cantonCode}
+      />
       <JobDetails position={jobDetails} cancel={cancel} />
     </div>
   );
@@ -44,12 +46,14 @@ const WithRecommendation = () => {
 
 const WithoutRecommendation = () => {
   const [jobDetails, setJobDetails] = useState(undefined);
-  const [selectedJob, setSelectedJob] = useState(undefined);
+  const [recomVariables, setRecomVariables] = useState({});
   const router = useRouter();
   const me = useMe();
   const searchEnabled = get(me, 'cohort.search');
 
   const cancel = () => setJobDetails(undefined);
+
+  const { job, cantonCode } = recomVariables;
 
   return (
     <div gutter={[10, 10]}>
@@ -59,10 +63,10 @@ const WithoutRecommendation = () => {
         title="Recommandations"
         subTitle="Cet outil recommande des emplois"
       >
-        {searchEnabled ? <NoRecommendationSearch setRecomVariables={setSelectedJob} /> : null}
+        {searchEnabled ? <NoRecommendationSearch setRecomVariables={setRecomVariables} /> : null}
       </PageHeader>
       <br />
-      <JobResults selectedJob={selectedJob} setJobDetails={setJobDetails} />
+      <JobResults selectedJob={job} cantonCode={cantonCode} setJobDetails={setJobDetails} />
       <JobDetails position={jobDetails} cancel={cancel} />
     </div>
   );

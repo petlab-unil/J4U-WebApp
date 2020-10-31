@@ -2,12 +2,13 @@ import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { POSITIONS } from 'gql/queries';
 
-export default (avamCode) => {
+export default (avamCode, cantonCode) => {
   const [page, setPage] = useState(1);
   const [positions, setPositions] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
+
   const { loading, error, data } = useQuery(POSITIONS, {
-    variables: { professionCodes: [avamCode], page },
+    variables: { professionCodes: [avamCode], page, cantonCode },
   });
 
   useEffect(() => {
@@ -16,6 +17,8 @@ export default (avamCode) => {
       setTotalCount(data.positions.totalCount);
     }
   }, [data]);
+
+  console.log(loading);
 
   // useEffect(() => {
   //   if (avamCode === 101128) console.log('--------', data);

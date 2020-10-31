@@ -63,8 +63,8 @@ const Position = ({ position, setJobDetails }) => {
   );
 };
 
-const IndividualResult = ({ recom, setJobDetails }) => {
-  const { positions, totalCount, loading, page, setPage } = usePositions(recom.avam);
+const IndividualResult = ({ recom, setJobDetails, cantonCode }) => {
+  const { positions, totalCount, loading, page, setPage } = usePositions(recom.avam, cantonCode);
 
   const count = totalCount === undefined ? '' : `offres disponibles: ${totalCount}`;
 
@@ -122,7 +122,7 @@ const IndividualResult = ({ recom, setJobDetails }) => {
   );
 };
 
-const RecommendationResults = ({ recoms, setJobDetails }) => {
+const RecommendationResults = ({ recoms, setJobDetails, cantonCode }) => {
   const middlePoint = Math.floor(recoms.length / 2);
   const colsData = chunk(
     recoms.map((x, i) => ({
@@ -139,7 +139,14 @@ const RecommendationResults = ({ recoms, setJobDetails }) => {
             {recoms.map((recom, i) => {
               const y = { ...recom };
               y.rank = i;
-              return <IndividualResult key={i} recom={y} setJobDetails={setJobDetails} />;
+              return (
+                <IndividualResult
+                  key={i}
+                  recom={y}
+                  setJobDetails={setJobDetails}
+                  cantonCode={cantonCode}
+                />
+              );
             })}
           </Col>
         ))}

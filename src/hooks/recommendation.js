@@ -8,10 +8,15 @@ export default () => {
   const [recomVariables, setRecomVariables] = useState(undefined);
   const { accessToken } = useAuth();
 
-  const { oldJobData } = pick(recomVariables, ['oldJobData.isco08', 'oldJobData.title']);
+  const { cantonCode, oldJobData } = pick(recomVariables, [
+    'oldJobData.isco08',
+    'oldJobData.title',
+    'cantonCode',
+  ]);
   const variables = pick(recomVariables, ['alpha', 'beta']);
   variables.oldJobIsco08 = !oldJobData || oldJobData.isco08;
   variables.oldJobTitle = !oldJobData || oldJobData.title;
+  variables.cantonCode = cantonCode;
 
   const { loading, error, data } = useQuery(RECOMMENDATIONS, {
     skip: !recomVariables,
@@ -25,5 +30,5 @@ export default () => {
 
   if (loading || error || !data) return { recoms: [], setRecomVariables };
 
-  return { recoms: data.recommendations.results, setRecomVariables };
+  return { recoms: data.recommendations.results, setRecomVariables, cantonCode };
 };

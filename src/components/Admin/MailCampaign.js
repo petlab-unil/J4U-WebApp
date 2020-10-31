@@ -207,36 +207,38 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
                 break;
             }
             return (
-              <Col sm={24} lg={12} key={i}>
-                <Descriptions title="Campaign Info" size="small" ordered column={4}>
-                  <Descriptions.Item label="Name" span={1}>
-                    {campaign.name}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Action" span={1}>
-                    {campaign.action}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Status" span={2}>
-                    <Badge status={badgeType} text={badgeText} />
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Expiration" span={2}>
-                    {moment(params.surveyEnd).format('DD-MM-YYYY HH[h]')}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Execution" span={2}>
-                    {moment(campaign.executionDate).format('DD-MM-YYYY HH:mm')}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Distribution" span={2}>
-                    {params.distribId}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Cohort" span={2}>
-                    {cohortNames}
-                  </Descriptions.Item>
-                  <Descriptions.Item label="Emails Matched" span={4}>
-                    {(params.emailsMatched || []).join(', ')}
-                  </Descriptions.Item>
-                </Descriptions>
-                <Button onClick={() => deleteCampaign({ variables: { id: campaign.id } })}>
-                  DEL
-                </Button>
+              <Col sm={24} lg={24} key={i}>
+                <Card>
+                  <Descriptions title="Campaign Info" size="small" ordered column={4}>
+                    <Descriptions.Item label="Name" span={1}>
+                      {campaign.name}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Action" span={1}>
+                      {campaign.action}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Status" span={2}>
+                      <Badge status={badgeType} text={badgeText} />
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Expiration" span={2}>
+                      {moment(params.surveyEnd).format('DD-MM-YYYY HH[h]')}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Execution" span={2}>
+                      {moment(campaign.executionDate).format('DD-MM-YYYY HH:mm')}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Distribution" span={2}>
+                      {params.distribId}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Cohort" span={2}>
+                      {cohortNames}
+                    </Descriptions.Item>
+                    <Descriptions.Item label="Emails Matched" span={4}>
+                      {(params.emailsMatched || []).join(', ')}
+                    </Descriptions.Item>
+                  </Descriptions>
+                  <Button onClick={() => deleteCampaign({ variables: { id: campaign.id } })}>
+                    DEL
+                  </Button>
+                </Card>
               </Col>
             );
           })}

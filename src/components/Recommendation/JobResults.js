@@ -72,12 +72,12 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(240px, 500px));
 `;
 
-const JobResults = ({ selectedJob, setJobDetails }) => {
-  const avam = get(selectedJob, 'job.avam');
+const JobResults = ({ selectedJob, cantonCode, setJobDetails }) => {
+  const avam = get(selectedJob, 'avam');
 
   if (!avam) return null;
 
-  const { positions, totalCount, loading, page, setPage } = usePositions(avam);
+  const { positions, totalCount, loading, page, setPage } = usePositions(avam, cantonCode);
 
   const count = totalCount === undefined ? '' : `Offres disponibles: ${totalCount}`;
 
