@@ -76,8 +76,6 @@ const Recommendation = () => {
   const me = useMe();
 
   const withRecom = get(me, 'cohort.recommendations');
-  console.log(me);
-  console.log(withRecom);
 
   if (withRecom) return <WithRecommendation />;
 

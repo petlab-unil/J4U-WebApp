@@ -65,7 +65,7 @@ export default withApollo(({ initialState }) => {
             }
           });
 
-        if (networkError) console.log(`[Network error]: ${networkError}`);
+        //if (networkError) console.log(`[Network error]: ${networkError}`);
       }),
       new HttpLink({
         uri: process.env.NEXT_GRAPHQL_PROXY_URI, // Server URL (must be absolute)

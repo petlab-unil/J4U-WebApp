@@ -18,8 +18,6 @@ export default (avamCode, cantonCode) => {
     }
   }, [data]);
 
-  console.log(loading);
-
   // useEffect(() => {
   //   if (avamCode === 101128) console.log('--------', data);
   // }, [positions]);
