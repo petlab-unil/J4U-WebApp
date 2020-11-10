@@ -1,4 +1,5 @@
-import { Row, Col, Tabs } from 'antd';
+import axios from 'axios';
+import { Row, Col, Tabs, Button } from 'antd';
 import { SignupLink, GroupConfig, MailCampaign, Users, Cohorts } from 'components/Admin';
 import RolesRequired from 'components/HOC/RolesRequiredPage';
 import TrackVisit from 'components/HOC/TrackVisit';
@@ -65,6 +66,29 @@ const Admin = () => {
           </Col>
           <Col lg={12} span={24}>
             <SignupLink />
+            <br />
+            <Button
+              onClick={() => {
+                axios({
+                  url: `${process.env.API_URI}/activities`,
+                  method: 'GET',
+                  responseType: 'blob', // important
+                })
+                  .then(function (response) {
+                    const url = window.URL.createObjectURL(new Blob([response.data]));
+                    const link = document.createElement('a');
+                    link.href = url;
+                    link.setAttribute('download', 'activities.zip');
+                    document.body.appendChild(link);
+                    link.click();
+                  })
+                  .catch(function (error) {
+                    console.log(error);
+                  });
+              }}
+            >
+              Download Activities
+            </Button>
           </Col>
           <Col lg={12} span={24}>
             <GroupConfig />
