@@ -24,8 +24,8 @@ export default () => {
     return (
       <div>
         <Alert
-          message="Verification Impossible"
-          description="Votre adresse email n'a pas pu etre verifiee"
+          message="Vérification Impossible"
+          description="Votre adresse email n'a pas pu être vérifiée"
           type="error"
         />
         <Alert description={errorMsg} type="error" />
@@ -41,11 +41,11 @@ export default () => {
     return (
       <div>
         <Alert
-          message="Adresse Email Verifiee"
-          description="Vous avez verifiee votre adresse email avec succes. Vous pouvez maintenant utiliser les services du site J4U"
+          message="Adresse Email Vérifiée "
+          description="Vous avez vérifié votre adresse email avec succès. Vous pouvez maintenant utiliser les services du site J4U"
           type="success"
         />
-        <Link href="/?login" n>
+        <Link href="/?login">
           <a href="/?login"> Se connecter</a>
         </Link>
       </div>

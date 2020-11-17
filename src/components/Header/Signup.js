@@ -69,6 +69,9 @@ export default () => {
       initialValues={{ remember: true }}
       onChange={validate}
       onFinish={onFinish}
+      validateMessages={{
+        required: '${name} obligatoire',
+      }}
     >
       <Form.Item name="civilite">
         <Radio.Group>
@@ -87,7 +90,7 @@ export default () => {
       </Form.Item>
 
       <Form.Item name="birthDate" required>
-        <DatePicker />
+        <DatePicker placeholder="Date de naissance" />
       </Form.Item>
 
       <Form.Item name="phone" required>
@@ -126,7 +129,7 @@ export default () => {
 
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button" disabled={!isValid}>
-          Signup
+          S'inscrire
         </Button>
         Ou
         <Link href="/?login" shallow>

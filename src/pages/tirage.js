@@ -14,11 +14,6 @@ export default () => {
           par les universités de Genève et de Lausanne.
         </Paragraph>
         <Paragraph>
-          Vous êtes invité à participer à une étude pilote qui vise à vous aider dans votre
-          recherche d’emploi. Nous vous remercions de votre participation. Cette étude est réalisée
-          par les universités de Genève et de Lausanne.
-        </Paragraph>
-        <Paragraph>
           Si vous acceptez de participer, nous vous demanderons d’utiliser l’outil mis à votre
           disposition et de répondre à des questionnaires. Il y aura entre un et deux questionnaires
           envoyés chaque semaine. Chaque participation aux questionnaires rapporte des billets de
@@ -39,7 +34,7 @@ export default () => {
             </li>
             <li>
               Utilisation du site j4u.unil.ch (onglets « recommandations professionnelles » ou «
-              recherche d’emploi ») : 3 billets de loterie / jours
+              recherche d’emploi ») : 3 billets de loterie / jour
             </li>
           </ul>
         </Paragraph>
@@ -60,15 +55,6 @@ export default () => {
           Pour rappel, vos réponses seront collectées de façon confidentielle et anonymisée. Dans le
           cas où les résultats de l’étude seraient publiés, votre identité ne sera pas utilisée. La
           confidentialité des données est entièrement garantie.
-        </Paragraph>
-        <Paragraph>
-          Afin de confirmer votre participation au tirage au sort, nous vous demandons de compléter
-          ce questionnaire et de nous le renvoyer à l’adresse indiquée au-dessus jusqu’au XXX.
-        </Paragraph>
-        <Paragraph>
-          Afin de confirmer votre participation au tirage au sort, nous vous demandons de{' '}
-          <a href={'formUrl'}>télécharger</a> et de compléter ce formulaire et de nous le renvoyer à
-          l’adresse indiquée au-dessus.
         </Paragraph>
       </Col>
       <Col span={24} />

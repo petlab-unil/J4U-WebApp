@@ -6,7 +6,7 @@ const HelpIcon = styled(QuestionCircleOutlined)`
 `;
 
 export default ({ url }) => (
-  <a href={url}>
+  <a href={url} target="_blank" rel="noopener noreferrer">
     <HelpIcon />
   </a>
 );

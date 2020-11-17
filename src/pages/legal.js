@@ -11,15 +11,15 @@ export default () => {
         <Paragraph>
           <strong>1. Objectifs de l’étude</strong>
           <br />
-          Objectifs de l’étude Par la présente, nous vous proposons de participer à une étude qui
-          vise à élaborer des outils pour vous soutenir dans votre recherche d’emploi. Ces outils
-          mis à disposition ont trois objectifs. Ils visent à améliorer (i) l’information sur vos
-          compétences, (ii) votre stratégie de recherche d’emploi, (iii) vos capacités cognitives,
-          telles que votre capacité de raisonnement, votre mémoire, etc. Les outils sont attribués
-          de façon aléatoire aux participants.
+          Par la présente, nous vous proposons de participer à une étude qui vise à élaborer des
+          outils pour vous soutenir dans votre recherche d’emploi. Ces outils mis à disposition ont
+          trois objectifs. Ils visent à améliorer (i) l’information sur vos compétences, (ii) votre
+          stratégie de recherche d’emploi, (iii) vos capacités cognitives, telles que votre capacité
+          de raisonnement, votre mémoire, etc. Les outils sont attribués de façon aléatoire aux
+          participants.
         </Paragraph>
         <Paragraph>
-          Cette étude est réalisée et financée par Prof. M. Cherubini (UNIGE), Prof. M. Kliegel
+          Cette étude est réalisée et financée par Prof. M. Cherubini (UNIL), Prof. M. Kliegel
           (UNIGE), Prof. R. Lalive (UNIL), Prof. M. Pellizzari (UNIGE) (numéro de fonds :
           100018_178878).
         </Paragraph>
@@ -67,13 +67,13 @@ export default () => {
         <Paragraph>
           <strong>4. Conditions de participation</strong>
           <br />
-          <ul>
-            <li>
-              L'étude se déroulera sur 6 mois, dès votre participation à la séance de démarrage.
-            </li>
-            <li>Vous fournissez des informations sur vos recherches d’emplois</li>
-            <li>Vous souhaitez suivre les indications qui vous sont (et seront) fournies.</li>
-          </ul>
+          L'étude se déroulera sur 6 mois, dès la finalisation du questionnaire en ligne au moment
+          de votre inscription.
+          <br />
+          Vous fournissez des informations sur vos recherches d'emploi via des sondages
+          hebdomadaires.
+          <br />
+          Vous avez le désir de suivre les conseils qui vous sont (et seront) fournis.
         </Paragraph>
 
         <Paragraph>
@@ -111,11 +111,11 @@ export default () => {
             </li>
             <li>
               Participation aux questionnaires reçus par email (avant la date butoir indiquée dans
-              l’email) : 5 billets
+              l’email) : 5 billets / questionnaire
             </li>
             <li>
               Utilisation du site j4u.unil.ch (onglets « recommandations professionnelles » ou «
-              recherche d’emploi ») : 3 billets/ jours
+              recherche d’emploi ») : 3 billets/ jour
             </li>
           </ul>
         </Paragraph>
