@@ -3,24 +3,24 @@
 * Install npm (node package manager)
 
 * Clone the git repo :
-``
+```
     git clone https://github.com/petlab-unil/J4U-WebApp
-``
+```
 
 * Create a .env file inside the cloned folder :
-``
+```
     cd J4U-WebApp/
     vim .env
-``
+```
 
 * Install all packages required (specified inside packages.json) :
-``
+```
     npm i
-``
+```
 * Run the server in development mode :
-``
+```
     npm run dev
-``
+```
 
 .env template example : 
 
