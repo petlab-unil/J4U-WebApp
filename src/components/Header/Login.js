@@ -5,8 +5,8 @@ import { useAuth } from 'hooks/auth';
 import useForm from 'hooks/form';
 
 const LoginSchema = Yup.object().shape({
-  email: Yup.string().email('Invalid email').required('Required'),
-  password: Yup.string().min(2, 'Too Short!').max(30, 'Too Long!').required('Required'),
+  email: Yup.string().email('Email non valide').required('Champ obligatoire'),
+  password: Yup.string().min(2, 'Trop court').max(30, 'Trop long').required('Champ obligatoire'),
 });
 
 export default () => {

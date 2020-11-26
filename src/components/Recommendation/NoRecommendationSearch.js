@@ -1,8 +1,9 @@
 import { Form, Row, Col, Button, Slider } from 'antd';
 import get from 'lodash/get';
 import useMe from 'hooks/me';
-import JobSearch from './JobSearch';
 import { CantonSelect } from 'components/Select';
+import { useTracker } from 'hooks/tracker';
+import JobSearch from './JobSearch';
 
 const ItemSelect = (SelectComponent, props) => ({ value, onChange }) => {
   return <SelectComponent value={value} setValue={onChange} {...props} />;
@@ -10,6 +11,7 @@ const ItemSelect = (SelectComponent, props) => ({ value, onChange }) => {
 const CantonItem = ItemSelect(CantonSelect);
 
 const Recommendation = ({ setRecomVariables }) => {
+  const tracker = useTracker();
   const onValuesChange = (v) => console.log(v, 'vvv');
 
   const me = useMe();
@@ -17,7 +19,12 @@ const Recommendation = ({ setRecomVariables }) => {
   const betaFixed = get(me, 'cohort.betaFixed');
 
   const onFinish = (v) => {
-    console.log(v, 'aaaaaaaaaaaaa');
+    tracker.track('NO_RECOMMENDATION_CLICK', {
+      canton_code: v.job.cantonCode,
+      job_isco08: v.job.isco08,
+      job_avam: v.job.avam,
+      job_title: v.job.title,
+    });
     setRecomVariables(v);
   };
 
@@ -35,7 +42,7 @@ const Recommendation = ({ setRecomVariables }) => {
           <Form.Item
             label="Emploi précédent"
             name="job"
-            rules={[{ required: true, message: 'Please input your username!' }]}
+            rules={[{ required: true, message: 'Champ obligatoire' }]}
           >
             <JobSearch me={me} />
           </Form.Item>
@@ -45,7 +52,7 @@ const Recommendation = ({ setRecomVariables }) => {
           <Form.Item
             name="cantonCode"
             label="Canton"
-            rules={[{ required: true, message: 'Required' }]}
+            rules={[{ required: true, message: 'Champ obligatoire' }]}
           >
             <CantonItem placeholder="Canton" showSearch />
           </Form.Item>

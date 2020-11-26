@@ -1,8 +1,9 @@
 import { Form, Row, Col, Button, Slider } from 'antd';
 import get from 'lodash/get';
 import useMe from 'hooks/me';
-import JobSearch from './JobSearch';
 import { CantonSelect } from 'components/Select';
+import { useTracker } from 'hooks/tracker';
+import JobSearch from './JobSearch';
 import Help from './Help';
 
 const ItemSelect = (SelectComponent, props) => ({ value, onChange }) => {
@@ -11,12 +12,21 @@ const ItemSelect = (SelectComponent, props) => ({ value, onChange }) => {
 const CantonItem = ItemSelect(CantonSelect);
 
 const Recommendation = ({ setRecomVariables }) => {
+  const tracker = useTracker();
   const onValuesChange = (v) => console.log(v, 'vvv');
   const me = useMe();
   const alphaFixed = get(me, 'cohort.alphaFixed');
   const betaFixed = get(me, 'cohort.betaFixed');
 
   const onFinish = (v) => {
+    tracker.track('RECOMMENDATION_CLICK', {
+      canton_code: v.cantonCode,
+      old_job_isco08: v.oldJobData.isco08,
+      old_job_avam: v.oldJobData.avam,
+      old_job_title: v.oldJobData.title,
+      alpha: v.alpha,
+      beta: v.beta,
+    });
     setRecomVariables(v);
   };
 
@@ -46,7 +56,7 @@ const Recommendation = ({ setRecomVariables }) => {
               <Form.Item
                 label="Emploi précédent"
                 name="oldJobData"
-                rules={[{ required: true, message: 'Please input your username!' }]}
+                rules={[{ required: true, message: 'Champ obligatoire' }]}
               >
                 <JobSearch me={me} />
               </Form.Item>
@@ -61,7 +71,7 @@ const Recommendation = ({ setRecomVariables }) => {
           <Form.Item
             name="cantonCode"
             label="Canton"
-            rules={[{ required: true, message: 'Required' }]}
+            rules={[{ required: true, message: 'Champ obligatoire' }]}
           >
             <CantonItem placeholder="Canton" showSearch />
           </Form.Item>
@@ -73,7 +83,7 @@ const Recommendation = ({ setRecomVariables }) => {
               <Form.Item
                 label="Importance de mon profil personnel"
                 name="alpha"
-                rules={[{ required: true, message: 'Please input your password!' }]}
+                rules={[{ required: true, message: 'Champ obligatoire' }]}
               >
                 <Slider
                   min={0}
@@ -94,7 +104,7 @@ const Recommendation = ({ setRecomVariables }) => {
           <Form.Item
             label="Importance de mon emploi précédent"
             name="beta"
-            rules={[{ required: true, message: 'Please input your password!' }]}
+            rules={[{ required: true, message: 'Champ obligatoire' }]}
           >
             <Slider min={0} max={1} step={0.01} style={{ width: '100%' }} disabled={betaFixed} />
           </Form.Item>

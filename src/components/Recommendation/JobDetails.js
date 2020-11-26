@@ -6,8 +6,8 @@ import every from 'lodash/every';
 import isEmpty from 'lodash/isEmpty';
 import get from 'lodash/get';
 import { getCertificate } from 'helpers';
-import { PermanentTag, ImmediatelyTag, LoadTag } from './Tags';
 import { useTracker } from 'hooks/tracker';
+import { PermanentTag, ImmediatelyTag, LoadTag } from './Tags';
 
 const { Text } = Typography;
 
