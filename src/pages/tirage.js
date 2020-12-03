@@ -30,7 +30,7 @@ export default () => {
             </li>
             <li>
               Participation aux questionnaires reçus par email (avant la date butoir indiquée dans
-              l’email) : 5 billets de loterie
+              l’email) : 5 billets de loterie / questionnaire
             </li>
             <li>
               Utilisation du site j4u.unil.ch (onglets « recommandations professionnelles » ou «

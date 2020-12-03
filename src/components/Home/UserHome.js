@@ -32,10 +32,11 @@ const SurveyCard = ({ me }) => {
     <>
       <Paragraph>
         <b>
-          Si vous venez de faire le questionnaire, patientez quelques minutes afin que l’application
-          charge vos données puis{' '}
+          Si vous venez de faire le questionnaire, vous serez averti par email que vos données ont
+          bien été chargées dans l'application. Cela prendra 15 min environ. Vous pouvez également
+          patienter et{' '}
           <a href="/" onClick={() => Router.reload(window.location.pathname)}>
-            actualisez la page
+            actualiser la page
           </a>
           .
         </b>

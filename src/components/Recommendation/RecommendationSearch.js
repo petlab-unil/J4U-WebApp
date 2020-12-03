@@ -6,6 +6,54 @@ import { useTracker } from 'hooks/tracker';
 import JobSearch from './JobSearch';
 import Help from './Help';
 
+const ExplainPreviousJob = () => {
+  return (
+    <>
+      <Col span={12}>
+        <p>Voici votre outil personnalisé avec les réponses de votre questionnaire.</p>
+
+        <p>
+          Choisissez votre emploi précédent et les niveaux d'importance avant de cliquer sur
+          "Recommander".
+        </p>
+        <p>
+          <strong>Comment régler les niveaux d’importance ?</strong>
+        </p>
+        <p>
+          Importance <u>de mon profil personnel</u> correspond au poids attribué au questionnaire
+          que vous avez complété.
+        </p>
+        <p>
+          <u>Importance de mon emploi précédent</u> correspond au poids attribué au champ "emploi
+          précédent". 
+        </p>
+      </Col>
+      <Col span={12}>
+        <p>
+          <strong>Astuces</strong>
+          <ul>
+            <li>
+              Pour savoir ce qu'il vous conviendrait (ou vous aurait convenu) du point de vue de
+              votre profil personnel, indépendamment de ce que vous avez fait par le passé : mettez
+              Importance de mon profil personnel à 1 et Importance de mon emploi précédent à 0.
+            </li>
+            <li>
+              l'inverse, pour savoir avoir des suggestions qui sont cohérentes avec votre dernier
+              métier : mettez Importance de mon profil personnel à 0 et Importance de mon emploi
+              précédent à 1.
+            </li>
+            <li>- 'hésitez pas à jour avec les curseurs. </li>
+          </ul>
+        </p>
+        <p>
+          <strong>Pour en savoir plus </strong>
+        </p>
+        <p>Pour plus de renseignements cliquez sur les points d'interrogation.</p>
+      </Col>
+    </>
+  );
+};
+
 const ItemSelect = (SelectComponent, props) => ({ value, onChange }) => {
   return <SelectComponent value={value} setValue={onChange} {...props} />;
 };
@@ -86,7 +134,7 @@ const Recommendation = ({ setRecomVariables }) => {
                 rules={[{ required: true, message: 'Champ obligatoire' }]}
               >
                 <Slider
-                  min={0}
+                  min={0.01}
                   max={1}
                   step={0.01}
                   style={{ width: '100%' }}
@@ -106,7 +154,7 @@ const Recommendation = ({ setRecomVariables }) => {
             name="beta"
             rules={[{ required: true, message: 'Champ obligatoire' }]}
           >
-            <Slider min={0} max={1} step={0.01} style={{ width: '100%' }} disabled={betaFixed} />
+            <Slider min={0.01} max={1} step={0.01} style={{ width: '100%' }} disabled={betaFixed} />
           </Form.Item>
         </Col>
 
@@ -124,6 +172,11 @@ const Recommendation = ({ setRecomVariables }) => {
             </Col>
           </Row>
         </Col>
+        <Col span={24}>
+          <br />
+          <br />
+        </Col>
+        <ExplainPreviousJob />
       </Row>
     </Form>
   );

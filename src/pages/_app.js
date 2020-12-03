@@ -8,6 +8,7 @@ import { ThemeProvider } from 'styled-components';
 import { NookiesProvider, parseNookies } from 'next-nookies-persist';
 import { ProvideAuth } from 'hooks/auth';
 import MainLayout from 'layouts/MainLayout';
+import DeviceError from 'components/DeviceError';
 import { parseServerError } from 'helpers';
 
 const theme = {
@@ -17,6 +18,8 @@ const theme = {
 };
 
 const MyApp = ({ Component, pageProps, apollo }) => {
+  if (!pageProps.isChrome) return <DeviceError />;
+
   return (
     <NookiesProvider initialValue={pageProps.nookies}>
       <ApolloProvider client={apollo}>
@@ -33,9 +36,11 @@ const MyApp = ({ Component, pageProps, apollo }) => {
 };
 
 MyApp.getInitialProps = async ({ Component, ctx }) => {
+  const isChrome = ctx.req ? ctx.req.headers['user-agent'].includes('Chrome') : navigator.userAgent;
   return {
     pageProps: {
       nookies: parseNookies(ctx),
+      isChrome,
       ...(Component.getInitialProps ? await Component.getInitialProps(ctx) : {}),
     },
   };
