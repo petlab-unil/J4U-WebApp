@@ -13,13 +13,15 @@ const JobSearch = ({ onChange, me }) => {
     label: <div>{title}</div>,
   }));
 
-  options.push({
-    key: -1,
-    isco08: me.oldJobIsco08,
-    avam: null,
-    value: me.oldJobTitle,
-    label: <div>{me.oldJobTitle}</div>,
-  });
+  if (me) {
+    options.push({
+      key: -1,
+      isco08: me.oldJobIsco08,
+      avam: null,
+      value: me.oldJobTitle,
+      label: <div>{me.oldJobTitle}</div>,
+    });
+  }
 
   options = uniqBy(options, (x) => x.value);
 
@@ -32,7 +34,7 @@ const JobSearch = ({ onChange, me }) => {
             width: '100%',
           }}
           options={options}
-          defaultValue={me.oldJobTitle}
+          defaultValue={me && me.oldJobTitle}
           onSelect={onSelect}
           onSearch={handleSearch}
           optionFilterProp="label"

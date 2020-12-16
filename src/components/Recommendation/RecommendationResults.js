@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import chunk from 'lodash/chunk';
 import usePositions from 'hooks/positions';
 import { PermanentTag, ImmediatelyTag, LoadTag } from './Tags';
+import { useTracker } from 'hooks/tracker';
 
 const { Panel } = Collapse;
 const { Paragraph } = Typography;
@@ -36,12 +37,20 @@ const EmploymentDates = ({ position }) => {
 };
 
 const Position = ({ position, setJobDetails }) => {
+  const tracker = useTracker();
+
   return (
     <Tooltip title="Cliquer pour les détatils">
       <ClickCard
         title={position.descriptions[0].title}
         type="inner"
-        onClick={() => setJobDetails(position)}
+        onClick={() => {
+          setJobDetails(position);
+          tracker.track('JOB_CLICK', {
+            job_id: position.id,
+            job_title: position.descriptions[0].title,
+          });
+        }}
       >
         <Row>
           <Col span={6}>Tags:</Col>

@@ -7,9 +7,11 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import * as Yup from 'yup';
 import useForm from 'hooks/form';
 import { CREATE_USER } from 'gql/mutations';
+import JobSearch from 'components/Recommendation/JobSearch';
 
 const SignupSchema = Yup.object().shape({
   civilite: Yup.string().oneOf(['MLLE', 'MME', 'M'], 'Erreur').required('Champ obligatoire'),
+  oldJobSignup: Yup.string().required('Champ obligatoire'),
   firstName: Yup.string().required('Champ obligatoire'),
   lastName: Yup.string().required('Champ obligatoire'),
   birthDate: Yup.date()
@@ -40,6 +42,8 @@ export default () => {
   const { token } = router.query;
 
   const onFinish = async (values) => {
+    values.oldJobSignup = values.oldJobSignup.title;
+
     if (isValid) {
       values.birthDate = moment(values.birthDate, 'DD-MM-YYYY').format('YYYY-MM-DD');
 
@@ -73,6 +77,13 @@ export default () => {
         required: '${name} obligatoire',
       }}
     >
+      <Form.Item
+        name="oldJobSignup"
+        required
+        rules={[{ required: true, message: 'Champ obligatoire' }]}
+      >
+        <JobSearch />
+      </Form.Item>
       <Form.Item name="civilite">
         <Radio.Group>
           <Radio.Button value="MLLE">Mlle</Radio.Button>
