@@ -17,14 +17,16 @@ const ScrollDiv = styled.div`
   overflow-y: scroll;
 `;
 
-const JobDetails = ({ position, cancel }) => {
+const JobDetails = ({ position: p, cancel }) => {
   const [view, setView] = useState('INFO');
   const me = useMe();
   const tracker = useTracker();
 
   const recomEnabled = get(me, 'cohort.recommendations');
 
-  if (!position) return null;
+  if (!p) return null;
+
+  const { position, isco08 } = p;
 
   const {
     id,
@@ -36,7 +38,7 @@ const JobDetails = ({ position, cancel }) => {
     employment: { startDate, endDate },
   } = position;
 
-  console.log(id);
+  console.log(id, isco08);
 
   const emptyContact = every([firstName, lastName, phone, email], isEmpty);
 
@@ -46,7 +48,7 @@ const JobDetails = ({ position, cancel }) => {
       type="primary"
       onClick={() => {
         setView('APPLY');
-        tracker.track('APPLY_CLICK', { job_id: id, job_title: title });
+        tracker.track('APPLY_CLICK', { job_id: id, job_title: title, isco08 });
       }}
     >
       Postuler
@@ -115,6 +117,7 @@ const JobDetails = ({ position, cancel }) => {
                     job_id: id,
                     job_title: title,
                     external_url: externalUrl,
+                    isco08,
                   });
                 }}
               >
@@ -131,7 +134,7 @@ const JobDetails = ({ position, cancel }) => {
                 type="primary"
                 onClick={() => {
                   getCertificate(me, title);
-                  tracker.track('CERTIFICATE_CLICK', { job_id: id, job_title: title });
+                  tracker.track('CERTIFICATE_CLICK', { job_id: id, job_title: title, isco08 });
                 }}
               >
                 Certificat

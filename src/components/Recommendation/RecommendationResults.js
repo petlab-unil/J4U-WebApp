@@ -36,7 +36,7 @@ const EmploymentDates = ({ position }) => {
   );
 };
 
-const Position = ({ position, setJobDetails }) => {
+const Position = ({ position, setJobDetails, isco08 }) => {
   const tracker = useTracker();
 
   return (
@@ -45,10 +45,11 @@ const Position = ({ position, setJobDetails }) => {
         title={position.descriptions[0].title}
         type="inner"
         onClick={() => {
-          setJobDetails(position);
+          setJobDetails({ position, isco08 });
           tracker.track('JOB_CLICK', {
             job_id: position.id,
             job_title: position.descriptions[0].title,
+            isco08,
           });
         }}
       >
@@ -118,7 +119,12 @@ const IndividualResult = ({ recom, setJobDetails, cantonCode }) => {
                   />
                   <Spin spinning={!!loading}>
                     {positions.map((position, i) => (
-                      <Position key={i} position={position} setJobDetails={setJobDetails} />
+                      <Position
+                        key={i}
+                        position={position}
+                        isco08={recom.isco08}
+                        setJobDetails={setJobDetails}
+                      />
                     ))}
                   </Spin>
                 </Panel>
