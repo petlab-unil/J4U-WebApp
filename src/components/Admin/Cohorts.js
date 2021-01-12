@@ -50,6 +50,7 @@ const CohortForm = ({ form, onChange, save, canSave, reset, initialValues }) => 
           </Form.Item>
         </Col>
       </Row>
+
       <Row>
         <Col span={12}>
           <Form.Item

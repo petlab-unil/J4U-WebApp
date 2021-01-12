@@ -1,13 +1,16 @@
+import { useState } from 'react';
 import Link from 'next/link';
 import moment from 'moment';
 import { useMutation } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { Form, Input, Button, Radio, message, DatePicker } from 'antd';
+import { Form, Input, Button, Radio, message, DatePicker, AutoComplete } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import * as Yup from 'yup';
 import useForm from 'hooks/form';
 import { CREATE_USER } from 'gql/mutations';
-import JobSearch from 'components/Recommendation/JobSearch';
+import jobs from 'jobs-reg.json';
+import Fuse from 'fuse.js';
+import capitalize from 'lodash/capitalize';
 
 const SignupSchema = Yup.object().shape({
   civilite: Yup.string().oneOf(['MLLE', 'MME', 'M'], 'Erreur').required('Champ obligatoire'),
@@ -32,7 +35,105 @@ const SignupSchema = Yup.object().shape({
   passwordConfirmation: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Mot de passe et confirmation differents')
     .required('Champ obligatoire'),
+  avs: Yup.string()
+    .test('AVS', 'AVS invalide', (value) => {
+      return (value || '').replace(/\D+/g, '').length === 10;
+    })
+    .required('Champ obligatoire'),
 });
+
+const AVSInput = ({ value, onChange }) => {
+  const v = value || '..';
+
+  const s = v.split('.');
+
+  const [v1, v2, v3] = s;
+
+  const set = (num, pos) => {
+    const x = [v1, v2, v3];
+    x[pos] = num.replace(/\D+/g, '');
+    const res = x.join('.');
+    onChange(res);
+  };
+
+  return (
+    <div>
+      {'AVS: '}
+      <Input disabled value="756" style={{ width: '60px' }} />
+      {' . '}
+      <Input
+        value={v1}
+        onChange={(e) => set(e.target.value, 0)}
+        maxLength={4}
+        style={{ width: '60px' }}
+      />
+      {' . '}
+      <Input
+        value={v2}
+        onChange={(e) => set(e.target.value, 1)}
+        maxLength={4}
+        style={{ width: '60px' }}
+      />
+      {' . '}
+      <Input
+        value={v3}
+        onChange={(e) => set(e.target.value, 2)}
+        maxLength={2}
+        style={{ width: '45px' }}
+      />
+    </div>
+  );
+};
+
+const oldJobOptions = jobs
+  .slice(0, 8000)
+  .map((x) => ({ label: capitalize(x.BERUF_M_FR), value: x.isco08 }));
+
+const fuse = new Fuse(oldJobOptions, {
+  keys: ['label'],
+});
+
+const JobSearch = ({ value, onChange }) => {
+  const [options, setOptions] = useState([]);
+
+  const searchOptions = (x) => {
+    console.log(x);
+    const res = fuse
+      .search(x)
+      .slice(0, 20)
+      .map((x) => x.item);
+    setOptions([...res]);
+  };
+
+  let o = options.map(({ label, value }) => ({
+    key: label,
+    isco08: value,
+    value: label,
+    label: <div>{label}</div>,
+  }));
+
+  console.log(o);
+
+  return (
+    <AutoComplete
+      dropdownMatchSelectWidth={252}
+      style={{
+        width: '100%',
+      }}
+      filterOption={false}
+      options={[...o]}
+      onSelect={(x) => onChange(x.isco08)}
+      onSearch={searchOptions}
+      optionFilterProp="label"
+    >
+      <Input.Search size="medium" placeholder="Emploi précédent" enterButton />
+    </AutoComplete>
+  );
+};
+
+// const res = fuse.search('Agricul');
+// console.log(oldJobOptions);
+// console.log(res);
 
 export default () => {
   const router = useRouter();
@@ -43,6 +144,8 @@ export default () => {
 
   const onFinish = async (values) => {
     values.oldJobSignup = values.oldJobSignup.title;
+
+    values.avs = '756' + values.avs.replace(/\D+/g, '');
 
     if (isValid) {
       values.birthDate = moment(values.birthDate, 'DD-MM-YYYY').format('YYYY-MM-DD');
@@ -90,6 +193,10 @@ export default () => {
           <Radio.Button value="MME">Mme</Radio.Button>
           <Radio.Button value="M">M</Radio.Button>
         </Radio.Group>
+      </Form.Item>
+
+      <Form.Item name="avs" required>
+        <AVSInput />
       </Form.Item>
 
       <Form.Item name="firstName" required>

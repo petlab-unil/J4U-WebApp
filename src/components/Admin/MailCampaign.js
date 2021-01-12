@@ -3,13 +3,13 @@ import {
   Card,
   Row,
   Col,
+  Select,
   Form,
   Input,
   Button,
   DatePicker,
   Descriptions,
   Badge,
-  Select,
   Spin,
   Alert,
 } from 'antd';
@@ -97,6 +97,19 @@ const AddMailCampaign = () => {
               rules={[{ required: true, message: 'Required' }]}
             >
               <DatePicker showTime />
+            </Form.Item>
+
+            <Form.Item
+              name={['params', 'template']}
+              label="Template"
+              rules={[{ required: true, message: 'Required' }]}
+            >
+              <Select>
+                <Option value="template-1">template-1</Option>
+                <Option value="template-2">template-2</Option>
+                <Option value="template-3">template-3</Option>
+                <Option value="template-4">template-4</Option>
+              </Select>
             </Form.Item>
 
             <Form.Item
