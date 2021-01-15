@@ -122,7 +122,10 @@ const JobSearch = ({ value, onChange }) => {
       }}
       filterOption={false}
       options={[...o]}
-      onSelect={(x) => onChange(x.isco08)}
+      onSelect={(x) => {
+        console.log(x);
+        onChange(x);
+      }}
       onSearch={searchOptions}
       optionFilterProp="label"
     >
@@ -143,7 +146,7 @@ export default () => {
   const { token } = router.query;
 
   const onFinish = async (values) => {
-    values.oldJobSignup = values.oldJobSignup.title;
+    values.oldJobSignup = values.oldJobSignup;
 
     values.avs = '756' + values.avs.replace(/\D+/g, '');
 
