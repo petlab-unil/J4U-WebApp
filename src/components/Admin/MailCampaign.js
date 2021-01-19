@@ -105,10 +105,10 @@ const AddMailCampaign = () => {
               rules={[{ required: true, message: 'Required' }]}
             >
               <Select>
-                <Option value="template-1">template-1</Option>
-                <Option value="template-2">template-2</Option>
-                <Option value="template-3">template-3</Option>
-                <Option value="template-4">template-4</Option>
+                <Option value="premier_email_training">Premier email training</Option>
+                <Option value="debut_semaine_training">Debut semaine training</Option>
+                <Option value="fin_semaine_training">Fin semaine training</Option>
+                <Option value="survey">Survey</Option>
               </Select>
             </Form.Item>
 
