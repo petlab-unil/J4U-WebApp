@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import get from 'lodash/get';
 import usePositions from 'hooks/positions';
 import { PermanentTag, ImmediatelyTag, LoadTag } from './Tags';
+import { useEffect } from 'react';
 
 const { Panel } = Collapse;
 const { Paragraph } = Typography;
@@ -72,12 +73,19 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(240px, 500px));
 `;
 
-const JobResults = ({ selectedJob, cantonCode, setJobDetails }) => {
+const JobResults = ({ selectedJob, cantonCode, setJobDetails, setTrackingRecomStat }) => {
   const avam = get(selectedJob, 'avam');
 
   if (!avam) return null;
 
   const { positions, totalCount, loading, page, setPage } = usePositions(avam, cantonCode);
+
+  useEffect(() => {
+    if (totalCount !== null) {
+      // console.log(positions, totalCount);
+      setTrackingRecomStat(1, { count: totalCount });
+    }
+  }, [positions]);
 
   const count = totalCount === undefined ? '' : `Offres disponibles: ${totalCount}`;
 

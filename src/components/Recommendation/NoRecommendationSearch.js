@@ -10,8 +10,7 @@ const ItemSelect = (SelectComponent, props) => ({ value, onChange }) => {
 };
 const CantonItem = ItemSelect(CantonSelect);
 
-const Recommendation = ({ setRecomVariables }) => {
-  const tracker = useTracker();
+const Recommendation = ({ setRecomVariables, setTrackingMeta }) => {
   const onValuesChange = (v) => console.log(v, 'vvv');
 
   const me = useMe();
@@ -19,10 +18,10 @@ const Recommendation = ({ setRecomVariables }) => {
   const betaFixed = get(me, 'cohort.betaFixed');
 
   const onFinish = (v) => {
-    tracker.track('NO_RECOMMENDATION_CLICK', {
+    setTrackingMeta({
       canton_code: v.job.cantonCode,
       job_isco08: v.job.isco08,
-      job_avam: v.job.avam,
+      // job_avam: v.job.avam,
       job_title: v.job.title,
     });
     setRecomVariables(v);

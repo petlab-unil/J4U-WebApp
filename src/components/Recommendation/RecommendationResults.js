@@ -4,6 +4,7 @@ import chunk from 'lodash/chunk';
 import usePositions from 'hooks/positions';
 import { PermanentTag, ImmediatelyTag, LoadTag } from './Tags';
 import { useTracker } from 'hooks/tracker';
+import { useEffect } from 'react';
 
 const { Panel } = Collapse;
 const { Paragraph } = Typography;
@@ -73,8 +74,15 @@ const Position = ({ position, setJobDetails, isco08 }) => {
   );
 };
 
-const IndividualResult = ({ recom, setJobDetails, cantonCode }) => {
+const IndividualResult = ({ recom, setJobDetails, cantonCode, setTrackingRecomStat }) => {
   const { positions, totalCount, loading, page, setPage } = usePositions(recom.avam, cantonCode);
+
+  useEffect(() => {
+    if (totalCount !== null) {
+      // console.log(positions, totalCount);
+      setTrackingRecomStat(recom.rank + 1, { isco08: recom.isco08, count: totalCount });
+    }
+  }, [positions]);
 
   const count = totalCount === undefined ? '' : `offres disponibles: ${totalCount}`;
 
@@ -137,7 +145,7 @@ const IndividualResult = ({ recom, setJobDetails, cantonCode }) => {
   );
 };
 
-const RecommendationResults = ({ recoms, setJobDetails, cantonCode }) => {
+const RecommendationResults = ({ recoms, setJobDetails, cantonCode, setTrackingRecomStat }) => {
   const middlePoint = Math.floor(recoms.length / 2);
   const colsData = chunk(
     recoms.map((x, i) => ({
@@ -160,6 +168,7 @@ const RecommendationResults = ({ recoms, setJobDetails, cantonCode }) => {
                   recom={y}
                   setJobDetails={setJobDetails}
                   cantonCode={cantonCode}
+                  setTrackingRecomStat={setTrackingRecomStat}
                 />
               );
             })}

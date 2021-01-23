@@ -30,7 +30,5 @@ export default () => {
 
   if (loading || error || !data) return { recoms: [], setRecomVariables };
 
-  console.log(data.recommendations.results);
-
   return { recoms: data.recommendations.results, setRecomVariables, cantonCode };
 };

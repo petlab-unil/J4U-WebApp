@@ -23,18 +23,18 @@ export default () => {
 
         <Paragraph>
           Malheureusement, le site J4U n’est pas compatible avec ce navigateur web. Nous vous
-          recommandons d’installer GoogleChrome afin de pouvoir participer au projet.
+          recommandons d’installer Google Chrome afin de pouvoir participer au projet.
         </Paragraph>
 
+        <Paragraph>Voici le lien de téléchargement à partir d'un site sécurisé:</Paragraph>
         <Paragraph>
-          Voici les liens de téléchargement à partir de sites sécurisés:
           <a href="https://www.google.com/chrome/index.html">Télécharger Chrome</a>
         </Paragraph>
 
         <Paragraph>
-          LEJARDON INFORMATIQUE SI BESOIN):  LIENEn cas de difficulté, n’hésitez pas à nous joindre
-          à l’adresse suivante : j4u@unil.ch L’équipe J4U vous remercie
+          En cas de difficulté, n’hésitez pas à nous joindre à l’adresse suivante : j4u@unil.ch
         </Paragraph>
+        <Paragraph>L’équipe J4U vous remercie</Paragraph>
       </div>
     </Result>
   );

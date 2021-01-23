@@ -67,13 +67,10 @@ export default () => {
         <Paragraph>
           <strong>4. Conditions de participation</strong>
           <br />
-          L'étude se déroulera sur 6 mois, dès la finalisation du questionnaire en ligne au moment
-          de votre inscription.
-          <br />
-          Vous fournissez des informations sur vos recherches d'emploi via des sondages
-          hebdomadaires.
-          <br />
-          Vous avez le désir de suivre les conseils qui vous sont (et seront) fournis.
+          Les participants doivent être majeurs et à la recherche d’un emploi. Ils doivent avoir le
+          désir de suivre les conseils qui seront fournis. L'étude se déroulera sur 6 mois, dès la
+          finalisation du questionnaire en ligne au moment de votre inscription.Vous fournissez des
+          informations sur vos recherches d'emploi via des sondages hebdomadaires.
         </Paragraph>
 
         <Paragraph>

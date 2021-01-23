@@ -2,10 +2,10 @@ import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { POSITIONS } from 'gql/queries';
 
-export default (avamCode, cantonCode) => {
+export default (avamCode, cantonCode, setTrackingRecomStat) => {
   const [page, setPage] = useState(1);
   const [positions, setPositions] = useState([]);
-  const [totalCount, setTotalCount] = useState(0);
+  const [totalCount, setTotalCount] = useState(null);
 
   const { loading, error, data } = useQuery(POSITIONS, {
     variables: { professionCodes: [avamCode], page, cantonCode },

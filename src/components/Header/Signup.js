@@ -37,7 +37,8 @@ const SignupSchema = Yup.object().shape({
     .required('Champ obligatoire'),
   avs: Yup.string()
     .test('AVS', 'AVS invalide', (value) => {
-      return (value || '').replace(/\D+/g, '').length === 10;
+      const len = (value || '').replace(/\D+/g, '').length;
+      return len === 10 || len === 0;
     })
     .required('Champ obligatoire'),
 });
@@ -58,8 +59,8 @@ const AVSInput = ({ value, onChange }) => {
 
   return (
     <div>
-      {'AVS: '}
-      <Input disabled value="756" style={{ width: '60px' }} />
+      {'AVS: 756'}
+      {/* <Input disabled value="756" style={{ width: '60px' }} /> */}
       {' . '}
       <Input
         value={v1}
@@ -183,13 +184,6 @@ export default () => {
         required: '${name} obligatoire',
       }}
     >
-      <Form.Item
-        name="oldJobSignup"
-        required
-        rules={[{ required: true, message: 'Champ obligatoire' }]}
-      >
-        <JobSearch />
-      </Form.Item>
       <Form.Item name="civilite">
         <Radio.Group>
           <Radio.Button value="MLLE">Mlle</Radio.Button>
@@ -198,16 +192,16 @@ export default () => {
         </Radio.Group>
       </Form.Item>
 
-      <Form.Item name="avs" required>
-        <AVSInput />
-      </Form.Item>
-
       <Form.Item name="firstName" required>
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Prenom" />
       </Form.Item>
 
       <Form.Item name="lastName" required>
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Nom" />
+      </Form.Item>
+
+      <Form.Item name="avs">
+        <AVSInput />
       </Form.Item>
 
       <Form.Item name="birthDate" required>
@@ -246,6 +240,16 @@ export default () => {
           type="password"
           placeholder="Confirmation du mot de passe"
         />
+      </Form.Item>
+
+      <Form.Item
+        name="oldJobSignup"
+        required
+        rules={[{ required: true, message: 'Champ obligatoire' }]}
+      >
+        Merci d'indiquer l'emploi exercé avant votre épisode de chômage ou votre emploi actuel si
+        vous n’êtes pas inscrit au chômage
+        <JobSearch />
       </Form.Item>
 
       <Form.Item>

@@ -33,16 +33,17 @@ const ExplainPreviousJob = () => {
           <strong>Astuces</strong>
           <ul>
             <li>
-              Pour savoir ce qu'il vous conviendrait (ou vous aurait convenu) du point de vue de
-              votre profil personnel, indépendamment de ce que vous avez fait par le passé : mettez
-              Importance de mon profil personnel à 1 et Importance de mon emploi précédent à 0.
+              Pour connaître les métiers qui vous conviendraient (ou qui vous auraient convenu) du
+              point de vue de votre profil personnel, indépendamment de ce que vous avez fait par le
+              passé : mettez Importance de mon profil personnel à 1 et Importance de mon emploi
+              précédent à 0.
             </li>
             <li>
-              l'inverse, pour savoir avoir des suggestions qui sont cohérentes avec votre dernier
+              A l'inverse, pour savoir avoir des suggestions qui sont cohérentes avec votre dernier
               métier : mettez Importance de mon profil personnel à 0 et Importance de mon emploi
               précédent à 1.
             </li>
-            <li>- 'hésitez pas à jour avec les curseurs. </li>
+            <li>N'hésitez pas à jour avec les curseurs. </li>
           </ul>
         </p>
         <p>
@@ -59,18 +60,17 @@ const ItemSelect = (SelectComponent, props) => ({ value, onChange }) => {
 };
 const CantonItem = ItemSelect(CantonSelect);
 
-const Recommendation = ({ setRecomVariables }) => {
-  const tracker = useTracker();
+const Recommendation = ({ setRecomVariables, setTrackingMeta }) => {
   const onValuesChange = (v) => console.log(v, 'vvv');
   const me = useMe();
   const alphaFixed = get(me, 'cohort.alphaFixed');
   const betaFixed = get(me, 'cohort.betaFixed');
 
   const onFinish = (v) => {
-    tracker.track('RECOMMENDATION_CLICK', {
+    setTrackingMeta({
       canton_code: v.cantonCode,
       old_job_isco08: v.oldJobData.isco08,
-      old_job_avam: v.oldJobData.avam,
+      // old_job_avam: v.oldJobData.avam,
       old_job_title: v.oldJobData.title,
       alpha: v.alpha,
       beta: v.beta,
