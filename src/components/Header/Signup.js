@@ -35,12 +35,10 @@ const SignupSchema = Yup.object().shape({
   passwordConfirmation: Yup.string()
     .oneOf([Yup.ref('password'), null], 'Mot de passe et confirmation differents')
     .required('Champ obligatoire'),
-  avs: Yup.string()
-    .test('AVS', 'AVS invalide', (value) => {
-      const len = (value || '').replace(/\D+/g, '').length;
-      return len === 10 || len === 0;
-    })
-    .required('Champ obligatoire'),
+  avs: Yup.string().test('AVS', 'AVS invalide', (value) => {
+    const len = (value || '').replace(/\D+/g, '').length;
+    return len === 10 || len === 0;
+  }),
 });
 
 const AVSInput = ({ value, onChange }) => {
