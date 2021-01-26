@@ -109,6 +109,8 @@ const AddMailCampaign = () => {
                 <Option value="debut_semaine_training">Debut semaine training</Option>
                 <Option value="fin_semaine_training">Fin semaine training</Option>
                 <Option value="survey">Survey</Option>
+                <Option value="mid_evaluation">Mid evaluation</Option>
+                <Option value="post_test">Post test</Option>
               </Select>
             </Form.Item>
 
