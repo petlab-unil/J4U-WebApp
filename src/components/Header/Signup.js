@@ -113,7 +113,7 @@ const JobSearch = ({ value, onChange }) => {
     label: <div>{label}</div>,
   }));
 
-  console.log(o);
+  console.log(o, value, onChange, '-----');
 
   return (
     <AutoComplete
@@ -124,7 +124,7 @@ const JobSearch = ({ value, onChange }) => {
       filterOption={false}
       options={[...o]}
       onSelect={(x) => {
-        console.log(x);
+        console.log(x, onChange);
         onChange(x);
       }}
       onSearch={searchOptions}
@@ -191,41 +191,33 @@ export default () => {
           <Radio.Button value="M">M</Radio.Button>
         </Radio.Group>
       </Form.Item>
-
       <Form.Item name="firstName" required>
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Prenom" />
       </Form.Item>
-
       <Form.Item name="lastName" required>
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Nom" />
       </Form.Item>
-
       <Form.Item name="avs">
         <AVSInput />
       </Form.Item>
-
       <Form.Item name="birthDate" required>
         <DatePicker placeholder="Date de naissance" />
       </Form.Item>
-
       <Form.Item name="phone" required>
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
           placeholder="Numero de telephone"
         />
       </Form.Item>
-
       <Form.Item name="email" required>
         <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
       </Form.Item>
-
       <Form.Item name="emailConfirmation" required>
         <Input
           prefix={<UserOutlined className="site-form-item-icon" />}
           placeholder="Confirmation de l'email"
         />
       </Form.Item>
-
       <Form.Item name="password" required>
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -233,7 +225,6 @@ export default () => {
           placeholder="Mot de passe"
         />
       </Form.Item>
-
       <Form.Item name="passwordConfirmation" required>
         <Input
           prefix={<LockOutlined className="site-form-item-icon" />}
@@ -241,17 +232,15 @@ export default () => {
           placeholder="Confirmation du mot de passe"
         />
       </Form.Item>
-
+      Merci d'indiquer l'emploi exercé avant votre épisode de chômage ou votre emploi actuel si vous
+      n’êtes pas inscrit au chômage
       <Form.Item
         name="oldJobSignup"
         required
         rules={[{ required: true, message: 'Champ obligatoire' }]}
       >
-        Merci d'indiquer l'emploi exercé avant votre épisode de chômage ou votre emploi actuel si
-        vous n’êtes pas inscrit au chômage
         <JobSearch />
       </Form.Item>
-
       <Form.Item>
         <Button type="primary" htmlType="submit" className="login-form-button" disabled={!isValid}>
           S'inscrire
