@@ -147,7 +147,7 @@ export default () => {
   const onFinish = async (values) => {
     values.oldJobSignup = values.oldJobSignup;
 
-    if (values.avs) values.avs = '756' + values.avs.replace(/\D+/g, '');
+    values.avs = values.avs ? '756' + values.avs.replace(/\D+/g, '') : '';
 
     if (isValid) {
       values.birthDate = moment(values.birthDate, 'DD-MM-YYYY').format('YYYY-MM-DD');
