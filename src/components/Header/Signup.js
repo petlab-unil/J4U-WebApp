@@ -36,8 +36,9 @@ const SignupSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'Mot de passe et confirmation differents')
     .required('Champ obligatoire'),
   avs: Yup.string().test('AVS', 'AVS invalide', (value) => {
+    console.log(value, 'jddddd');
     const len = (value || '').replace(/\D+/g, '').length;
-    return len === 10 || len === 0;
+    return len === 10 || len === 0 || value === undefined;
   }),
 });
 
