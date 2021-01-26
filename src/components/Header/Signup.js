@@ -36,9 +36,10 @@ const SignupSchema = Yup.object().shape({
     .oneOf([Yup.ref('password'), null], 'Mot de passe et confirmation differents')
     .required('Champ obligatoire'),
   avs: Yup.string().test('AVS', 'AVS invalide', (value) => {
-    console.log(value, 'jddddd');
-    const len = (value || '').replace(/\D+/g, '').length;
-    return len === 10 || len === 0 || value === undefined;
+    const v = value || '';
+    const len = (v || '').replace(/\D+/g, '').length;
+    console.log(v, len, 'aaaa');
+    return len === 10 || len === 0;
   }),
 });
 
@@ -112,8 +113,6 @@ const JobSearch = ({ value, onChange }) => {
     label: <div>{label}</div>,
   }));
 
-  console.log(o, value, onChange, '-----');
-
   return (
     <AutoComplete
       dropdownMatchSelectWidth={252}
@@ -177,7 +176,7 @@ export default () => {
       form={form}
       className="login-form"
       initialValues={{ remember: true }}
-      onChange={validate}
+      onValuesChange={validate}
       onFinish={onFinish}
       validateMessages={{
         required: '${name} obligatoire',
