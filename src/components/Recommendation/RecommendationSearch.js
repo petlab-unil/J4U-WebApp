@@ -43,7 +43,7 @@ const ExplainPreviousJob = () => {
               métier : mettez Importance de mon profil personnel à 0 et Importance de mon emploi
               précédent à 1.
             </li>
-            <li>N'hésitez pas à jour avec les curseurs. </li>
+            <li>N'hésitez pas à jouer avec les curseurs. </li>
           </ul>
         </p>
         <p>
