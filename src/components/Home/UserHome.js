@@ -48,6 +48,12 @@ const SurveyCard = ({ me }) => {
       </Paragraph>
 
       <Paragraph>
+        <b>
+          DATE LIMITE POUR FAIRE LE QUESTIONNAIRE: <u>LE 14 MARS 2021</u>.
+        </b>
+      </Paragraph>
+
+      <Paragraph>
         Rappel des instructions données dans la vidéo :
         <ul>
           <li>
