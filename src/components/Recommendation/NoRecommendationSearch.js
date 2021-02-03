@@ -38,7 +38,6 @@ const Recommendation = ({ setRecomVariables, setTrackingMeta }) => {
     >
       <br />
       <Row gutter={[24, 2]}>
-        aksdjfnaksjdnfksknaksd
         <Col lg={8} xs={12}>
           <Form.Item
             label="Emploi précédent"
