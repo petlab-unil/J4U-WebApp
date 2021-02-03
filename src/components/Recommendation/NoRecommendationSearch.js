@@ -38,6 +38,7 @@ const Recommendation = ({ setRecomVariables, setTrackingMeta }) => {
     >
       <br />
       <Row gutter={[24, 2]}>
+        aksdjfnaksjdnfksknaksd
         <Col lg={8} xs={12}>
           <Form.Item
             label="Emploi précédent"
@@ -47,7 +48,6 @@ const Recommendation = ({ setRecomVariables, setTrackingMeta }) => {
             <JobSearch me={me} />
           </Form.Item>
         </Col>
-
         <Col span={2}>
           <Form.Item
             name="cantonCode"
@@ -57,7 +57,6 @@ const Recommendation = ({ setRecomVariables, setTrackingMeta }) => {
             <CantonItem placeholder="Canton" showSearch />
           </Form.Item>
         </Col>
-
         <Col lg={4} xs={6}>
           <Form.Item label="Rechercher">
             <Button type="primary" htmlType="submit">
