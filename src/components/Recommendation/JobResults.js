@@ -42,7 +42,7 @@ const Position = ({ position, setJobDetails }) => {
       <ClickCard
         title={position.descriptions[0].title}
         type="inner"
-        onClick={() => setJobDetails(position)}
+        onClick={() => setJobDetails({ position, isco08: null })}
       >
         <Row>
           <Col span={6}>Tags:</Col>
