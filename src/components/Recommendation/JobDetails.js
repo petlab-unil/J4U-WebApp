@@ -25,6 +25,13 @@ const JobDetails = ({ position: p, cancel }) => {
   const recomEnabled = get(me, 'cohort.recommendations');
 
   if (!p) return null;
+  console.log(p);
+  console.log(p);
+  console.log(p);
+  console.log(p);
+  console.log(p);
+  console.log(p);
+  console.log(p);
 
   const { position, isco08 } = p;
 
