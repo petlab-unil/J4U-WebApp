@@ -106,3 +106,19 @@ export const UPDATE_COHORT = gql`
   }
   ${fragments.FRAGMENT_COHORT_ALL_FIELDS}
 `;
+
+export const RESET_PASSWROD = gql`
+  mutation ResetPassword($email: String!) {
+    resetPassword(email: $email) {
+      ok
+    }
+  }
+`;
+
+export const UPDATE_PASSWORD = gql`
+  mutation UpdatePassword($token: String!, $password: String!) {
+    updatePassword(token: $token, password: $password) {
+      ok
+    }
+  }
+`;

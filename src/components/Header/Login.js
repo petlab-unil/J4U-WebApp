@@ -3,6 +3,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import * as Yup from 'yup';
 import { useAuth } from 'hooks/auth';
 import useForm from 'hooks/form';
+import Link from 'next/link';
 
 const LoginSchema = Yup.object().shape({
   email: Yup.string().email('Email non valide').required('Champ obligatoire'),
@@ -44,9 +45,11 @@ export default () => {
       </Form.Item>
 
       <Form.Item>
-        <a className="login-form-forgot" href="/aa">
-          Mot de passe oublié
-        </a>
+        <Link href="/reset">
+          <a className="login-form-forgot" href="/reset">
+            Mot de passe oublié
+          </a>
+        </Link>
       </Form.Item>
 
       <Form.Item>
