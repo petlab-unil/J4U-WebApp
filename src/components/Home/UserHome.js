@@ -10,7 +10,7 @@ const VerifyCard = ({ me }) => {
     return (
       <Alert
         message="Etape 1 : Vérification du compte"
-        description="Vous devez vérifier votre compte en suivant les intructions reçues par email"
+        description="Vous devez vérifier votre compte en suivant les intructions reçues par email, Attention, vérifier également vos spams"
         type="error"
         showIcon
       />
