@@ -37,6 +37,7 @@
     "next-with-apollo": "^5.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.7.0",
+    "react-device-detect": "^1.15.0",
     "react-dom": "^16.7.0",
     "react-player": "^2.6.2",
     "styled-components": "^5.0.1",
