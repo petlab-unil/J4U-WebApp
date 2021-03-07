@@ -18,7 +18,6 @@ const Recommendation = ({ setRecomVariables, setTrackingMeta }) => {
   const betaFixed = get(me, 'cohort.betaFixed');
 
   const onFinish = (v) => {
-    console.log(v.cantonCode);
     setTrackingMeta({
       canton_code: v.cantonCode,
       job_isco08: v.job.isco08,

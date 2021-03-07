@@ -25,6 +25,11 @@ const columns = [
     key: 'birthDate',
   },
   {
+    title: 'Sign Up At',
+    dataIndex: 'signupAt',
+    key: 'signupAt',
+  },
+  {
     title: 'Form Done At',
     dataIndex: 'formDoneAt',
     key: 'formDoneAt',

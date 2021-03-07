@@ -26,6 +26,7 @@ export const FRAGMENT_COHORT_ALL_FIELDS = gql`
 export const FRAGMENT_USER_ALL_FIELD = gql`
   fragment UserAllFields on User {
     id
+    signupAt
     firstName
     lastName
     civilite
