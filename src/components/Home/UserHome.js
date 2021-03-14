@@ -44,7 +44,7 @@ const SurveyCard = ({ me }) => {
 
       <Paragraph>
         <b>
-          DATE LIMITE POUR FAIRE LE QUESTIONNAIRE AU 14 MARS 2021 DÉPASSÉ.
+          DATE LIMITE POUR FAIRE LE QUESTIONNAIRE AU 14 MARS 2021 DÉPASSÉE.
         </b>
       </Paragraph>
 
@@ -66,7 +66,6 @@ const SurveyCard = ({ me }) => {
           </li>
         </ul>
       </Paragraph>
-
     </>
   );
 
