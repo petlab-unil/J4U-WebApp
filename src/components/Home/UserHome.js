@@ -53,7 +53,7 @@ const SurveyCard = ({ me }) => {
         </b>
       </Paragraph>
 
-      {/*<Paragraph>
+      <Paragraph>
         Rappel des instructions données dans la vidéo :
         <ul>
           <li>
@@ -72,9 +72,9 @@ const SurveyCard = ({ me }) => {
         </ul>
       </Paragraph>
 
-      <Paragraph>
+      {/*<Paragraph>
         <a href={me.baselineLink}>Questionnaire</a>
-            </Paragraph>*/}
+      </Paragraph>*/}
     </>
   );
 
