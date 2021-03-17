@@ -84,7 +84,7 @@ const IndividualResult = ({ recom, setJobDetails, cantonCode, setTrackingRecomSt
     }
   }, [positions]);
 
-  const count = totalCount === undefined ? '' : `offres disponibles: ${totalCount}`;
+  const count = ((totalCount === undefined || totalCount === null) ? '' : `offres disponibles: ${totalCount}`;
 
   if (totalCount === 0) {
     return (

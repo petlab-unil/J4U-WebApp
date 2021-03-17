@@ -95,7 +95,7 @@ const JobResults = ({ selectedJob, cantonCode, setJobDetails, setTrackingRecomSt
     }
   }, [positions]);
 
-  const count = totalCount === undefined ? '' : `Offres disponibles: ${totalCount}`;
+  const count = (totalCount === undefined || totalCount === null) ? '' : `Offres disponibles: ${totalCount}`;
 
   const header = (
     <>
