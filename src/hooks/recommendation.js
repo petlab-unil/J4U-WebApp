@@ -21,6 +21,7 @@ export default () => {
   const { loading, error, data } = useQuery(RECOMMENDATIONS, {
     skip: !recomVariables,
     variables,
+    fetchPolicy: 'no-cache',
     context: {
       headers: {
         accessToken,
