@@ -43,9 +43,12 @@ const SurveyCard = ({ me }) => {
       </Paragraph>
 
       <Paragraph>
-        <b>
-          DATE LIMITE POUR FAIRE LE QUESTIONNAIRE AU 14 MARS 2021 DÉPASSÉE.
-        </b>
+        Sinon, vous devez compléter un questionnaire qui nous permettra de définir votre profil
+        personnel. Ce questionnaire prend entre 45 min et 1 heure 
+      </Paragraph>
+
+       <Paragraph>
+        <a href={me.baselineLink}>Questionnaire</a>
       </Paragraph>
 
       <Paragraph>
