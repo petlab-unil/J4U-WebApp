@@ -39,8 +39,6 @@ function useTrackingSearch(type) {
       if (!isEqual(draft.perRecomStat[i], stat)) draft.perRecomStat[i] = stat;
     });
 
-  console.log(trackingData, 'AAAAAAA');
-
   useEffect(() => {
     if (Object.keys(trackingData.perRecomStat).length === nRes && !isEmpty(trackingData.meta)) {
       const stats = {};
@@ -53,14 +51,13 @@ function useTrackingSearch(type) {
       const data = { ...trackingData.meta, ...stats };
       tracker.track(type, data);
       updateTrackingData((draft) => {
-        draft.meta = {};
+        draft.meta = draft.meta;
         draft.perRecomStat = {};
       });
-      console.log('TRACKING TRACKING TRACKING TRACKING TRACKING TRACKING TRACKING TRACNKING');
     }
   }, [trackingData]);
 
-  return { setTrackingMeta, setTrackingRecomStat };
+  return { trackingData, setTrackingMeta, setTrackingRecomStat };
 }
 
 const WithRecommendation = () => {
@@ -107,11 +104,13 @@ const WithoutRecommendation = () => {
   const router = useRouter();
   const me = useMe();
   const searchEnabled = get(me, 'cohort.search');
-  const { setTrackingMeta, setTrackingRecomStat } = useTrackingSearch('NO_RECOMMENDATION_CLICK');
+  const { trackingData, setTrackingMeta, setTrackingRecomStat } = useTrackingSearch('NO_RECOMMENDATION_CLICK');
 
   const cancel = () => setJobDetails(undefined);
 
   const { job, cantonCode } = recomVariables;
+
+  console.log(trackingData)
 
   return (
     <div gutter={[10, 10]}>
@@ -130,6 +129,7 @@ const WithoutRecommendation = () => {
       </PageHeader>
       <br />
       <JobResults
+      isco08={trackingData.meta.job_isco08}
         selectedJob={job}
         cantonCode={cantonCode}
         setJobDetails={setJobDetails}

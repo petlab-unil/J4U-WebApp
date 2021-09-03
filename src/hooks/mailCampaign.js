@@ -55,9 +55,6 @@ export default () => {
   };
   const save = (values) => {
     const variables = prepare(values);
-    console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEE');
-    console.log(variables);
-    console.log('EEEEEEEEEEEEEEEEEEEEEEEEEEE');
     createDatetimeJob({
       variables,
     });

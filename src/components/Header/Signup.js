@@ -38,7 +38,6 @@ const SignupSchema = Yup.object().shape({
   avs: Yup.string().test('AVS', 'AVS invalide', (value) => {
     const v = value || '';
     const len = (v || '').replace(/\D+/g, '').length;
-    console.log(v, len, 'aaaa');
     return len === 10 || len === 0;
   }),
 });
@@ -98,7 +97,6 @@ const JobSearch = ({ value, onChange }) => {
   const [options, setOptions] = useState([]);
 
   const searchOptions = (x) => {
-    console.log(x);
     const res = fuse
       .search(x)
       .slice(0, 20)
@@ -122,7 +120,6 @@ const JobSearch = ({ value, onChange }) => {
       filterOption={false}
       options={[...o]}
       onSelect={(x) => {
-        console.log(x, onChange);
         onChange(x);
       }}
       onSearch={searchOptions}
@@ -132,10 +129,6 @@ const JobSearch = ({ value, onChange }) => {
     </AutoComplete>
   );
 };
-
-// const res = fuse.search('Agricul');
-// console.log(oldJobOptions);
-// console.log(res);
 
 export default () => {
   const router = useRouter();

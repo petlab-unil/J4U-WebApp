@@ -38,7 +38,6 @@ const tailLayout = {
 };
 
 const ItemSelect = (SelectComponent) => ({ value, onChange, ...props }) => {
-  console.log(props, '--------------');
   return <SelectComponent value={value} setValue={onChange} {...props} />;
 };
 const SurveyItem = ItemSelect(SurveySelect);
@@ -160,8 +159,6 @@ const DisplayMailCampaigns = ({ campaigns, accessToken, loading }) => {
 
   const filterCampaigns = () => {
     let res = campaigns;
-    console.log(filters);
-    console.log(campaigns);
     if (filters.name) res = campaigns.filter((c) => c.name.toLowerCase().includes(filters.name));
     if (filters.state && filters.state.length > 0)
       res = res.filter((c) => filters.state.includes(c.state));

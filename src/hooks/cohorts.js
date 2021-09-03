@@ -35,12 +35,10 @@ function mutationCommons() {
 
   const hasChanged = () => {
     const newObj = form.getFieldsValue(true);
-    console.log(refObj, newObj);
     return !isEqual(refObj, newObj);
   };
 
   const onChange = () => {
-    console.log('bbbbb');
     setCanSave(hasChanged());
   };
 
@@ -68,7 +66,6 @@ export function useCreateCohort() {
   });
 
   const save = (values) => {
-    console.log(values);
     values.cohortStart = values.cohortStart.format('YYYY-MM-DD');
     values.cohortEnd = values.cohortEnd.format('YYYY-MM-DD');
     createCohort({
@@ -103,7 +100,6 @@ export function useUpdateCohort() {
   });
 
   const save = async (values) => {
-    console.log(values);
     values.cohortStart = values.cohortStart.format('YYYY-MM-DD');
     values.cohortEnd = values.cohortEnd.format('YYYY-MM-DD');
     const obj = await updateCohort({

@@ -11,7 +11,6 @@ class Tracker {
 
   track(type, payload) {
     const token = this.accessToken;
-    //console.log(token, type, payload, JSON.stringify(payload));
     if (!token) return;
     this.client.mutate({
       mutation: CREATE_ACTIVITY,
@@ -22,8 +21,6 @@ class Tracker {
         },
       },
     });
-    //.then((x) => console.log(x))
-    //.catch((err) => console.error(err));
   }
 }
 
@@ -33,7 +30,6 @@ export const useTracker = () => {
   const [tracker, setTracker] = useState(new Tracker(accessToken, client));
 
   useEffect(() => {
-    //console.log('KAMARU');
     setTracker(new Tracker(accessToken, client));
   }, [accessToken]);
 

@@ -37,18 +37,20 @@ const EmploymentDates = ({ position }) => {
   );
 };
 
-const Position = ({ position, setJobDetails }) => {
+const Position = ({ isco08, position, setJobDetails }) => {
   const tracker = useTracker();
+  console.log('ISCO', isco08);
   return (
     <Tooltip title="Cliquer pour les détatils">
       <ClickCard
         title={position.descriptions[0].title}
         type="inner"
         onClick={() => {
-          setJobDetails({ position, isco08: null });
+          setJobDetails({ position, isco08 });
           tracker.track('JOB_CLICK', {
             job_id: position.id,
             job_title: position.descriptions[0].title,
+            isco08,
           });
         }}
       >
@@ -81,7 +83,7 @@ const GridContainer = styled.div`
   grid-template-columns: repeat(auto-fit, minmax(240px, 500px));
 `;
 
-const JobResults = ({ selectedJob, cantonCode, setJobDetails, setTrackingRecomStat }) => {
+const JobResults = ({ isco08, selectedJob, cantonCode, setJobDetails, setTrackingRecomStat }) => {
   const avam = get(selectedJob, 'avam');
 
   if (!avam) return null;
@@ -90,12 +92,11 @@ const JobResults = ({ selectedJob, cantonCode, setJobDetails, setTrackingRecomSt
 
   useEffect(() => {
     if (totalCount !== null) {
-      // console.log(positions, totalCount);
       setTrackingRecomStat(1, { count: totalCount });
     }
   }, [positions]);
 
-  const count = (totalCount === undefined) ? '' : `Offres disponibles: ${totalCount}`;
+  const count = totalCount === undefined ? '' : `Offres disponibles: ${totalCount}`;
 
   const header = (
     <>
@@ -117,7 +118,7 @@ const JobResults = ({ selectedJob, cantonCode, setJobDetails, setTrackingRecomSt
       <Spin spinning={!!loading}>
         <GridContainer id="zoo">
           {positions.map((position, i) => (
-            <Position key={i} position={position} setJobDetails={setJobDetails} />
+            <Position isco08={isco08} key={i} position={position} setJobDetails={setJobDetails} />
           ))}
         </GridContainer>
       </Spin>

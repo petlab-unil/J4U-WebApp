@@ -79,7 +79,6 @@ const IndividualResult = ({ recom, setJobDetails, cantonCode, setTrackingRecomSt
 
   useEffect(() => {
     if (totalCount !== null) {
-      // console.log(positions, totalCount);
       setTrackingRecomStat(recom.rank + 1, { isco08: recom.isco08, count: totalCount });
     }
   }, [positions]);

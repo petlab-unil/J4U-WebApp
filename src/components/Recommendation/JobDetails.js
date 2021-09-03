@@ -25,13 +25,7 @@ const JobDetails = ({ position: p, cancel }) => {
   const recomEnabled = get(me, 'cohort.recommendations');
 
   if (!p) return null;
-  console.log(p);
-  console.log(p);
-  console.log(p);
-  console.log(p);
-  console.log(p);
-  console.log(p);
-  console.log(p);
+
 
   const { position, isco08 } = p;
 
@@ -45,7 +39,6 @@ const JobDetails = ({ position: p, cancel }) => {
     employment: { startDate, endDate },
   } = position;
 
-  console.log(id, isco08);
 
   const emptyContact = every([firstName, lastName, phone, email], isEmpty);
 
