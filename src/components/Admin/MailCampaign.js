@@ -111,6 +111,7 @@ const AddMailCampaign = () => {
                 <Option value="mid_evaluation">Mid evaluation</Option>
                 <Option value="relance_mideval">Relance Mideval</Option>
                 <Option value="post_test">Post test</Option>
+                <Option value="au_revoir">Au revoir</Option>
               </Select>
             </Form.Item>
 
