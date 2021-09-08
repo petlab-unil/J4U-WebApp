@@ -48,7 +48,7 @@ const SurveyCard = ({ me }) => {
       </Paragraph>
 
        <Paragraph>
-        <a href={me.baselineLink}>Questionnaire</a>
+        DATE LIMITE POUR FAIRE LE QUESTIONNAIRE : 12 DECEMBRE 2021 <a href={me.baselineLink}>Questionnaire</a>
       </Paragraph>
 
       <Paragraph>
