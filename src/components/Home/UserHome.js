@@ -33,7 +33,7 @@ const SurveyCard = ({ me }) => {
       <Paragraph>
         <b>
           Si vous venez de faire le questionnaire, vous serez averti par email que vos données ont
-          bien été chargées dans l'application. Cela prendra 15 min environ. Vous pouvez également
+          bien été chargées dans l'application. Cela prendra 15 min environ. Pensez à vérifier vos spams. Vous pouvez également
           patienter et{' '}
           <a href="/" onClick={() => Router.reload(window.location.pathname)}>
             actualiser la page
@@ -48,8 +48,13 @@ const SurveyCard = ({ me }) => {
       </Paragraph>
 
        <Paragraph>
-        DATE LIMITE POUR FAIRE LE QUESTIONNAIRE : 12 DECEMBRE 2021 <a href={me.baselineLink}>Questionnaire</a>
-      </Paragraph>
+        DATE LIMITE POUR FAIRE LE QUESTIONNAIRE : 12 DECEMBRE 2021 
+       </Paragraph>
+
+       <Paragraph>
+  <a href={me.baselineLink}>Questionnaire</a>
+       </Paragraph>
+
 
       <Paragraph>
         Rappel des instructions données dans la vidéo :
