@@ -66,7 +66,7 @@ const SurveyCard = ({ me }) => {
           <li>Faites l’enquête dans un endroit calme sans être interrompu.</li>
           <li>
             Réalisez l’enquête depuis un ordinateur (enquête non compatible avec une tablette ou un
-            smartphone) sur <u>Google Chrome</u>.
+            smartphone) sur <a href="https://www.google.com/chrome/index.html">Google Chrome</a>.
           </li>
           <li>Lisez bien les instructions avant chaque exercice.</li>
           <li>
