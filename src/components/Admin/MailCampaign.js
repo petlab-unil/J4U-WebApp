@@ -110,6 +110,7 @@ const AddMailCampaign = () => {
                 <Option value="survey">Survey</Option>
                 <Option value="mid_evaluation">Mid evaluation</Option>
                 <Option value="relance_mideval">Relance Mideval</Option>
+                <Option value="relance_posttest">Relance Posttest</Option>
                 <Option value="post_test">Post test</Option>
                 <Option value="au_revoir">Au revoir</Option>
                 <Option value="blocage">Blocage</Option>
