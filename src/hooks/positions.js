@@ -7,8 +7,11 @@ export default (avamCode, cantonCode, setTrackingRecomStat) => {
   const [positions, setPositions] = useState([]);
   const [totalCount, setTotalCount] = useState(null);
 
+  console.log(avamCode, positions)
+
   const { loading, error, data } = useQuery(POSITIONS, {
     variables: { professionCodes: [avamCode], page, cantonCode },
+    fetchPolicy: 'no-cache',
   });
 
   useEffect(() => {

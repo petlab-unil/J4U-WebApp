@@ -21,7 +21,7 @@ const theme = {
 
 const MyApp = ({ Component, pageProps, apollo }) => {
   if (isMobile) return <MobileError />;
-  if (!isChrome) return <DeviceError />;
+  // if (!isChrome) return <DeviceError />;
 
   return (
     <NookiesProvider initialValue={pageProps.nookies}>

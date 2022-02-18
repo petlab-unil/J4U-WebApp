@@ -29,7 +29,21 @@ export default () => {
     },
   });
 
-  if (loading || error || !data) return { recoms: [], setRecomVariables };
+  console.log('rrrrr', recomVariables);
 
-  return { recoms: data.recommendations.results, setRecomVariables, cantonCode };
+  if (loading || error || !data)
+    return {
+      recoms: [],
+      setRecomVariables,
+      recomVariables,
+      recomsLoading: loading,
+    };
+
+  return {
+    recoms: data.recommendations.results,
+    recomsLoading: loading,
+    setRecomVariables,
+    recomVariables,
+    cantonCode,
+  };
 };

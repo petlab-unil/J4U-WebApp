@@ -99,12 +99,19 @@ export const JOB_SEARCH_HINTS = gql`
 `;
 
 export const RECOMMENDATIONS = gql`
-  query recommendations($oldJobIsco08: Int!, $oldJobTitle: String!, $alpha: Float!, $beta: Float!) {
+  query recommendations(
+    $oldJobIsco08: Int!
+    $oldJobTitle: String!
+    $alpha: Float!
+    $beta: Float!
+    $cantonCode: String!
+  ) {
     recommendations(
       oldJobIsco08: $oldJobIsco08
       oldJobTitle: $oldJobTitle
       alpha: $alpha
       beta: $beta
+      cantonCode: $cantonCode
     ) {
       varList
       results {
@@ -112,6 +119,7 @@ export const RECOMMENDATIONS = gql`
         isco08
         avam
         bfs
+        positionsCount
       }
     }
   }
