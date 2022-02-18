@@ -3,7 +3,6 @@ import withApollo from 'next-with-apollo';
 import { message } from 'antd';
 import { ApolloProvider, InMemoryCache, ApolloClient, ApolloLink, HttpLink } from '@apollo/client';
 import Router from 'next/router';
-import { onError } from '@apollo/link-error';
 import { ThemeProvider } from 'styled-components';
 import { NookiesProvider, parseNookies } from 'next-nookies-persist';
 import { ProvideAuth } from 'hooks/auth';
@@ -12,7 +11,9 @@ import DeviceError from 'components/DeviceError';
 import { parseServerError } from 'helpers';
 import MobileError from 'components/MobileError';
 import { isMobile, isChrome } from 'react-device-detect';
-import { RetryLink } from '@apollo/link-retry';
+
+import { RetryLink } from '@apollo/client/link/retry';
+import { onError } from '@apollo/client/link/error';
 
 const theme = {
   colors: {
