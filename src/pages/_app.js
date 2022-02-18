@@ -12,6 +12,7 @@ import DeviceError from 'components/DeviceError';
 import { parseServerError } from 'helpers';
 import MobileError from 'components/MobileError';
 import { isMobile, isChrome } from 'react-device-detect';
+import { RetryLink } from '@apollo/client/link/retry';
 
 const theme = {
   colors: {
@@ -77,6 +78,18 @@ export default withApollo(({ initialState }) => {
         uri: process.env.NEXT_GRAPHQL_PROXY_URI, // Server URL (must be absolute)
         credentials: 'omit', // Additional fetch() options like `credentials` or `headers`
         fetch,
+      }),
+
+      new RetryLink({
+        delay: {
+          initial: 300,
+          max: Infinity,
+          jitter: true,
+        },
+        attempts: {
+          max: 10,
+          retryIf: (error, _operation) => !!error,
+        },
       }),
     ]),
     cache: new InMemoryCache().restore(initialState || {}),
