@@ -13,6 +13,7 @@
     "@ant-design/icons": "^4.0.5",
     "@apollo/client": "^3.0.0-beta.44",
     "@apollo/link-error": "^2.0.0-beta.3",
+    "@apollo/link-retry": "^2.0.0-beta.3",
     "@apollo/react-ssr": "3.0.0",
     "@next/bundle-analyzer": "^9.3.4",
     "@zeit/next-css": "^1.0.1",

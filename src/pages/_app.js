@@ -1,14 +1,7 @@
 import React from 'react';
 import withApollo from 'next-with-apollo';
 import { message } from 'antd';
-import {
-  ApolloProvider,
-  InMemoryCache,
-  ApolloClient,
-  ApolloLink,
-  HttpLink,
-  RetryLink,
-} from '@apollo/client';
+import { ApolloProvider, InMemoryCache, ApolloClient, ApolloLink, HttpLink } from '@apollo/client';
 import Router from 'next/router';
 import { onError } from '@apollo/link-error';
 import { ThemeProvider } from 'styled-components';
@@ -19,6 +12,7 @@ import DeviceError from 'components/DeviceError';
 import { parseServerError } from 'helpers';
 import MobileError from 'components/MobileError';
 import { isMobile, isChrome } from 'react-device-detect';
+import { RetryLink } from '@apollo/link-retry';
 
 const theme = {
   colors: {
