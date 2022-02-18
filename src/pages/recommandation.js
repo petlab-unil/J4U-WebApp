@@ -213,8 +213,8 @@ const WithRecommendation = () => {
     if (!recoms || !recomVariables || recomsLoading) return;
     const obj = {};
     recoms.map((x, i) => {
-      obj[`isco08_rank_${i + 1}`] = x.isco08;
-      obj[`count_rank_${i + 1}`] = x.positionsCount;
+      obj[`rank_${i + 1}_count`] = x.isco08;
+      obj[`rank_${i + 1}_isco08`] = x.positionsCount;
     });
     const xx = {
       canton_code: recomVariables.cantonCode,
