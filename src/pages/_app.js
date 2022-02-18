@@ -54,6 +54,17 @@ export default withApollo(({ initialState }) => {
     // ssrMode: typeof window === 'undefined', // Disables forceFetch on the server (so queries are only run once)
     ssrMode: false,
     link: ApolloLink.from([
+      new RetryLink({
+        delay: {
+          initial: 300,
+          max: Infinity,
+          jitter: true,
+        },
+        attempts: {
+          max: 10,
+          retryIf: (error, _operation) => !!error,
+        },
+      }),
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors)
           graphQLErrors.forEach(({ message: msg }) => {
@@ -79,18 +90,6 @@ export default withApollo(({ initialState }) => {
         uri: process.env.NEXT_GRAPHQL_PROXY_URI, // Server URL (must be absolute)
         credentials: 'omit', // Additional fetch() options like `credentials` or `headers`
         fetch,
-      }),
-
-      new RetryLink({
-        delay: {
-          initial: 300,
-          max: Infinity,
-          jitter: true,
-        },
-        attempts: {
-          max: 10,
-          retryIf: (error, _operation) => !!error,
-        },
       }),
     ]),
     cache: new InMemoryCache().restore(initialState || {}),
