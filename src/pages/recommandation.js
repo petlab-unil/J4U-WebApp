@@ -26,23 +26,33 @@ import { RecommendationResults } from 'components/Recommendation';
 
 // X EXTERNAL_CLICK
 // X CERTIFICATE_CLICK
-// APPLY_CLICK
-// JOB_CLICK
+// X APPLY_CLICK
+// X JOB_CLICK
 // X RECOMMENDATION_CLICK
 // X NO_RECOMMENDATION_CLICK
 
 const RecommendationContext = createContext({});
 
 const PositionDetails = ({ details }) => {
+  const { position, recom } = details;
   return (
     <Row>
-      <Row></Row>
+      <Col>
+        <Typography.Title>{position.descriptions[0].title}</Typography.Title>
+      </Col>
+
+      <Col>
+        <Typography.Paragraph ellipsis={{ rows: 6, expandable: true, symbol: '...' }}>
+          {position.descriptions[0].description}
+        </Typography.Paragraph>
+      </Col>
     </Row>
   );
 };
 
 const JobModal = ({ details, isDetailsModalOpen, toggleModal }) => {
   if (!details) return null;
+  const [isInfoView, setIsInfoView] = useState(true);
   const { position, recom } = details;
   const me = useMe();
 
@@ -64,29 +74,44 @@ const JobModal = ({ details, isDetailsModalOpen, toggleModal }) => {
     });
   };
 
+  const applyClick = () => {
+    setIsInfoView(false);
+    tracker.track('APPLY_CLICK', {
+      job_id: position.id,
+      job_title: position.descriptions[0].title,
+      isco08: recom.isco08,
+    });
+  };
+
+  let cc;
+
+  if (isInfoView) {
+    cc = [
+      <Button type="primary" onClick={applyClick}>
+        Postuler
+      </Button>,
+    ];
+  } else {
+    cc = [
+      <Button type="primary" onClick={certificateClick}>
+        Certificat
+      </Button>,
+      position.externalUrl ? (
+        <a href="" target="_blank" href={position.externalUrl} onClick={externalClick}>
+          <Button type="link">Postuler</Button>
+        </a>
+      ) : null,
+    ];
+  }
+
   return (
-    <Modal
-      title="Details"
-      visible={isDetailsModalOpen}
-      onCancel={toggleModal}
-      footer={[
-        <Button type="primary" onClick={certificateClick}>
-          Certificate
-        </Button>,
-        position.externalUrl ? (
-          <a href="" target="_blank" href={position.externalUrl} onClick={externalClick}>
-            <Button type="link">Postuler</Button>
-          </a>
-        ) : null,
-      ]}
-    >
-      <p>Some contents...</p>
+    <Modal title="Details" visible={isDetailsModalOpen} onCancel={toggleModal} footer={cc}>
       <PositionDetails details={details} />
     </Modal>
   );
 };
 
-const RecommandationResult = ({ recom }) => {
+const RecommandationResult = ({ recom, i }) => {
   const { toggleModal, setDetails, cantonCode, ...other } = useContext(RecommendationContext);
   const tracker = useTracker();
   const me = useMe();
@@ -117,11 +142,14 @@ const RecommandationResult = ({ recom }) => {
         count: totalCount,
       };
       tracker.track('NO_RECOMMENDATION_CLICK', xx);
-    }, [positions, other.recomVariables.job.title]);
+    }, [positions]);
+    //}, [positions, other.recomVariables.job.title]);
   }
 
+  const ss = i ? `Rang ${i + 1}: ${recom.jobTitle}` : "Jobs";
+
   return (
-    <Card title={recom.jobTitle} style={{ width: '100%' }}>
+    <Card title={ss} style={{ width: '100%' }}>
       <Collapse defaultActiveKey={['0']}>
         <Collapse.Panel header={`${totalCount} offres d'emploi`} key={1}>
           <Pagination
@@ -180,11 +208,15 @@ const RecommendationsZone = ({ recoms }) => {
 
   return (
     <Row gutter={[8, 8]}>
-      {recoms.map((x) => {
+      {recoms.map((x, i) => {
         return (
-          <Col span={8}>
-            <RecommandationResult recom={x} />
-          </Col>
+          <>
+            <Col span={6} />
+            <Col span={12}>
+              <RecommandationResult recom={x} i={i} />
+            </Col>
+            <Col span={6} />
+          </>
         );
       })}
     </Row>
