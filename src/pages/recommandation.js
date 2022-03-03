@@ -82,6 +82,10 @@ const JobModal = ({ details, isDetailsModalOpen, toggleModal }) => {
       isco08: recom.isco08,
     });
   };
+  const onCancel = () => {
+    setIsInfoView(true);
+    toggleModal();
+  };
 
   let cc;
 
@@ -105,7 +109,7 @@ const JobModal = ({ details, isDetailsModalOpen, toggleModal }) => {
   }
 
   return (
-    <Modal title="Details" visible={isDetailsModalOpen} onCancel={toggleModal} footer={cc}>
+    <Modal title="Details" visible={isDetailsModalOpen} onCancel={onCancel} footer={cc}>
       <PositionDetails details={details} />
     </Modal>
   );
@@ -146,7 +150,7 @@ const RecommandationResult = ({ recom, i }) => {
     //}, [positions, other.recomVariables.job.title]);
   }
 
-  const ss = i ? `Rang ${i + 1}: ${recom.jobTitle}` : "Jobs";
+  const ss = i ? `Rang ${i + 1}: ${recom.jobTitle}` : 'Jobs';
 
   return (
     <Card title={ss} style={{ width: '100%' }}>
