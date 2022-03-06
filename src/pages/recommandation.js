@@ -13,6 +13,7 @@ import {
   Col,
   Card,
   List,
+  Descriptions,
   Collapse,
   Typography,
   Button,
@@ -23,6 +24,10 @@ import {
 import { createContext, useContext, useEffect, useState } from 'react';
 import { useTracker } from 'hooks/tracker';
 import { RecommendationResults } from 'components/Recommendation';
+import every from 'lodash/every';
+import isEmpty from 'lodash/isEmpty';
+import { PermanentTag, ImmediatelyTag, LoadTag } from '../components/Recommendation/Tags';
+import styled from 'styled-components';
 
 // X EXTERNAL_CLICK
 // X CERTIFICATE_CLICK
@@ -31,22 +36,68 @@ import { RecommendationResults } from 'components/Recommendation';
 // X RECOMMENDATION_CLICK
 // X NO_RECOMMENDATION_CLICK
 
+const ScrollDiv = styled.div`
+  width: 100%;
+  max-height: 200px;
+  overflow-y: scroll;
+`;
+
 const RecommendationContext = createContext({});
 
-const PositionDetails = ({ details }) => {
+const PositionDetails = ({ details, isInfoView }) => {
   const { position, recom } = details;
-  return (
-    <Row>
-      <Col>
-        <Typography.Title>{position.descriptions[0].title}</Typography.Title>
-      </Col>
+  const { isco08 } = recom;
 
-      <Col>
-        <Typography.Paragraph ellipsis={{ rows: 6, expandable: true, symbol: '...' }}>
-          {position.descriptions[0].description}
-        </Typography.Paragraph>
-      </Col>
-    </Row>
+  const {
+    id,
+    externalUrl,
+    descriptions: [{ title, description }],
+    location: { city, countryCode, cantonCode },
+    contact: { firstName, lastName, phone, email },
+    company: { name: companyName, city: companayCity, countryCode: companyCountyCode },
+    employment: { startDate, endDate },
+  } = position;
+
+  const emptyContact = every([firstName, lastName, phone, email], isEmpty);
+  return (
+    <>
+      <Descriptions title="General" layout="vertical" column={3}>
+        <Descriptions.Item label="Titre">{title}</Descriptions.Item>
+        <Descriptions.Item label="Tags">
+          <PermanentTag position={position} />
+          <ImmediatelyTag position={position} />
+          <LoadTag position={position} />
+        </Descriptions.Item>
+        <Descriptions.Item label="Dates">
+          {startDate ? `Début: ${startDate}` : null}
+          {endDate ? `Fin: ${endDate}` : null}
+        </Descriptions.Item>
+        <Descriptions.Item span={3} label="Description">
+          <ScrollDiv>{description}</ScrollDiv>
+        </Descriptions.Item>
+      </Descriptions>
+
+      <Descriptions title="Entreprise" layout="horizontal">
+        <Descriptions.Item label="Nom">{companyName}</Descriptions.Item>
+        <Descriptions.Item label="Ville">{companayCity}</Descriptions.Item>
+        <Descriptions.Item label="Pays">{companyCountyCode}</Descriptions.Item>
+      </Descriptions>
+
+      <Descriptions title="Job Localisation" layout="horizontal">
+        <Descriptions.Item label="Ville">{city}</Descriptions.Item>
+        <Descriptions.Item label="Pays">{countryCode || 'CH'}</Descriptions.Item>
+        <Descriptions.Item label="Canton">{cantonCode}</Descriptions.Item>
+      </Descriptions>
+
+      {emptyContact || isInfoView ? null : (
+        <Descriptions title="Contact" layout="horitontal">
+          <Descriptions.Item label="Prenom">{firstName}</Descriptions.Item>
+          <Descriptions.Item label="Nom">{lastName}</Descriptions.Item>
+          <Descriptions.Item label="Telephone">{phone}</Descriptions.Item>
+          <Descriptions.Item label="Email">{email}</Descriptions.Item>
+        </Descriptions>
+      )}
+    </>
   );
 };
 
@@ -102,15 +153,15 @@ const JobModal = ({ details, isDetailsModalOpen, toggleModal }) => {
       </Button>,
       position.externalUrl ? (
         <a href="" target="_blank" href={position.externalUrl} onClick={externalClick}>
-          <Button type="link">Postuler</Button>
+          <Button type="link">Postuler sur site externe</Button>
         </a>
       ) : null,
     ];
   }
 
   return (
-    <Modal title="Details" visible={isDetailsModalOpen} onCancel={onCancel} footer={cc}>
-      <PositionDetails details={details} />
+    <Modal title="Details" visible={isDetailsModalOpen} onCancel={onCancel} footer={cc} width="80%">
+      <PositionDetails details={details} isInfoView={isInfoView} />
     </Modal>
   );
 };
@@ -150,7 +201,7 @@ const RecommandationResult = ({ recom, i }) => {
     //}, [positions, other.recomVariables.job.title]);
   }
 
-  const ss = i ? `Rang ${i + 1}: ${recom.jobTitle}` : 'Jobs';
+  const ss = i >=0 ? `Rang ${i + 1}: ${recom.jobTitle}` : 'Jobs';
 
   return (
     <Card title={ss} style={{ width: '100%' }}>
