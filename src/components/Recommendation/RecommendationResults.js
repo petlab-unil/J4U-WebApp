@@ -86,6 +86,10 @@ const IndividualResult = ({ recom, setJobDetails, cantonCode, setTrackingRecomSt
   const count = totalCount === undefined ? '' : `offres disponibles: ${totalCount}`;
 
   if ((totalCount === 0) || (totalCount === null)) {
+    totalCount = 0
+  }
+
+  if ((totalCount === 0) || (totalCount === null)) {
     return (
       <Row gutter={[24, 24]}>
         <Col span={24}>
