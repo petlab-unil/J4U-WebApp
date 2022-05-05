@@ -24,8 +24,8 @@ class Tracker {
         },
       })
       // To debug
-      .then((_) => message.info(`TYPE: ${type} -- PAYLOAD: ${JSON.stringify(payload, null, 4)}`, 5))
-      .catch((err) => message.error(JSON.stringify(err), 5));
+      // .then((_) => message.info(`TYPE: ${type} -- PAYLOAD: ${JSON.stringify(payload, null, 4)}`, 5))
+      // .catch((err) => message.error(JSON.stringify(err), 5));
   }
 }
 

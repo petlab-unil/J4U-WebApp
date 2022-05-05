@@ -106,6 +106,7 @@ const JobModal = ({ details, isDetailsModalOpen, toggleModal }) => {
   const [isInfoView, setIsInfoView] = useState(true);
   const { position, recom } = details;
   const me = useMe();
+  const withRecom = get(me, 'cohort.recommendations');
 
   const tracker = useTracker();
   const certificateClick = (title) => {
@@ -148,9 +149,11 @@ const JobModal = ({ details, isDetailsModalOpen, toggleModal }) => {
     ];
   } else {
     cc = [
-      <Button type="primary" onClick={certificateClick}>
-        Certificat
-      </Button>,
+      withRecom ? (
+        <Button type="primary" onClick={certificateClick}>
+          Certificat
+        </Button>
+      ) : null,
       position.externalUrl ? (
         <a href="" target="_blank" href={position.externalUrl} onClick={externalClick}>
           <Button type="link">Postuler sur site externe</Button>
@@ -201,12 +204,18 @@ const RecommandationResult = ({ recom, i }) => {
     //}, [positions, other.recomVariables.job.title]);
   }
 
-  const ss = i >=0 ? `Rang ${i + 1}: ${recom.jobTitle}` : 'Jobs';
+  const ss = i >= 0 ? `Rang ${i + 1}: ${recom.jobTitle}` : 'Jobs';
+  const header =
+    totalCount
+      ? `${totalCount} offres d'emploi`
+      : 'Nous n’avons actuellement aucune offre correspondant à ce poste spécifique. Retentez plus tard, une offre pourrait apparaître.';
+
+
 
   return (
     <Card title={ss} style={{ width: '100%' }}>
       <Collapse defaultActiveKey={['0']}>
-        <Collapse.Panel header={`${totalCount} offres d'emploi`} key={1}>
+        <Collapse.Panel header={header} key={1}>
           <Pagination
             simple
             current={page}
