@@ -83,9 +83,8 @@ const IndividualResult = ({ recom, setJobDetails, cantonCode, setTrackingRecomSt
     }
   }, [positions]);
 
-  const count = totalCount === undefined ? '' : `offres disponibles: ${totalCount}`;
 
-  if ((totalCount === 0) || (totalCount === null)) {
+  if ((totalCount === 0) || (totalCount === null) || (totalCount === undefined)) {
     return (
       <Row gutter={[24, 24]}>
         <Col span={24}>
@@ -100,6 +99,7 @@ const IndividualResult = ({ recom, setJobDetails, cantonCode, setTrackingRecomSt
     );
   }
 
+  const count = `offres disponibles: ${totalCount}`;
   const header = (
     <>
       {`${count}`} <Spin spinning={!!loading} />
