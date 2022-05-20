@@ -8,7 +8,7 @@ export default () => {
     <Result
       status="error"
       title="Appareil non valide"
-      subTitle="Vous ne devez pas utiliser utiliser un appareil mobile"
+      subTitle="Vous ne devez pas utiliser un appareil mobile"
     >
       <div className="desc">
         <Paragraph>

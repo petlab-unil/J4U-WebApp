@@ -30,7 +30,7 @@ LoginModal.propTypes = {
 
 const SignupModal = ({ visible, reset }) => (
   <Modal
-    title="Connexion"
+    title="S'inscrire"
     visible={visible}
     onOk={reset}
     onCancel={reset}
