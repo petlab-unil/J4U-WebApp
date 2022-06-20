@@ -1,4 +1,5 @@
-import Link from 'next/link';
+import Link from 'next/liacr
+nk';
 import { Row, Col, Button, Typography } from 'antd';
 
 const { Paragraph, Title } = Typography;
@@ -19,12 +20,10 @@ export default () => {
           participants.
         </Paragraph>
         <Paragraph>
-          Cette étude est réalisée et financée par Prof. M. Cherubini (UNIL), Prof. M. Kliegel
-          (UNIGE), Prof. R. Lalive (UNIL), Prof. M. Pellizzari (UNIGE) (numéro de fonds :
-          100018_178878).
+          Cette étude est réalisée en dehors de votre suivi à l’ORP et ne remet en rien en question les exigences de ce suivi et les objectifs définis avec la conseillère ou le conseiller ORP.
         </Paragraph>
         <Paragraph>
-          L’étude a reçu l’accord du Service de l’emploi du canton de Neuchâtel, et va être conduite
+          L’étude a reçu l’accord du Service de l’emploi du canton de Vaud, et va être conduite
           dans le respect de la réglementation en vigueur.
         </Paragraph>
         <Paragraph>
@@ -40,7 +39,7 @@ export default () => {
         <Paragraph>
           <strong>2. Informations générales sur le projet et les données</strong>
           <br />
-          Cette étude propose d’explorer plusieurs outils pour la recherche d’emploi.
+          Cette étude propose d’explorer plusieurs outils utiles pour la recherche d’emploi.
         </Paragraph>
         <Paragraph>
           L’étude récoltera des données sur vos recherches d’emploi qui seront complémentées par des
@@ -67,8 +66,7 @@ export default () => {
         <Paragraph>
           <strong>4. Conditions de participation</strong>
           <br />
-          Les participants doivent être majeurs et à la recherche d’un emploi. Ils doivent avoir le
-          désir de suivre les conseils qui seront fournis. L'étude se déroulera sur 6 mois, dès la
+          Les participants doivent être majeurs et à la recherche d’un emploi. Ils devront utiliser les outils et répondre aux questionnaires des e-mails. L'étude se déroulera sur 6 mois, dès la
           finalisation du questionnaire en ligne au moment de votre inscription.Vous fournissez des
           informations sur vos recherches d'emploi via des sondages hebdomadaires.
         </Paragraph>
@@ -76,16 +74,12 @@ export default () => {
         <Paragraph>
           <strong>5. Bénéfices pour les participants</strong>
           <br />
-          Votre participation à cette étude pourra vous aider à trouver un emploi qui correspond
-          mieux à vos compétences et à votre personnalité ou à trouver un emploi plus rapidement.
+          Votre participation à cette étude pourra potentiellement augmenter vos chances de trouver un emploi et vous fournira des outils supplémentaires pour effectuer vos recherches d’emploi.
         </Paragraph>
         <Paragraph>
           <strong>6. Tirage au sort</strong>
           <br />
-          Pour être éligible au tirage au sort, vous ne devez pas exercer une activité rémunérée à
-          l’Université de Lausanne (contrat de travail) et ne pas recevoir sur l’année civile plus
-          de CHF 2’300.- de dédommagement, toute expérience confondue, de la part de l’Université de
-          Lausanne.
+          Les personnes exerçant une activité rémunérée à l’Université de Lausanne (CDI, CDD ; missions temporaires, gain intermédiaire) ne participent pas au tirage au sort. Les autres participants feront partie d'un tirage au sort dont le prix est de CHF 2000 en espèces.
         </Paragraph>
         <Paragraph>
           Chaque participant remplissant ce critère fera partie d'un tirage au sort dont le prix est
@@ -144,16 +138,13 @@ export default () => {
         </Paragraph>
 
         <Paragraph>
-          <strong>9. Lien avec fiche de recherche d’emploi de l’ORP</strong>
+          <strong>9. Lien avec votre suivi ORP et vos formulaires de preuves de recherches d’emploi de l’ORP</strong>
           <br />
-          Cette étude vous proposera de postuler à des offres d’emploi pouvant être plus éloignées
-          de celles acceptées par l’ORP comme preuve de recherche. Nous vous encourageons néanmoins
-          à tester ces propositions puisqu’elles peuvent être mieux adaptées à vos compétences et à
-          votre personnalité.
+          Cette étude est sans lien direct avec votre suivi au sein de l’ORP. Vos formulaires de recherches d’emploi devront lui être remis selon les objectifs de suivi définis avec votre conseillère ou cotre conseiller ORP.Cette étude vous proposera en revanche de postuler à des offres d’emploi supplémentaires pouvant potentiellement être plus éloignées de celles acceptées par l’ORP.Nous vous encourageons néanmoins à tester ces propositions puisqu’elles peuvent être mieux adaptées à vos compétences et à votre personnalité, tout en gardant à l’esprit qu’elle ne se substituent pas à celles demandées par l’ORP.
         </Paragraph>
 
         <Paragraph>
-          <strong>10. Interlocuteur(s)</strong>
+          <strong>11. Interlocuteur(s)</strong>
           <br />
           Vous pouvez à tout moment poser vos questions et demander des précisions complémentaires à
           l’adresse suivante : <a href="mailto:j4u@unil.ch">j4u@unil.ch</a>. Notre équipe se fera un
