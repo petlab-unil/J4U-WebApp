@@ -48,7 +48,7 @@ const SurveyCard = ({ me }) => {
       </Paragraph>
 
        <Paragraph>
-        DATE LIMITE POUR FAIRE LE QUESTIONNAIRE : 31 JUILLET 2022
+        DATE LIMITE POUR FAIRE LE QUESTIONNAIRE : 10 JUILLET 2022
        </Paragraph>
 
        <Paragraph>
