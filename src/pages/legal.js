@@ -1,5 +1,4 @@
-import Link from 'next/liacr
-nk';
+import Link from 'next/link'
 import { Row, Col, Button, Typography } from 'antd';
 
 const { Paragraph, Title } = Typography;
