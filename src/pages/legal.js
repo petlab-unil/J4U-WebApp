@@ -59,15 +59,17 @@ export default () => {
           <br />
           Les participants pourront s’inscrire en ligne et auront accès à un outil pour les
           accompagner dans leur recherche d’emploi. Par ailleurs, ils recevront des emails pour une
-          période de 6 mois ou jusqu’à la reprise d’un emploi.
+          période de 6 mois ou jusqu’à la désinscription à l’étude. Il est conseillé de vérifier les spams dans le cas où nos emails seraient considérés comme tels.
         </Paragraph>
 
         <Paragraph>
           <strong>4. Conditions de participation</strong>
           <br />
-          Les participants doivent être majeurs et à la recherche d’un emploi. Ils devront utiliser les outils et répondre aux questionnaires des e-mails. L'étude se déroulera sur 6 mois, dès la
-          finalisation du questionnaire en ligne au moment de votre inscription.Vous fournissez des
-          informations sur vos recherches d'emploi via des sondages hebdomadaires.
+          Les participants doivent remplir les conditions suivantes:<br />
+          - être majeurs et à la recherche d'un emploi<br />
+          - utiliser les outils et répondre aux questionnaires des e-mails<br /><br />
+
+          L'étude se déroulera sur 6 mois, dès votre inscription en ligne.
         </Paragraph>
 
         <Paragraph>
@@ -78,13 +80,17 @@ export default () => {
         <Paragraph>
           <strong>6. Tirage au sort</strong>
           <br />
-          Les personnes exerçant une activité rémunérée à l’Université de Lausanne (CDI, CDD ; missions temporaires, gain intermédiaire) ne participent pas au tirage au sort. Les autres participants feront partie d'un tirage au sort dont le prix est de CHF 2000 en espèces.
+          Votre participation est complètement volontaire et vous êtes totalement libre d'arrêter votre participation à n'importe quel moment, sans préavis. 
+          Pour cela, il suffit de cliquer sur le lien de désinscription en bas d’un de nos emails. Si vous vous désinscrivez avant la fin de l’étude, nous vous serions 
+          reconnaissant de participer tout de même à l’évaluation de mi-parcours (3 mois après votre inscription) et de fin de parcours (6 mois après votre inscription). 
+          Ce sont les deux seuls emails que vous recevrez après votre désinscription. 
         </Paragraph>
         <Paragraph>
-          Chaque participant remplissant ce critère fera partie d'un tirage au sort dont le prix est
-          de CHF 2000 en espèces.
-        </Paragraph>
-        <Paragraph>
+          <strong>7. Tirage au sort</strong>  <br />
+          Les personnes exerçant une activité rémunérée à l’Université de Lausanne (CDI, CDD ; missions temporaires, gain intermédiaire) ne participent pas au tirage au sort. <br />
+          <br />
+          Les autres participants feront partie d'un tirage au sort dont le prix est de CHF 2000 par virement bancaire.<br />
+          <br />
           Au cours de cette étude, vous serez sollicité pour utiliser l’outil mis à votre
           disposition et répondre à des questionnaires. Chaque utilisation de l’outil et chaque
           participation aux questionnaires rapportent des billets pour le tirage au sort final. Plus
@@ -108,38 +114,35 @@ export default () => {
               recherche d’emploi ») : 3 billets/ jour
             </li>
           </ul>
-        </Paragraph>
-        <Paragraph>
-          Votre participation est complètement volontaire et vous êtes totalement libre d'arrêter
-          votre participation à n'importe quel moment, sans préavis. En cas d’arrêt, seuls les
-          billets déjà récoltés compteront pour le tirage au sort.
-        </Paragraph>
-        <Paragraph>
-          Le gagnant de la loterie sera notifié par email dans les quelques jours qui suivent la fin
-          du projet.
-        </Paragraph>
-
-        <Paragraph>
-          <strong>7. Droits des participants</strong>
           <br />
-          Vous prenez part à cette étude uniquement de façon volontaire. Si vous choisissez de ne
-          pas participer ou si vous choisissez de participer et revenez sur votre décision pendant
-          le déroulement de l’étude, vous n’aurez pas à justifier votre refus. Vous pouvez à tout
-          moment poser toutes les questions nécessaires au sujet de l’étude. Pour ce faire,
-          veuillez-vous adresser au contact indiqué à la fin de la présente feuille d’information.
+          En cas de désinscription, seuls les billets déjà récoltés compteront pour le tirage au sort. <br />
+          Le gagnant de la loterie sera notifié par email dans les quelques jours qui suivent la fin du projet.
         </Paragraph>
 
         <Paragraph>
-          <strong>8. Financement de l'étude</strong>
+          <strong>8. Droits des participants</strong>
+          <br />
+          Vous prenez part à cette étude uniquement de façon volontaire. Vous êtes libre d’y participer ou non.
+          Vous pouvez à tout moment poser toutes les questions nécessaires au sujet de l’étude. 
+          Pour ce faire, veuillez-vous adresser au contact indiqué à la fin de la présente feuille d’information.
+        </Paragraph>
+
+        <Paragraph>
+          <strong>9. Financement de l'étude</strong>
           <br />
           Ce projet est financé par les Fonds National Suisse de la recherche Scientifique. Le
           numéro de fonds est le 100018_178878, géré par Prof. R. Lalive (UNIL).
         </Paragraph>
 
         <Paragraph>
-          <strong>9. Lien avec votre suivi ORP et vos formulaires de preuves de recherches d’emploi de l’ORP</strong>
+          <strong>10. Lien avec votre suivi ORP et vos formulaires de preuves de recherches d’emploi de l’ORP</strong>
           <br />
-          Cette étude est sans lien direct avec votre suivi au sein de l’ORP. Vos formulaires de recherches d’emploi devront lui être remis selon les objectifs de suivi définis avec votre conseillère ou cotre conseiller ORP.Cette étude vous proposera en revanche de postuler à des offres d’emploi supplémentaires pouvant potentiellement être plus éloignées de celles acceptées par l’ORP.Nous vous encourageons néanmoins à tester ces propositions puisqu’elles peuvent être mieux adaptées à vos compétences et à votre personnalité, tout en gardant à l’esprit qu’elle ne se substituent pas à celles demandées par l’ORP.
+          Cette étude est sans lien direct avec votre suivi au sein de l’ORP. Vos formulaires de recherches d’emploi devront lui être remis selon les objectifs de suivi définis avec votre conseillère ou votre conseiller ORP. <br />
+          <br />
+          Cette étude vous proposera en revanche de postuler à des offres d’emploi supplémentaires pouvant potentiellement être plus éloignées de celles acceptées par l’ORP. <br />
+          <br />
+          Nous vous encourageons néanmoins à tester ces propositions puisqu’elles peuvent être mieux adaptées à vos compétences et à votre personnalité, tout en gardant à l’esprit qu’elle ne se substituent pas à celles demandées par l’ORP. <br />
+          <br />
         </Paragraph>
 
         <Paragraph>
