@@ -78,7 +78,7 @@ export default () => {
           Votre participation à cette étude pourra potentiellement augmenter vos chances de trouver un emploi et vous fournira des outils supplémentaires pour effectuer vos recherches d’emploi.
         </Paragraph>
         <Paragraph>
-          <strong>6. Tirage au sort</strong>
+          <strong>6. Désinscription à l’étude</strong>
           <br />
           Votre participation est complètement volontaire et vous êtes totalement libre d'arrêter votre participation à n'importe quel moment, sans préavis. 
           Pour cela, il suffit de cliquer sur le lien de désinscription en bas d’un de nos emails. Si vous vous désinscrivez avant la fin de l’étude, nous vous serions 
