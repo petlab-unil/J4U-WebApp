@@ -30,6 +30,7 @@ const VerifyCard = ({ me }) => {
 const SurveyCard = ({ me }) => {
   const desc = (
     <>
+      {/*
       <Paragraph>
         <b>
           Si vous venez de faire le questionnaire, vous serez averti par email que vos données ont
@@ -47,18 +48,21 @@ const SurveyCard = ({ me }) => {
         Sinon, vous devez compléter un questionnaire qui nous permettra de définir votre profil
         personnel. Ce questionnaire prend entre 45 min et 1 heure 
       </Paragraph>
+      */}
      
-
        <Paragraph>
-        DATE LIMITE POUR FAIRE LE QUESTIONNAIRE AU 11 SEPTEMBRE 2022.
+        DATE LIMITE (11 SEPTEMBRE 2022) POUR FAIRE LE QUESTIONNAIRE DÉPASSÉE.
        </Paragraph>
 
        
+      {/*
        <Paragraph>
   <a href={me.baselineLink}>Questionnaire</a>
        </Paragraph>
+      */}
 
 
+      {/*
       <Paragraph>
         Rappel des instructions données dans la vidéo :
         <ul>
@@ -77,6 +81,7 @@ const SurveyCard = ({ me }) => {
           </li>
         </ul>
       </Paragraph>
+      */}
      
     </>
   );
