@@ -48,10 +48,12 @@ const SurveyCard = ({ me }) => {
         Sinon, vous devez compléter un questionnaire qui nous permettra de définir votre profil
         personnel. Ce questionnaire prend entre 45 min et 1 heure 
       </Paragraph>
-     
+
+      {/* 
        <Paragraph>
         DATE LIMITE (11 SEPTEMBRE 2022) POUR FAIRE LE QUESTIONNAIRE DÉPASSÉE.
        </Paragraph>
+      */}
 
        
        <Paragraph>
